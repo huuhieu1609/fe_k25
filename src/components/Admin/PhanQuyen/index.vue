@@ -191,7 +191,8 @@
                                         <td>1</td>
                                         <td class="text-start">Quản lý Nhân Viên</td>
                                         <td>
-                                            <button class="btn btn-danger btn-sm px-2 shadow-sm">
+                                            <button class="btn btn-danger btn-sm px-2 shadow-sm" data-bs-toggle="modal"
+                                                data-bs-target="#removeQuyenModal" @click="obj_delete_quyen = { ten_quyen: 'Quản lý Nhân Viên' }">
                                                 Xóa
                                             </button>
                                         </td>
@@ -200,7 +201,8 @@
                                         <td>2</td>
                                         <td class="text-start">Quản lý Khách Hàng</td>
                                         <td>
-                                            <button class="btn btn-danger btn-sm px-2 shadow-sm">
+                                            <button class="btn btn-danger btn-sm px-2 shadow-sm" data-bs-toggle="modal"
+                                                data-bs-target="#removeQuyenModal" @click="obj_delete_quyen = { ten_quyen: 'Quản lý Khách Hàng' }">
                                                 Xóa
                                             </button>
                                         </td>
@@ -209,7 +211,8 @@
                                         <td>3</td>
                                         <td class="text-start">Quản lý Nhà Cung Cấp</td>
                                         <td>
-                                            <button class="btn btn-danger btn-sm px-2 shadow-sm">
+                                            <button class="btn btn-danger btn-sm px-2 shadow-sm" data-bs-toggle="modal"
+                                                data-bs-target="#removeQuyenModal" @click="obj_delete_quyen = { ten_quyen: 'Quản lý Nhà Cung Cấp' }">
                                                 Xóa
                                             </button>
                                         </td>
@@ -218,7 +221,8 @@
                                         <td>4</td>
                                         <td class="text-start">Quản lý Công Nợ NCC</td>
                                         <td>
-                                            <button class="btn btn-danger btn-sm px-2 shadow-sm">
+                                            <button class="btn btn-danger btn-sm px-2 shadow-sm" data-bs-toggle="modal"
+                                                data-bs-target="#removeQuyenModal" @click="obj_delete_quyen = { ten_quyen: 'Quản lý Công Nợ NCC' }">
                                                 Xóa
                                             </button>
                                         </td>
@@ -227,7 +231,8 @@
                                         <td>5</td>
                                         <td class="text-start">Quản lý Ca Làm Việc</td>
                                         <td>
-                                            <button class="btn btn-danger btn-sm px-2 shadow-sm">
+                                            <button class="btn btn-danger btn-sm px-2 shadow-sm" data-bs-toggle="modal"
+                                                data-bs-target="#removeQuyenModal" @click="obj_delete_quyen = { ten_quyen: 'Quản lý Ca Làm Việc' }">
                                                 Xóa
                                             </button>
                                         </td>
@@ -241,24 +246,110 @@
             </div>
         </div>
 
-        <!-- Modals -->
+        <!-- Delete Modal -->
         <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header bg-danger text-white">
+                    <div class="modal-header bg-danger text-white border-bottom-0">
                         <h5 class="modal-title text-white">Xác Nhận Xóa</h5>
                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-center py-4">
                         <i class="fa fa-exclamation-triangle text-warning mb-3" style="font-size: 3rem;"></i>
-                        <h5 class="fw-bold fs-5">Bạn có chắc chắn muốn xóa?</h5>
+                        <h5 class="fw-bold fs-5">Xác nhận xóa chức vụ?</h5>
                         <p class="text-muted small">Hành động này không thể hoàn tác.</p>
                     </div>
-                    <div class="modal-footer justify-content-center">
+                    <div class="modal-footer justify-content-center border-top-0">
                         <button type="button" class="btn btn-secondary px-4 shadow-sm"
                             data-bs-dismiss="modal">Hủy</button>
-                        <button type="button" class="btn btn-danger px-4 shadow-sm">Xác Nhận Xóa</button>
+                        <button type="button" class="btn btn-danger px-4 shadow-sm" @click="deleteChucVu()">Xác Nhận
+                            Xóa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add Chức Vụ Modal -->
+        <div class="modal fade" id="addChucVuModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white border-bottom-0">
+                        <h5 class="modal-title text-white">Thêm Mới Chức Vụ</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Tên Chức Vụ</label>
+                            <input v-model="obj_add.ten_chuc_vu" type="text" class="form-control"
+                                placeholder="Nhập tên chức vụ">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Tình Trạng</label>
+                            <select v-model="obj_add.tinh_trang" class="form-select">
+                                <option value="1">Hoạt động</option>
+                                <option value="0">Tạm dừng</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary px-4" @click="createChucVu()">Lưu Lại</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Edit Chức Vụ Modal -->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-warning text-dark border-bottom-0">
+                        <h5 class="modal-title">Cập Nhật Chức Vụ</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Tên Chức Vụ</label>
+                            <input v-model="obj_edit.ten_chuc_vu" type="text" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Tình Trạng</label>
+                            <select v-model="obj_edit.tinh_trang" class="form-select">
+                                <option value="1">Hoạt động</option>
+                                <option value="0">Tạm dừng</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top-0">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-warning px-4 text-dark" @click="updateChucVu()">Cập
+                            Nhật</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Remove Permission Modal -->
+        <div class="modal fade" id="removeQuyenModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-white border-bottom-0">
+                        <h5 class="modal-title text-white">Xác Nhận Xóa Quyền</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center py-4">
+                        <i class="fa fa-exclamation-triangle text-warning mb-3" style="font-size: 3rem;"></i>
+                        <h5 class="fw-bold fs-5">Xác nhận gỡ quyền?</h5>
+                        <p class="text-muted small">Bạn đang muốn gỡ quyền: <b class="text-danger">{{ obj_delete_quyen.ten_quyen }}</b></p>
+                        <p class="text-muted small mb-0">Hành động này không thể hoàn tác.</p>
+                    </div>
+                    <div class="modal-footer justify-content-center border-top-0">
+                        <button type="button" class="btn btn-secondary px-4 shadow-sm"
+                            data-bs-dismiss="modal">Hủy</button>
+                        <button type="button" class="btn btn-danger px-4 shadow-sm" @click="removeQuyen()">Xác Nhận Gỡ Bỏ</button>
                     </div>
                 </div>
             </div>
@@ -268,8 +359,37 @@
 
 <script>
 export default {
-    name: "PhanQuyenManager"
+    name: "PhanQuyenManager",
+    data() {
+        return {
+            obj_add: {
+                ten_chuc_vu: "",
+                tinh_trang: 1
+            },
+            obj_edit: {},
+            obj_delete: {},
+            obj_delete_quyen: {}
+        }
+    },
+    methods: {
+        createChucVu() {
+            // Implement logic
+            console.log("Create Chuc Vu:", this.obj_add);
+        },
+        updateChucVu() {
+            // Implement logic
+            console.log("Update Chuc Vu:", this.obj_edit);
+        },
+        deleteChucVu() {
+            // Implement logic
+            console.log("Delete Chuc Vu:", this.obj_delete);
+        },
+        removeQuyen() {
+            // Implement logic
+            console.log("Remove Permission:", this.obj_delete_quyen);
+        }
+    }
 }
 </script>
 
-<style></style>
+<style scoped></style>

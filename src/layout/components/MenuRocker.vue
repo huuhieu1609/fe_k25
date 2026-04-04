@@ -82,9 +82,11 @@
                         <div class="menu-title">Quản lý ca làm việc</div>
                     </router-link>
                 </li>
+
                 <li class="nav-item dropdown">
                     <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret"
                         data-bs-toggle="dropdown">
+
                         <div class="parent-icon"><i class='bx bx-package'></i>
                         </div>
                         <div class="menu-title">Quản lý sản phẩm</div>

@@ -53,7 +53,8 @@ const routes = [
     {
         path: '/admin/loai-san-pham',
         component: () => import('../components/Admin/LoaiSanPham/index.vue')
-    }
+    },
+
 ]
 
 const router = createRouter({
