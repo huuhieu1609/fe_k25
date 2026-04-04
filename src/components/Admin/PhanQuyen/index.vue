@@ -172,8 +172,7 @@
             <div class="col-lg-4">
                 <div class="card border-top border-0 border-4 border-primary shadow-sm">
                     <div class="card-header bg-transparent">
-                        <h5 class="card-title mb-0">Đang Phân Quyền:<br><span
-                                class="text-danger fw-bold fs-6">Admin</span>
+                        <h5 class="card-title mb-0">Đang Phân Quyền:<span class="text-danger fw-bold "> Admin</span>
                         </h5>
                     </div>
                     <div class="card-body">
@@ -192,7 +191,7 @@
                                         <td class="text-start">Quản lý Nhân Viên</td>
                                         <td>
                                             <button class="btn btn-danger btn-sm px-2 shadow-sm" data-bs-toggle="modal"
-                                                data-bs-target="#removeQuyenModal" @click="obj_delete_quyen = { ten_quyen: 'Quản lý Nhân Viên' }">
+                                                data-bs-target="#removeQuyenModal">
                                                 Xóa
                                             </button>
                                         </td>
@@ -202,7 +201,7 @@
                                         <td class="text-start">Quản lý Khách Hàng</td>
                                         <td>
                                             <button class="btn btn-danger btn-sm px-2 shadow-sm" data-bs-toggle="modal"
-                                                data-bs-target="#removeQuyenModal" @click="obj_delete_quyen = { ten_quyen: 'Quản lý Khách Hàng' }">
+                                                data-bs-target="#removeQuyenModal">
                                                 Xóa
                                             </button>
                                         </td>
@@ -212,7 +211,7 @@
                                         <td class="text-start">Quản lý Nhà Cung Cấp</td>
                                         <td>
                                             <button class="btn btn-danger btn-sm px-2 shadow-sm" data-bs-toggle="modal"
-                                                data-bs-target="#removeQuyenModal" @click="obj_delete_quyen = { ten_quyen: 'Quản lý Nhà Cung Cấp' }">
+                                                data-bs-target="#removeQuyenModal">
                                                 Xóa
                                             </button>
                                         </td>
@@ -222,7 +221,7 @@
                                         <td class="text-start">Quản lý Công Nợ NCC</td>
                                         <td>
                                             <button class="btn btn-danger btn-sm px-2 shadow-sm" data-bs-toggle="modal"
-                                                data-bs-target="#removeQuyenModal" @click="obj_delete_quyen = { ten_quyen: 'Quản lý Công Nợ NCC' }">
+                                                data-bs-target="#removeQuyenModal">
                                                 Xóa
                                             </button>
                                         </td>
@@ -232,7 +231,7 @@
                                         <td class="text-start">Quản lý Ca Làm Việc</td>
                                         <td>
                                             <button class="btn btn-danger btn-sm px-2 shadow-sm" data-bs-toggle="modal"
-                                                data-bs-target="#removeQuyenModal" @click="obj_delete_quyen = { ten_quyen: 'Quản lý Ca Làm Việc' }">
+                                                data-bs-target="#removeQuyenModal">
                                                 Xóa
                                             </button>
                                         </td>
@@ -263,7 +262,7 @@
                     <div class="modal-footer justify-content-center border-top-0">
                         <button type="button" class="btn btn-secondary px-4 shadow-sm"
                             data-bs-dismiss="modal">Hủy</button>
-                        <button type="button" class="btn btn-danger px-4 shadow-sm" @click="deleteChucVu()">Xác Nhận
+                        <button type="button" class="btn btn-danger px-4 shadow-sm">Xác Nhận
                             Xóa</button>
                     </div>
                 </div>
@@ -282,12 +281,11 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tên Chức Vụ</label>
-                            <input v-model="obj_add.ten_chuc_vu" type="text" class="form-control"
-                                placeholder="Nhập tên chức vụ">
+                            <input type="text" class="form-control" placeholder="Nhập tên chức vụ">
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tình Trạng</label>
-                            <select v-model="obj_add.tinh_trang" class="form-select">
+                            <select class="form-select">
                                 <option value="1">Hoạt động</option>
                                 <option value="0">Tạm dừng</option>
                             </select>
@@ -295,7 +293,7 @@
                     </div>
                     <div class="modal-footer border-top-0">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <button type="button" class="btn btn-primary px-4" @click="createChucVu()">Lưu Lại</button>
+                        <button type="button" class="btn btn-primary px-4">Lưu Lại</button>
                     </div>
                 </div>
             </div>
@@ -312,11 +310,11 @@
                     <div class="modal-body">
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tên Chức Vụ</label>
-                            <input v-model="obj_edit.ten_chuc_vu" type="text" class="form-control">
+                            <input type="text" class="form-control">
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tình Trạng</label>
-                            <select v-model="obj_edit.tinh_trang" class="form-select">
+                            <select class="form-select">
                                 <option value="1">Hoạt động</option>
                                 <option value="0">Tạm dừng</option>
                             </select>
@@ -324,7 +322,7 @@
                     </div>
                     <div class="modal-footer border-top-0">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                        <button type="button" class="btn btn-warning px-4 text-dark" @click="updateChucVu()">Cập
+                        <button type="button" class="btn btn-warning px-4 text-dark">Cập
                             Nhật</button>
                     </div>
                 </div>
@@ -343,13 +341,13 @@
                     <div class="modal-body text-center py-4">
                         <i class="fa fa-exclamation-triangle text-warning mb-3" style="font-size: 3rem;"></i>
                         <h5 class="fw-bold fs-5">Xác nhận gỡ quyền?</h5>
-                        <p class="text-muted small">Bạn đang muốn gỡ quyền: <b class="text-danger">{{ obj_delete_quyen.ten_quyen }}</b></p>
+                        <p class="text-muted small">Bạn đang muốn gỡ quyền: <b class="text-danger"></b></p>
                         <p class="text-muted small mb-0">Hành động này không thể hoàn tác.</p>
                     </div>
                     <div class="modal-footer justify-content-center border-top-0">
                         <button type="button" class="btn btn-secondary px-4 shadow-sm"
                             data-bs-dismiss="modal">Hủy</button>
-                        <button type="button" class="btn btn-danger px-4 shadow-sm" @click="removeQuyen()">Xác Nhận Gỡ Bỏ</button>
+                        <button type="button" class="btn btn-danger px-4 shadow-sm">Xác Nhận Gỡ Bỏ</button>
                     </div>
                 </div>
             </div>
@@ -362,34 +360,11 @@ export default {
     name: "PhanQuyenManager",
     data() {
         return {
-            obj_add: {
-                ten_chuc_vu: "",
-                tinh_trang: 1
-            },
-            obj_edit: {},
-            obj_delete: {},
-            obj_delete_quyen: {}
+
         }
     },
-    methods: {
-        createChucVu() {
-            // Implement logic
-            console.log("Create Chuc Vu:", this.obj_add);
-        },
-        updateChucVu() {
-            // Implement logic
-            console.log("Update Chuc Vu:", this.obj_edit);
-        },
-        deleteChucVu() {
-            // Implement logic
-            console.log("Delete Chuc Vu:", this.obj_delete);
-        },
-        removeQuyen() {
-            // Implement logic
-            console.log("Remove Permission:", this.obj_delete_quyen);
-        }
-    }
+
 }
 </script>
 
-<style scoped></style>
+<style></style>
