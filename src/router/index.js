@@ -55,6 +55,14 @@ const routes = [
         component: () => import('../components/Admin/LoaiSanPham/index.vue')
     },
     {
+        path: '/admin/kho',
+        component: () => import('../components/Admin/Kho/index.vue')
+    },
+    {
+        path: '/admin/ton-kho',
+        component: () => import('../components/Admin/TonKho/index.vue')
+    },
+    {
         path: '/admin/dang-nhap',
         component: () => import('../components/Admin/DangNhap/index.vue'),
         meta: {
