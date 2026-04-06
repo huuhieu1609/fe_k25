@@ -1,119 +1,118 @@
 <template>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card border-top border-0 border-4 border-primary">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="card-title">Danh sách khách hàng</h5>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Thêm
-                            mới</button>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-hover">
-                                <thead>
-                                    <tr class="text-center">
-                                        <th>STT</th>
-                                        <th>Họ và tên</th>
-                                        <th>Số điện thoại</th>
-                                        <th>Email</th>
-                                        <th>Địa chỉ</th>
-                                        <th>Điểm tích lũy</th>
-                                        <th>Ghi chú</th>
-                                        <th>Trạng thái</th>
-                                        <th>Thao tác</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="text-center align-middle">
-                                        <td>1</td>
-                                        <td>Nguyễn Văn A</td>
-                                        <td>0123456789</td>
-                                        <td>nguyenvana@gmail.com</td>
-                                        <td>Hà Nội</td>
-                                        <td>100</td>
-                                        <td>Khách hàng thân thiết</td>
-                                        <td><button class="btn btn-success btn-sm w-100">Đang hoạt động</button></td>
-                                        <td>
-                                            <button class="btn btn-warning me-2" data-bs-toggle="modal"
-                                                data-bs-target="#editModal"><i class="fa fa-edit"></i>Cập Nhật</button>
-                                            <button class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#deleteModal"><i class="fa fa-trash"></i>Xóa</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="text-center align-middle">
-                                        <td>2</td>
-                                        <td>Nguyễn Văn B</td>
-                                        <td>0123456789</td>
-                                        <td>nguyenvanb@gmail.com</td>
-                                        <td>Hà Nội</td>
-                                        <td>100</td>
-                                        <td>Khách hàng thân thiết</td>
-                                        <td><button class="btn btn-danger btn-sm w-100">Đã nghỉ việc</button></td>
-                                        <td>
-                                            <button class="btn btn-warning me-2" data-bs-toggle="modal"
-                                                data-bs-target="#editModal"><i class="fa fa-edit"></i>Cập Nhật</button>
-                                            <button class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#deleteModal"><i class="fa fa-trash"></i>Xóa</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="text-center align-middle">
-                                        <td>3</td>
-                                        <td>Nguyễn Văn C</td>
-                                        <td>0123456789</td>
-                                        <td>nguyenvanc@gmail.com</td>
-                                        <td>Hà Nội</td>
-                                        <td>100</td>
-                                        <td>Khách hàng thân thiết</td>
-                                        <td><button class="btn btn-success btn-sm w-100">Đang hoạt động</button></td>
-                                        <td>
-                                            <button class="btn btn-warning me-2" data-bs-toggle="modal"
-                                                data-bs-target="#editModal"><i class="fa fa-edit"></i>Cập Nhật</button>
-                                            <button class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#deleteModal"><i class="fa fa-trash"></i>Xóa</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="text-center align-middle">
-                                        <td>4</td>
-                                        <td>Nguyễn Văn D</td>
-                                        <td>0123456789</td>
-                                        <td>nguyenvand@gmail.com</td>
-                                        <td>Hà Nội</td>
-                                        <td>100</td>
-                                        <td>Khách hàng thân thiết</td>
-                                        <td><button class="btn btn-danger btn-sm w-100">Đã nghỉ việc</button></td>
-                                        <td>
-                                            <button class="btn btn-warning me-2" data-bs-toggle="modal"
-                                                data-bs-target="#editModal"><i class="fa fa-edit"></i>Cập Nhật</button>
-                                            <button class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#deleteModal"><i class="fa fa-trash"></i>Xóa</button>
-                                        </td>
-                                    </tr>
-                                    <tr class="text-center align-middle">
-                                        <td>5</td>
-                                        <td>Nguyễn Văn E</td>
-                                        <td>0123456789</td>
-                                        <td>nguyenvane@gmail.com</td>
-                                        <td>Hà Nội</td>
-                                        <td>100</td>
-                                        <td>Khách hàng thân thiết</td>
-                                        <td><button class="btn btn-success btn-sm w-100">Đang hoạt động</button></td>
-                                        <td>
-                                            <button class="btn btn-warning me-2" data-bs-toggle="modal"
-                                                data-bs-target="#editModal"><i class="fa fa-edit"></i>Cập Nhật</button>
-                                            <button class="btn btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#deleteModal"><i class="fa fa-trash"></i>Xóa</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card border-top border-0 border-4 border-primary">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title">Danh sách khách hàng</h5>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal">Thêm
+                        mới</button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>STT</th>
+                                    <th>Họ và tên</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Email</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Điểm tích lũy</th>
+                                    <th>Ghi chú</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center align-middle">
+                                    <td>1</td>
+                                    <td>Nguyễn Văn A</td>
+                                    <td>0123456789</td>
+                                    <td>nguyenvana@gmail.com</td>
+                                    <td>Hà Nội</td>
+                                    <td>100</td>
+                                    <td>Khách hàng thân thiết</td>
+                                    <td><button class="btn btn-success btn-sm w-100">Đang hoạt động</button></td>
+                                    <td>
+                                        <button class="btn btn-warning me-2" data-bs-toggle="modal"
+                                            data-bs-target="#editModal"><i class="fa fa-edit"></i>Cập Nhật</button>
+                                        <button class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal"><i class="fa fa-trash"></i>Xóa</button>
+                                    </td>
+                                </tr>
+                                <tr class="text-center align-middle">
+                                    <td>2</td>
+                                    <td>Nguyễn Văn B</td>
+                                    <td>0123456789</td>
+                                    <td>nguyenvanb@gmail.com</td>
+                                    <td>Hà Nội</td>
+                                    <td>100</td>
+                                    <td>Khách hàng thân thiết</td>
+                                    <td><button class="btn btn-danger btn-sm w-100">Đã nghỉ việc</button></td>
+                                    <td>
+                                        <button class="btn btn-warning me-2" data-bs-toggle="modal"
+                                            data-bs-target="#editModal"><i class="fa fa-edit"></i>Cập Nhật</button>
+                                        <button class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal"><i class="fa fa-trash"></i>Xóa</button>
+                                    </td>
+                                </tr>
+                                <tr class="text-center align-middle">
+                                    <td>3</td>
+                                    <td>Nguyễn Văn C</td>
+                                    <td>0123456789</td>
+                                    <td>nguyenvanc@gmail.com</td>
+                                    <td>Hà Nội</td>
+                                    <td>100</td>
+                                    <td>Khách hàng thân thiết</td>
+                                    <td><button class="btn btn-success btn-sm w-100">Đang hoạt động</button></td>
+                                    <td>
+                                        <button class="btn btn-warning me-2" data-bs-toggle="modal"
+                                            data-bs-target="#editModal"><i class="fa fa-edit"></i>Cập Nhật</button>
+                                        <button class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal"><i class="fa fa-trash"></i>Xóa</button>
+                                    </td>
+                                </tr>
+                                <tr class="text-center align-middle">
+                                    <td>4</td>
+                                    <td>Nguyễn Văn D</td>
+                                    <td>0123456789</td>
+                                    <td>nguyenvand@gmail.com</td>
+                                    <td>Hà Nội</td>
+                                    <td>100</td>
+                                    <td>Khách hàng thân thiết</td>
+                                    <td><button class="btn btn-danger btn-sm w-100">Đã nghỉ việc</button></td>
+                                    <td>
+                                        <button class="btn btn-warning me-2" data-bs-toggle="modal"
+                                            data-bs-target="#editModal"><i class="fa fa-edit"></i>Cập Nhật</button>
+                                        <button class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal"><i class="fa fa-trash"></i>Xóa</button>
+                                    </td>
+                                </tr>
+                                <tr class="text-center align-middle">
+                                    <td>5</td>
+                                    <td>Nguyễn Văn E</td>
+                                    <td>0123456789</td>
+                                    <td>nguyenvane@gmail.com</td>
+                                    <td>Hà Nội</td>
+                                    <td>100</td>
+                                    <td>Khách hàng thân thiết</td>
+                                    <td><button class="btn btn-success btn-sm w-100">Đang hoạt động</button></td>
+                                    <td>
+                                        <button class="btn btn-warning me-2" data-bs-toggle="modal"
+                                            data-bs-target="#editModal"><i class="fa fa-edit"></i>Cập Nhật</button>
+                                        <button class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal"><i class="fa fa-trash"></i>Xóa</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -163,7 +162,10 @@
                             <div class="col-lg-6">
                                 <div class="mb-3">
                                     <label for="trang_thai" class="form-label">Trạng thái</label>
-                                    <input type="text" class="form-control" placeholder="Nhập trạng thái">
+                                    <select class="form-select">
+                                        <option value="1">Đang hoạt động</option>
+                                        <option value="2">Đã nghỉ việc</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -222,10 +224,14 @@
                                     <input type="text" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+
+                            <div class="col-lg-12">
                                 <div class="mb-3">
                                     <label for="trang_thai" class="form-label">Trạng thái</label>
-                                    <input type="text" class="form-control">
+                                    <select class="form-select">
+                                        <option value="1">Đang hoạt động</option>
+                                        <option value="2">Đã nghỉ việc</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

@@ -181,13 +181,21 @@
                                 <label class="form-label fw-bold">Tồn Tối Thiểu</label>
                                 <input type="number" class="form-control" value="10">
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Trạng Thái</label>
-                            <select class="form-select">
-                                <option value="1" selected>Còn Kinh Doanh</option>
-                                <option value="0">Ngừng Kinh Doanh</option>
-                            </select>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Trạng Thái</label>
+                                <select class="form-select">
+                                    <option value="1" selected>Còn Kinh Doanh</option>
+                                    <option value="0">Ngừng Kinh Doanh</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Loại Sản Phẩm</label>
+                                <select class="form-select">
+                                    <option value="">Chọn loại sản phẩm...</option>
+                                    <option value="1">Trái Cây</option>
+                                    <option value="2">Thịt & Hải Sản</option>
+                                </select>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -210,7 +218,6 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <!-- Same form as Add Modal, but pre-filled -->
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Tên Sản Phẩm</label>
@@ -258,13 +265,20 @@
                                 <label class="form-label fw-bold">Tồn Tối Thiểu</label>
                                 <input type="number" class="form-control" value="10">
                             </div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Trạng Thái</label>
-                            <select class="form-select">
-                                <option value="1" selected>Còn Kinh Doanh</option>
-                                <option value="0">Ngừng Kinh Doanh</option>
-                            </select>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Trạng Thái</label>
+                                <select class="form-select">
+                                    <option value="1" selected>Còn Kinh Doanh</option>
+                                    <option value="0">Ngừng Kinh Doanh</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Loại Sản Phẩm</label>
+                                <select class="form-select">
+                                    <option value="1" selected>Trái Cây</option>
+                                    <option value="2">Thịt & Hải Sản</option>
+                                </select>
+                            </div>
                         </div>
                     </form>
                 </div>
