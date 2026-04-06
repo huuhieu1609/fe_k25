@@ -54,6 +54,13 @@ const routes = [
         path: '/admin/loai-san-pham',
         component: () => import('../components/Admin/LoaiSanPham/index.vue')
     },
+    {
+        path: '/admin/dang-nhap',
+        component: () => import('../components/Admin/DangNhap/index.vue'),
+        meta: {
+            layout: "blank"
+        }
+    }
 
 ]
 

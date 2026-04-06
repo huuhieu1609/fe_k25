@@ -390,27 +390,19 @@
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="javascript:;"><i
-                                    class="bx bx-user"></i><span>Profile</span></a>
-                        </li>
-                        <li><a class="dropdown-item" href="javascript:;"><i
-                                    class="bx bx-cog"></i><span>Settings</span></a>
-                        </li>
-                        <li><a class="dropdown-item" href="javascript:;"><i
-                                    class='bx bx-home-circle'></i><span>Dashboard</span></a>
-                        </li>
-                        <li><a class="dropdown-item" href="javascript:;"><i
-                                    class='bx bx-dollar-circle'></i><span>Earnings</span></a>
-                        </li>
-                        <li><a class="dropdown-item" href="javascript:;"><i
-                                    class='bx bx-download'></i><span>Downloads</span></a>
-                        </li>
-                        <li>
-                            <div class="dropdown-divider mb-0"></div>
-                        </li>
+                        <router-link to="/admin/dang-nhap">
+                            <li><a class="dropdown-item" href="javascript:;"><i class='bx bx-download'></i><span>Đăng
+                                        Nhập</span></a>
+                            </li>
+                        </router-link>
+
                         <li><a class="dropdown-item" href="javascript:;"><i
                                     class='bx bx-log-out-circle'></i><span>Logout</span></a>
                         </li>
+                        <li><a class="dropdown-item" href="javascript:;"><i
+                                    class='bx bx-log-out-circle'></i><span>LogoutAll</span></a>
+                        </li>
+
                     </ul>
                 </div>
             </nav>

@@ -37,8 +37,8 @@
                                         </td>
                                         <td class="text-nowrap">
 
-                                            <button class="btn btn-info btn-sm me-1 shadow-sm" data-bs-toggle="modal"
-                                                data-bs-target="#editModal">
+                                            <button class="btn btn-info btn-sm me-1 shadow-sm text-white"
+                                                data-bs-toggle="modal" data-bs-target="#editModal">
                                                 <i class="fa fa-edit"></i>
                                             </button>
                                             <button class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal"
@@ -55,8 +55,8 @@
                                         </td>
                                         <td class="text-nowrap">
 
-                                            <button class="btn btn-info btn-sm me-1 shadow-sm" data-bs-toggle="modal"
-                                                data-bs-target="#editModal">
+                                            <button class="btn btn-info btn-sm me-1 shadow-sm text-white"
+                                                data-bs-toggle="modal" data-bs-target="#editModal">
                                                 <i class="fa fa-edit"></i>
                                             </button>
                                             <button class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal"
