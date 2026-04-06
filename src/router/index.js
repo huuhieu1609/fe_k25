@@ -54,6 +54,14 @@ const routes = [
         path: '/admin/loai-san-pham',
         component: () => import('../components/Admin/LoaiSanPham/index.vue')
     },
+    {
+        path: '/admin/kho',
+        component: () => import('../components/Admin/Kho/index.vue')
+    },
+    {
+        path: '/admin/ton-kho',
+        component: () => import('../components/Admin/TonKho/index.vue')
+    },
 
 ]
 
