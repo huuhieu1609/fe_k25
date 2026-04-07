@@ -1,388 +1,243 @@
 <template>
-  <div class="row">
-    <div class="col-lg-4">
-      <div class="card border-top border-0 border-4 border-primary mt-2">
-        <div class="card-header">
-          <h5 class="card-title">Thêm Mới Kho</h5>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card border-top border-0 border-4 border-primary mt-2 shadow-sm">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6">
+                            <h5 class="card-title mb-0">Danh Sách Kho</h5>
+                        </div>
+                        <div class="col-lg-6 text-end">
+                            <button class="btn btn-primary px-4 shadow-sm" data-bs-toggle="modal" data-bs-target="#addModal">
+                                <i class="fa fa-plus me-1"></i>Thêm Mới
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover align-middle">
+                            <thead class="text-center text-nowrap table-light">
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Tên Kho</th>
+                                    <th>Ghi Chú</th>
+                                    <th>Thao Tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template v-if="listKho.length">
+                                    <tr v-for="(item, index) in listKho" :key="item.id" class="text-center">
+                                        <td>{{ index + 1 }}</td>
+                                        <td class="text-start">{{ item.ten }}</td>
+                                        <td class="text-start">{{ item.ghi_chu }}</td>
+                                        <td class="text-nowrap">
+                                            <button type="button" class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal" data-bs-target="#editModal" @click="prepareEdit(item)">
+                                                <i class="fa fa-edit"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" @click="prepareDelete(item)">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <tr v-else class="text-center">
+                                    <td colspan="4">Không có dữ liệu kho</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-          <div class="mb-3">
-            <label class="form-label fw-bold">Tên Kho</label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Nhập tên kho"
-            />
-          </div>
-          <div class="mb-3">
-            <label class="form-label fw-bold">Ghi Chú</label>
-            <textarea
-              class="form-control"
-              rows="3"
-              placeholder="Nhập ghi chú"
-            ></textarea>
-          </div>
-        </div>
-        <div class="card-footer text-end">
-          <button class="btn btn-primary px-4">Thêm Mới</button>
-        </div>
-      </div>
     </div>
-    <div class="col-lg-8">
-      <div class="card border-top border-0 border-4 border-primary mt-2">
-        <div class="card-header">
-          <h5 class="card-title">Danh Sách Kho</h5>
-        </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table
-              class="table table-bordered table-striped table-hover align-middle"
-            >
-              <thead class="text-center text-nowrap">
-                <tr>
-                  <th>STT</th>
-                  <th>Tên Kho</th>
-                  <th>Ghi Chú</th>
-                  <th>Thao Tác</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  class="text-center"
-                  v-for="(k, index) in listKho"
-                  :key="index"
-                >
-                  <td>{{ index + 1 }}</td>
-                  <td>{{ k.ten_kho }}</td>
-                  <td>{{ k.ghi_chu }}</td>
-                  <td class="text-nowrap">
-                    <button
-                      class="btn btn-info btn-sm me-1"
-                      data-bs-toggle="modal"
-                      data-bs-target="#chiTietTonKhoModal"
-                      @click="xemTonKho(k)"
-                    >
-                      <i class="bx bx-list-ol"></i> Xem Tồn Kho
-                    </button>
-                    <button
-                      class="btn btn-warning btn-sm me-1"
-                      data-bs-toggle="modal"
-                      data-bs-target="#capNhatModal"
-                      @click="chonKhoCapNhat(k)"
-                    >
-                      <i class="bx bx-edit"></i> Cập Nhật
-                    </button>
-                    <button
-                      class="btn btn-danger btn-sm"
-                      data-bs-toggle="modal"
-                      data-bs-target="#xoaModal"
-                      @click="chonKhoXoa(k)"
-                    >
-                      <i class="bx bx-trash"></i> Xóa
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <!-- Modal Chi Tiết Tồn Kho -->
-  <div
-    class="modal fade"
-    id="chiTietTonKhoModal"
-    tabindex="-1"
-    aria-labelledby="chiTietTonKhoModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="chiTietTonKhoModalLabel">
-            Chi Tiết Tồn Kho: {{ khoDangXem.ten_kho }}
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+    <!-- Add Modal -->
+    <div class="modal fade" id="addModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Thêm Mới Kho</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Tên Kho</label>
+                            <input v-model="them_kho.ten" type="text" class="form-control shadow-sm" placeholder="Nhập tên kho">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Ghi Chú</label>
+                            <textarea v-model="them_kho.ghi_chu" class="form-control shadow-sm" rows="3" placeholder="Nhập ghi chú"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-primary px-4 shadow-sm" @click="themKho">Lưu Kho</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <div class="table-responsive">
-            <table
-              class="table table-bordered table-striped table-hover align-middle"
-            >
-              <thead class="text-center text-nowrap">
-                <tr>
-                  <th>STT</th>
-                  <th>Mã Sản Phẩm</th>
-                  <th>Tên Sản Phẩm</th>
-                  <th>Số Lượng Tồn</th>
-                  <th>Đơn Vị Tính</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  class="text-center"
-                  v-for="(sp, index) in listTonKhoChiTiet"
-                  :key="index"
-                >
-                  <td>{{ index + 1 }}</td>
-                  <td>{{ sp.ma_sp }}</td>
-                  <td>{{ sp.ten_sp }}</td>
-                  <td class="text-end fw-bold text-success">
-                    {{ sp.so_luong }}
-                  </td>
-                  <td>{{ sp.dvt }}</td>
-                </tr>
-                <tr v-if="listTonKhoChiTiet.length === 0">
-                  <td colspan="5" class="text-center text-muted">
-                    Kho này hiện chưa có sản phẩm nào.
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Đóng
-          </button>
-        </div>
-      </div>
     </div>
-  </div>
 
-  <!-- Modal Cập Nhật Kho -->
-  <div
-    class="modal fade"
-    id="capNhatModal"
-    tabindex="-1"
-    aria-labelledby="capNhatModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="capNhatModalLabel">
-            Cập Nhật Thông Tin Kho
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title">Cập Nhật Kho</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Tên Kho</label>
+                            <input v-model="edit_kho.ten" type="text" class="form-control shadow-sm" placeholder="Nhập tên kho">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Ghi Chú</label>
+                            <textarea v-model="edit_kho.ghi_chu" class="form-control shadow-sm" rows="3" placeholder="Nhập ghi chú"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-warning shadow-sm px-4" @click="editKho">Lưu Thay Đổi</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <div class="mb-3">
-            <label class="form-label fw-bold">Tên Kho</label>
-            <input
-              type="text"
-              class="form-control"
-              v-model="khoCapNhat.ten_kho"
-              placeholder="Nhập tên kho"
-            />
-          </div>
-          <div class="mb-3">
-            <label class="form-label fw-bold">Ghi Chú</label>
-            <textarea
-              class="form-control"
-              rows="3"
-              v-model="khoCapNhat.ghi_chu"
-              placeholder="Nhập ghi chú"
-            ></textarea>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Đóng
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-bs-dismiss="modal"
-            @click="xacNhanCapNhat"
-          >
-            Cập Nhật
-          </button>
-        </div>
-      </div>
     </div>
-  </div>
 
-  <!-- Modal Xóa Kho -->
-  <div
-    class="modal fade"
-    id="xoaModal"
-    tabindex="-1"
-    aria-labelledby="xoaModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title text-danger" id="xoaModalLabel">
-            Xác Nhận Xóa Kho
-          </h5>
-          <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
+    <!-- Delete Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title text-white">Xóa Kho</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center py-4">
+                    <i class="fa fa-exclamation-triangle text-warning mb-3" style="font-size: 3rem;"></i>
+                    <h5 class="fw-bold fs-5">Bạn có chắc chắn muốn xóa kho này?</h5>
+                    <p class="text-muted small">Hành động này không thể hoàn tác.</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary px-4 shadow-sm" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger px-4 shadow-sm" @click="xoaKho">Xác Nhận Xóa</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <p>
-            Bạn có chắc chắn muốn xóa kho
-            <strong>{{ khoXoa.ten_kho }}</strong> này không?
-          </p>
-          <p class="text-danger">
-            <small
-              >Lưu ý: Hành động này không thể hoàn tác và có thể ảnh hưởng đến
-              dữ liệu tồn kho!</small
-            >
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Hủy
-          </button>
-          <button
-            type="button"
-            class="btn btn-danger"
-            data-bs-dismiss="modal"
-            @click="xacNhanXoa"
-          >
-            Xóa Kho
-          </button>
-        </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-  data() {
-    return {
-      listKho: [
-        {
-          id: 1,
-          ten_kho: "Kho Tổng Biên Hòa",
-          ghi_chu: "Kho trung tâm phân phối chính",
-        },
-        {
-          id: 2,
-          ten_kho: "Kho Chi Nhánh Tân Bình",
-          ghi_chu: "Kho lưu trữ hàng điện tử",
-        },
-        {
-          id: 3,
-          ten_kho: "Kho Vật Tư Bình Dương",
-          ghi_chu: "Chứa vật tư đóng gói nguyên liệu",
-        },
-      ],
-      listTonKho: [
-        {
-          id_kho: 1,
-          ma_sp: "SP001",
-          ten_sp: "Laptop Dell XPS 15",
-          so_luong: 45,
-          dvt: "Cái",
-        },
-        {
-          id_kho: 1,
-          ma_sp: "SP002",
-          ten_sp: "Bàn phím cơ Keychron K8",
-          so_luong: 120,
-          dvt: "Bộ",
-        },
-        {
-          id_kho: 1,
-          ma_sp: "SP003",
-          ten_sp: "Chuột không dây Logitech Master 3",
-          so_luong: 80,
-          dvt: "Cái",
-        },
-        {
-          id_kho: 2,
-          ma_sp: "SP004",
-          ten_sp: "Màn hình Dell Ultrasharp 27 inch",
-          so_luong: 30,
-          dvt: "Chiếc",
-        },
-        {
-          id_kho: 2,
-          ma_sp: "SP001",
-          ten_sp: "Laptop Dell XPS 15",
-          so_luong: 15,
-          dvt: "Cái",
-        },
-        {
-          id_kho: 3,
-          ma_sp: "SP005",
-          ten_sp: "Thùng Carton 5 lớp",
-          so_luong: 5000,
-          dvt: "Thùng",
-        },
-        {
-          id_kho: 3,
-          ma_sp: "SP006",
-          ten_sp: "Băng keo trong",
-          so_luong: 1200,
-          dvt: "Cuộn",
-        },
-      ],
-      khoDangXem: {},
-      listTonKhoChiTiet: [],
-      khoCapNhat: { ten_kho: "", ghi_chu: "" },
-      khoXoa: {},
-    };
-  },
-  methods: {
-    xemTonKho(kho) {
-      this.khoDangXem = kho;
-      this.listTonKhoChiTiet = this.listTonKho.filter(
-        (item) => item.id_kho === kho.id,
-      );
+    name: 'KhoManager',
+    data() {
+        return {
+            listKho: [],
+            them_kho: {
+                ten: '',
+                ghi_chu: '',
+            },
+            edit_kho: {},
+            xoa_kho: {},
+        };
     },
-    chonKhoCapNhat(kho) {
-      // Sao chép tránh tham chiếu
-      this.khoCapNhat = { ...kho };
+    created() {
+        this.getKho();
     },
-    chonKhoXoa(kho) {
-      this.khoXoa = kho;
+    methods: {
+        getKho() {
+            axios
+                .get('http://127.0.0.1:8000/api/admin/kho')
+                .then(response => {
+                    this.listKho = response.data.data || [];
+                })
+                .catch(error => {
+                    console.error('Lỗi khi tải danh sách Kho:', error);
+                    this.$toast?.error('Đã xảy ra lỗi khi tải danh sách Kho.');
+                });
+        },
+        themKho() {
+            axios
+                .post('http://127.0.0.1:8000/api/admin/kho/create', this.them_kho)
+                .then(response => {
+                    if (response.data.status == 1) {
+                        this.getKho();
+                        this.them_kho = {
+                            ten: '',
+                            ghi_chu: '',
+                        };
+                        this.$toast?.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                        const modal = document.querySelector('#addModal .btn-close');
+                        modal && modal.click();
+                    } else {
+                        this.$toast?.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi khi thêm mới Kho:', error);
+                    if (error.response && error.response.data && error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
+                        this.$toast?.error(`<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`);
+                    } else {
+                        this.$toast?.error('Đã xảy ra lỗi khi thêm mới Kho.');
+                    }
+                });
+        },
+        prepareEdit(item) {
+            this.edit_kho = { ...item };
+        },
+        prepareDelete(item) {
+            this.xoa_kho = item;
+        },
+        editKho() {
+            axios
+                .put('http://127.0.0.1:8000/api/admin/kho/update', this.edit_kho)
+                .then(response => {
+                    if (response.data.status == 1) {
+                        this.getKho();
+                        this.$toast?.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                        const modal = document.querySelector('#editModal .btn-close');
+                        modal && modal.click();
+                    } else {
+                        this.$toast?.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi khi cập nhật Kho:', error);
+                    if (error.response && error.response.data && error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
+                        this.$toast?.error(`<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`);
+                    } else {
+                        this.$toast?.error('Đã xảy ra lỗi khi cập nhật Kho.');
+                    }
+                });
+        },
+        xoaKho() {
+            axios
+                .delete(`http://127.0.0.1:8000/api/admin/kho/delete/${this.xoa_kho.id}`)
+                .then(response => {
+                    if (response.data.status == 1) {
+                        this.getKho();
+                        this.$toast?.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                        const modal = document.querySelector('#deleteModal .btn-close');
+                        modal && modal.click();
+                    } else {
+                        this.$toast?.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi khi xóa Kho:', error);
+                    this.$toast?.error('Đã xảy ra lỗi khi xóa Kho.');
+                });
+        },
     },
-    xacNhanCapNhat() {
-      const index = this.listKho.findIndex((k) => k.id === this.khoCapNhat.id);
-      if (index !== -1) {
-        this.listKho.splice(index, 1, this.khoCapNhat);
-        alert("Cập nhật kho thành công!");
-      }
-    },
-    xacNhanXoa() {
-      this.listKho = this.listKho.filter((k) => k.id !== this.khoXoa.id);
-      alert("Đã xóa kho " + this.khoXoa.ten_kho + "!");
-    },
-  },
 };
 </script>
 
-<style></style>
+<style scoped></style>

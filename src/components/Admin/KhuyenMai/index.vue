@@ -8,8 +8,7 @@
                             <h5 class="card-title mb-0">Danh Sách Khuyến Mãi</h5>
                         </div>
                         <div class="col-lg-6 text-end">
-                            <button class="btn btn-primary px-4 shadow-sm" data-bs-toggle="modal"
-                                data-bs-target="#addModal">
+                            <button class="btn btn-primary px-4 shadow-sm" data-bs-toggle="modal" data-bs-target="#addModal">
                                 <i class="fa fa-plus me-1"></i>Thêm Mới
                             </button>
                         </div>
@@ -22,8 +21,7 @@
                                 <tr>
                                     <th>STT</th>
                                     <th>Mã Code</th>
-                                    <th>Tên Chương Trình</th>
-                                    <th>Sản Phẩm Áp Dụng</th>
+                                    <th>Tên</th>
                                     <th>Kiểu</th>
                                     <th>Giá Trị</th>
                                     <th>Thời Gian</th>
@@ -33,55 +31,34 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="text-center">
-                                    <td>1</td>
-                                    <td>SUMMER2026</td>
-                                    <td class="text-start">Giảm giá mùa hè</td>
-                                    <td class="text-start">
-                                        Tất cả sản phẩm
-                                    </td>
-                                    <td>Phần trăm</td>
-                                    <td>10%</td>
-                                    <td class="small">01/06 - 31/08</td>
-                                    <td>500,000đ</td>
-                                    <td>
-                                        <button class="btn btn-success btn-sm w-100 shadow-sm">Đang áp dụng</button>
-                                    </td>
-                                    <td class="text-nowrap">
-                                        <button class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
-                                            data-bs-target="#editModal">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="text-center">
-                                    <td>2</td>
-                                    <td>K26OFFER</td>
-                                    <td class="text-start">Ưu đãi K26</td>
-                                    <td class="text-start">
-                                        Trái Cây Nhập Khẩu
-                                    </td>
-                                    <td>Số tiền</td>
-                                    <td>50,000đ</td>
-                                    <td class="small">01/04 - 15/04</td>
-                                    <td>200,000đ</td>
-                                    <td>
-                                        <button class="btn btn-success btn-sm w-100 shadow-sm">Đang áp dụng</button>
-                                    </td>
-                                    <td class="text-nowrap">
-                                        <button class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
-                                            data-bs-target="#editModal">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </td>
+                                <template v-if="listKhuyenMai.length">
+                                    <tr v-for="(item, index) in listKhuyenMai" :key="item.id" class="text-center">
+                                        <td>{{ index + 1 }}</td>
+                                        <td class="text-start">{{ item.ma_code }}</td>
+                                        <td class="text-start">{{ item.ten }}</td>
+                                        <td>
+                                            <span v-if="item.kieu == 1" class="badge bg-info">Phần trăm (%)</span>
+                                            <span v-else class="badge bg-secondary">Số tiền cố định (đ)</span>
+                                        </td>
+                                        <td>{{ item.gia_tri }} {{ item.kieu == 1 ? '%' : 'đ' }}</td>
+                                        <td class="small">{{ item.tu_ngay }} - {{ item.den_ngay }}</td>
+                                        <td>{{ item.dieu_kien_toi_thieu }}</td>
+                                        <td>
+                                            <button v-on:click="changeStatus(item)" v-if="item.trang_thai == 1" class="btn btn-success btn-sm w-100 shadow-sm">Đang áp dụng</button>
+                                            <button v-on:click="changeStatus(item)" v-else class="btn btn-secondary btn-sm w-100 shadow-sm">Tạm ngưng</button>
+                                        </td>
+                                        <td class="text-nowrap">
+                                            <button type="button" class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal" data-bs-target="#editModal" v-on:click="Object.assign(edit_khuyen_mai, item)">
+                                                <i class="fa fa-edit"></i>
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" v-on:click="Object.assign(xoa_khuyen_mai, item)">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </template>
+                                <tr v-else class="text-center">
+                                    <td colspan="9">Không có dữ liệu khuyến mãi</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -97,56 +74,46 @@
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
                     <h5 class="modal-title">Thêm Mới Khuyến Mãi</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Mã Khuyến Mãi</label>
-                                <input type="text" class="form-control shadow-sm" placeholder="Nhập mã khuyến mãi">
+                                <input v-model="them_khuyen_mai.ma_code" type="text" class="form-control shadow-sm" placeholder="Nhập mã khuyến mãi">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Tên Khuyến Mãi</label>
-                                <input type="text" class="form-control shadow-sm" placeholder="Nhập tên chương trình">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Sản Phẩm Áp Dụng</label>
-                                <select class="form-select shadow-sm">
-                                    <option value="0">Tất cả sản phẩm</option>
-                                    <option value="1">Trái Cây Nhập Khẩu</option>
-                                    <option value="2">Thịt Sạch VietGAP</option>
-                                    <option value="3">Đồ Uống & Giải Khát</option>
-                                </select>
+                                <input v-model="them_khuyen_mai.ten" type="text" class="form-control shadow-sm" placeholder="Nhập tên khuyến mãi">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Kiểu Khuyến Mãi</label>
-                                <select class="form-select shadow-sm">
-                                    <option value="Phần trăm">Phần trăm (%)</option>
-                                    <option value="Số tiền">Số tiền cố định (đ)</option>
+                                <select v-model="them_khuyen_mai.kieu" class="form-select shadow-sm">
+                                    <option disabled value="">Chọn kiểu</option>
+                                    <option value="1">Phần trăm (%)</option>
+                                    <option value="0">Số tiền cố định (đ)</option>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Giá Trị</label>
-                                <input type="number" class="form-control shadow-sm" placeholder="Nhập giá trị">
+                                <input v-model="them_khuyen_mai.gia_tri" type="number" class="form-control shadow-sm" placeholder="Nhập giá trị">
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label class="form-label fw-bold">Từ Ngày</label>
-                                <input type="date" class="form-control shadow-sm">
+                                <input v-model="them_khuyen_mai.tu_ngay" type="date" class="form-control shadow-sm">
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label class="form-label fw-bold">Đến Ngày</label>
-                                <input type="date" class="form-control shadow-sm">
+                                <input v-model="them_khuyen_mai.den_ngay" type="date" class="form-control shadow-sm">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Điều Kiện Tối Thiểu</label>
-                                <input type="number" class="form-control shadow-sm"
-                                    placeholder="Nhập giá trị đơn tối thiểu">
+                                <input v-model="them_khuyen_mai.dieu_kien_toi_thieu" type="number" class="form-control shadow-sm" placeholder="Nhập điều kiện tối thiểu">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Trạng Thái</label>
-                                <select class="form-select shadow-sm">
+                                <select v-model="them_khuyen_mai.trang_thai" class="form-select shadow-sm">
                                     <option value="1">Đang áp dụng</option>
                                     <option value="0">Tạm ngưng</option>
                                 </select>
@@ -156,7 +123,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary px-4 shadow-sm">Lưu Khuyến Mãi</button>
+                    <button type="button" class="btn btn-primary px-4 shadow-sm" @click="themKhuyenMai">Lưu Khuyến Mãi</button>
                 </div>
             </div>
         </div>
@@ -175,48 +142,39 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Mã Khuyến Mãi</label>
-                                <input type="text" class="form-control shadow-sm" value="SUMMER2026">
+                                <input v-model="edit_khuyen_mai.ma_code" type="text" class="form-control shadow-sm" placeholder="Nhập mã khuyến mãi">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Tên Khuyến Mãi</label>
-                                <input type="text" class="form-control shadow-sm" value="Giảm giá mùa hè">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Sản Phẩm Áp Dụng</label>
-                                <select class="form-select shadow-sm">
-                                    <option value="0" selected>Tất cả sản phẩm</option>
-                                    <option value="1">Trái Cây Nhập Khẩu</option>
-                                    <option value="2">Thịt Sạch VietGAP</option>
-                                    <option value="3">Đồ Uống & Giải Khát</option>
-                                </select>
+                                <input v-model="edit_khuyen_mai.ten" type="text" class="form-control shadow-sm" placeholder="Nhập tên khuyến mãi">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Kiểu Khuyến Mãi</label>
-                                <select class="form-select shadow-sm">
-                                    <option value="Phần trăm" selected>Phần trăm (%)</option>
-                                    <option value="Số tiền">Số tiền cố định (đ)</option>
+                                <select v-model="edit_khuyen_mai.kieu" class="form-select shadow-sm">
+                                    <option value="1">Phần trăm (%)</option>
+                                    <option value="0">Số tiền cố định (đ)</option>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Giá Trị</label>
-                                <input type="number" class="form-control shadow-sm" value="10">
+                                <input v-model="edit_khuyen_mai.gia_tri" type="number" class="form-control shadow-sm" placeholder="Nhập giá trị">
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label class="form-label fw-bold">Từ Ngày</label>
-                                <input type="date" class="form-control shadow-sm" value="2026-06-01">
+                                <input v-model="edit_khuyen_mai.tu_ngay" type="date" class="form-control shadow-sm">
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label class="form-label fw-bold">Đến Ngày</label>
-                                <input type="date" class="form-control shadow-sm" value="2026-08-31">
+                                <input v-model="edit_khuyen_mai.den_ngay" type="date" class="form-control shadow-sm">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Điều Kiện Tối Thiểu</label>
-                                <input type="number" class="form-control shadow-sm" value="500000">
+                                <input v-model="edit_khuyen_mai.dieu_kien_toi_thieu" type="number" class="form-control shadow-sm" placeholder="Nhập điều kiện tối thiểu">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Trạng Thái</label>
-                                <select class="form-select shadow-sm">
-                                    <option value="1" selected>Đang áp dụng</option>
+                                <select v-model="edit_khuyen_mai.trang_thai" class="form-select shadow-sm">
+                                    <option value="1">Đang áp dụng</option>
                                     <option value="0">Tạm ngưng</option>
                                 </select>
                             </div>
@@ -225,7 +183,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-warning shadow-sm px-4">Lưu Thay Đổi</button>
+                    <button type="button" class="btn btn-warning shadow-sm px-4" @click="editKhuyenMai">Lưu Thay Đổi</button>
                 </div>
             </div>
         </div>
@@ -237,8 +195,7 @@
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
                     <h5 class="modal-title text-white">Xóa Khuyến Mãi</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center py-4">
                     <i class="fa fa-exclamation-triangle text-warning mb-3" style="font-size: 3rem;"></i>
@@ -247,7 +204,7 @@
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-secondary px-4 shadow-sm" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-danger px-4 shadow-sm">Xác Nhận Xóa</button>
+                    <button type="button" class="btn btn-danger px-4 shadow-sm" @click="xoaKhuyenMai">Xác Nhận Xóa</button>
                 </div>
             </div>
         </div>
@@ -255,13 +212,149 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     name: 'KhuyenMaiManager',
     data() {
         return {
+            listKhuyenMai: [],
+            them_khuyen_mai: {
+                ma_code: '',
+                ten: '',
+                kieu: '',
+                gia_tri: '',
+                tu_ngay: '',
+                den_ngay: '',
+                dieu_kien_toi_thieu: '',
+                trang_thai: '1',
+            },
+            edit_khuyen_mai: {},
+            xoa_khuyen_mai: {},
+            change_Status:{},
+        };
+    },
+    created() {
+        this.getKhuyenMai();
+    },
+    methods: {
+        getKhuyenMai() {
+            axios
+                .get('http://127.0.0.1:8000/api/admin/khuyen-mai')
+                .then(response => {
+                    this.listKhuyenMai = response.data.data;
+                })
+                .catch(error => {
+                    console.error('Lỗi khi tải danh sách Khuyến Mãi:', error);
+                    this.$toast?.error('Đã xảy ra lỗi khi tải danh sách Khuyến Mãi.');
+                });
+        },
+        themKhuyenMai() {
+            axios
+                .post('http://127.0.0.1:8000/api/admin/khuyen-mai/create', this.them_khuyen_mai)
+                .then(response => {
+                    if (response.data.status == 1) {
+                        this.getKhuyenMai();
+                        this.them_khuyen_mai = {
+                            ma_code: '',
+                            ten: '',
+                            kieu: 'Phần trăm',
+                            gia_tri: '',
+                            tu_ngay: '',
+                            den_ngay: '',
+                            dieu_kien_toi_thieu: '',
+                            trang_thai: '1',
+                        };
+                        this.$toast?.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                        const modal = document.querySelector('#addModal .btn-close');
+                        modal && modal.click();
+                    } else {
+                        this.$toast?.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi khi thêm mới Khuyến Mãi:', error);
+                    if (error.response && error.response.data && error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
+                        this.$toast?.error(`<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`);
+                    } else {
+                        this.$toast?.error('Đã xảy ra lỗi khi thêm mới Khuyến Mãi.');
+                    }
+                });
+        },
+        
+        editKhuyenMai() {
+            axios
+                .put('http://127.0.0.1:8000/api/admin/khuyen-mai/update', this.edit_khuyen_mai)
+                .then(response => {
+                    if (response.data.status == 1) {
+                        this.getKhuyenMai();
+                        this.$toast?.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                        const modal = document.querySelector('#editModal .btn-close');
+                        modal && modal.click();
+                    } else {
+                        this.$toast?.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi khi cập nhật Khuyến Mãi:', error);
+                    if (error.response && error.response.data && error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
+                        this.$toast?.error(`<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`);
+                    } else {
+                        this.$toast?.error('Đã xảy ra lỗi khi cập nhật Khuyến Mãi.');
+                    }
+                });
+        },
+        xoaKhuyenMai() {
+            axios
+                .delete('http://127.0.0.1:8000/api/admin/khuyen-mai/delete/' + this.xoa_khuyen_mai.id)
+                .then(response => {
+                    if (response.data.status == 1) {
+                        this.getKhuyenMai();
+                        this.$toast.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                        const modal = document.querySelector('#deleteModal .btn-close');
+                        modal && modal.click();
+                    } else {
+                        this.$toast?.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi khi xóa Khuyến Mãi:', error);
+                    this.$toast?.error('Đã xảy ra lỗi khi xóa Khuyến Mãi.');
+                });
+        },
+        changeStatus(item) {
+            const new_trang_thai = item.trang_thai == 1 ? 0 : 1;
+            axios
+                .delete('http://127.0.0.1:8000/api/admin/khuyen-mai/change-status', {
+                    data: {
+                        id: item.id,
+                        trang_thai: new_trang_thai
+                    }
+                })
+                .then(response => {
+                    if (response.data.status == 1) {
+                        this.getKhuyenMai();
+                        this.$toast?.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                    } else {
+                        this.$toast?.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi khi thay đổi trạng thái Khuyến Mãi:', error);
+                    if (error.response && error.response.data && error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
+                        this.$toast?.error(`<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`);
+                    } else {
+                        this.$toast?.error('Đã xảy ra lỗi khi thay đổi trạng thái Khuyến Mãi.');
+                    }
+                });
         }
-    }
-}
+    },
+};
 </script>
 
 <style scoped></style>
