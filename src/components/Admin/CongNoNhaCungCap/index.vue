@@ -35,6 +35,14 @@
                             <label class="form-label fw-bold">Hạn Thanh Toán</label>
                             <input type="date" class="form-control">
                         </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Trạng Thái</label>
+                            <select class="form-select">
+                                <option selected disabled>Chọn trạng thái...</option>
+                                <option value="1">Hoạt động</option>
+                                <option value="2">Vô hiệu</option>
+                            </select>
+                        </div>
                     </form>
                 </div>
                 <div class="card-footer text-end">
