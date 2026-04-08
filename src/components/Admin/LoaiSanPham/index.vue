@@ -10,7 +10,8 @@
                     <form>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tên Loại Sản Phẩm</label>
-                            <input v-model="them_loai_san_pham.ten" type="text" class="form-control" placeholder="Nhập tên loại sản phẩm...">
+                            <input v-model="them_loai_san_pham.ten" type="text" class="form-control"
+                                placeholder="Nhập tên loại sản phẩm...">
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Mô Tả</label>
@@ -57,24 +58,26 @@
                                         <td class="text-start">{{ item.ten }}</td>
                                         <td class="text-start small text-muted">{{ item.mo_ta }}</td>
                                         <td>
-                                            <button v-on:click="changeStatus(item)" v-if="item.trang_thai == 1" class="btn btn-success btn-sm w-100 shadow-sm">Hoạt Động</button>
-                                            <button v-on:click="changeStatus(item)" v-else class="btn btn-secondary btn-sm w-100 shadow-sm">Tạm Dừng</button>
+                                            <button v-on:click="changeStatus(item)" v-if="item.trang_thai == 1"
+                                                class="btn btn-success btn-sm w-100 shadow-sm">Hoạt Động</button>
+                                            <button v-on:click="changeStatus(item)" v-else
+                                                class="btn btn-secondary btn-sm w-100 shadow-sm">Tạm Dừng</button>
                                         </td>
                                         <td class="text-nowrap">
                                             <button class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
-                                                data-bs-target="#editModal" @click="prepareEdit(item)">
+                                                data-bs-target="#editModal"
+                                                v-on:click="Object.assign(edit_loai_san_pham, item)">
                                                 <i class="fa fa-edit"></i>
                                             </button>
                                             <button class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal"
-                                                data-bs-target="#deleteModal" @click="prepareDelete(item)">
+                                                data-bs-target="#deleteModal"
+                                                v-on:click="Object.assign(xoa_loai_san_pham, item)">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </td>
                                     </tr>
                                 </template>
-                                <tr v-else class="text-center">
-                                    <td colspan="5">Không có dữ liệu loại sản phẩm</td>
-                                </tr>
+                               
                             </tbody>
                         </table>
                     </div>
@@ -95,11 +98,13 @@
                     <form>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tên Loại Sản Phẩm</label>
-                            <input v-model="edit_loai_san_pham.ten" type="text" class="form-control" placeholder="Nhập tên loại sản phẩm...">
+                            <input v-model="edit_loai_san_pham.ten" type="text" class="form-control"
+                                placeholder="Nhập tên loại sản phẩm...">
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Mô Tả</label>
-                            <textarea v-model="edit_loai_san_pham.mo_ta" class="form-control" rows="3" placeholder="Nhập mô tả..."></textarea>
+                            <textarea v-model="edit_loai_san_pham.mo_ta" class="form-control" rows="3"
+                                placeholder="Nhập mô tả..."></textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Trạng Thái</label>
@@ -134,7 +139,8 @@
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-secondary px-4 shadow-sm" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-danger px-4 shadow-sm" @click="xoaLoaiSanPham">Xác Nhận Xóa</button>
+                    <button type="button" class="btn btn-danger px-4 shadow-sm" @click="xoaLoaiSanPham">Xác Nhận
+                        Xóa</button>
                 </div>
             </div>
         </div>
@@ -199,12 +205,7 @@ export default {
                     }
                 });
         },
-        prepareEdit(item) {
-            this.edit_loai_san_pham = { ...item };
-        },
-        prepareDelete(item) {
-            this.xoa_loai_san_pham = item;
-        },
+
         editLoaiSanPham() {
             axios
                 .put('http://127.0.0.1:8000/api/admin/loai-san-pham/update', this.edit_loai_san_pham)

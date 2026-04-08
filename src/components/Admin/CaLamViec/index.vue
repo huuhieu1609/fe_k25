@@ -17,13 +17,7 @@
                                 <option value="2">Trần Thị B</option>
                             </select>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Trạng Thái</label>
-                            <select class="form-select shadow-sm">
-                                <option value="1" selected>Đang Mở</option>
-                                <option value="0">Đã Kết Ca</option>
-                            </select>
-                        </div>
+                       
                         <div class="mb-3">
                             <label class="form-label fw-bold">Giờ Mở</label>
                             <input type="datetime-local" class="form-control shadow-sm">
@@ -44,9 +38,16 @@
                             <label class="form-label fw-bold">Ghi Chú</label>
                             <textarea class="form-control shadow-sm" rows="3" placeholder="Nhập ghi chú..."></textarea>
                         </div>
+                         <div class="mb-3">
+                            <label class="form-label fw-bold">Trạng Thái</label>
+                            <select class="form-select shadow-sm">
+                                <option value="1" selected>Đang Mở</option>
+                                <option value="0">Đã Kết Ca</option>
+                            </select>
+                        </div>
                     </form>
                 </div>
-                <div class="card-footer text-end bg-transparent border-0">
+                <div class="card-footer text-end ">
                     <button class="btn btn-primary px-4 shadow-sm">Thêm Mới</button>
                 </div>
             </div>
@@ -65,8 +66,10 @@
                                 <tr>
                                     <th>STT</th>
                                     <th>Nhân Viên</th>
-                                    <th>Thời Gian</th>
-                                    <th>Tài Chính</th>
+                                    <th>Giờ Mở</th>
+                                    <th>Giờ Đóng</th>
+                                    <th>Tiền Đầu Ca</th>
+                                    <th>Tiền Kết Ca</th>
                                     <th>Lệch</th>
                                     <th>Trạng Thái</th>
                                     <th>Thao Tác</th>
@@ -76,17 +79,11 @@
                                 <tr class="text-center">
                                     <td>1</td>
                                     <td class="text-start">Nguyễn Văn A</td>
-                                    <td class="text-start">
-                                        <div class="small fw-bold text-success"><i class="fa fa-sign-in me-1"></i>08:00
-                                        </div>
-                                        <div class="small fw-bold text-danger"><i class="fa fa-sign-out me-1"></i>16:00
-                                        </div>
-                                    </td>
-                                    <td class="text-end">
-                                        <div class="small text-muted">Đầu: 500k</div>
-                                        <div class="small fw-bold">Kết: 1,200k</div>
-                                    </td>
-                                    <td><span class="badge bg-success">0</span></td>
+                                    <td class="text-center text-success fw-bold">08:00</td>
+                                    <td class="text-center text-danger fw-bold">16:00</td>
+                                    <td class="text-end text-muted">500,000</td>
+                                    <td class="text-end fw-bold">1,200,000</td>
+                                    <td>0</td>
                                     <td><button class="btn btn-success btn-sm w-100 shadow-sm">Đã Kết Ca</button></td>
                                     <td class="text-nowrap">
                                         <button class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
@@ -102,15 +99,10 @@
                                 <tr class="text-center">
                                     <td>2</td>
                                     <td class="text-start">Phạm Văn E</td>
-                                    <td class="text-start">
-                                        <div class="small fw-bold text-success"><i class="fa fa-sign-in me-1"></i>08:24
-                                        </div>
-                                        <div class="small text-muted italic">--:--</div>
-                                    </td>
-                                    <td class="text-end">
-                                        <div class="small text-muted">Đầu: 500k</div>
-                                        <div class="small fw-bold text-primary">Đang bán...</div>
-                                    </td>
+                                    <td class="text-center text-success fw-bold">08:24</td>
+                                    <td class="text-center text-muted fst-italic">--:--</td>
+                                    <td class="text-end text-muted">500,000</td>
+                                    <td class="text-end text-primary fw-bold">Đang bán...</td>
                                     <td>...</td>
                                     <td><button class="btn btn-warning btn-sm w-100 shadow-sm text-white">Đang
                                             Mở</button></td>
@@ -154,6 +146,7 @@
                                 <label class="form-label fw-bold">Trạng Thái</label>
                                 <select class="form-select shadow-sm">
                                     <option value="0">Đã Kết Ca</option>
+                                    <option value="1" >Đang Mở</option>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">

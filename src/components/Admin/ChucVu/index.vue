@@ -10,11 +10,13 @@
                     <form>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tên Chức Vụ</label>
-                            <input v-model="them_chuc_vu.ten_chuc_vu" type="text" class="form-control" placeholder="Nhập tên Chức Vụ">
+                            <input v-model="them_chuc_vu.ten_chuc_vu" type="text" class="form-control"
+                                placeholder="Nhập tên Chức Vụ">
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Slug Chức Vụ</label>
-                            <input v-model="them_chuc_vu.slug_chuc_vu" type="text" class="form-control" placeholder="Nhập slug Chức Vụ">
+                            <input v-model="them_chuc_vu.slug_chuc_vu" type="text" class="form-control"
+                                placeholder="Nhập slug Chức Vụ">
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tình trạng</label>
@@ -26,7 +28,8 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Mô tả</label>
-                            <textarea v-model="them_chuc_vu.mo_ta" class="form-control" rows="3" placeholder="Nhập mô tả"></textarea>
+                            <textarea v-model="them_chuc_vu.mo_ta" class="form-control" rows="3"
+                                placeholder="Nhập mô tả"></textarea>
                         </div>
                     </form>
                 </div>
@@ -50,32 +53,38 @@
                                     <th>STT</th>
                                     <th>Tên Chức Vụ</th>
                                     <th>Slug Chức Vụ</th>
+                                    <th>Mô tả</th>
                                     <th>Tình trạng</th>
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <template v-for="(value,index) in listChucVu" :key="index">
+                                <template v-for="(value, index) in listChucVu" :key="index">
                                     <tr class="text-center">
                                         <td>{{ index + 1 }}</td>
                                         <td class="text-start">{{ value.ten_chuc_vu }}</td>
                                         <td class="text-start">{{ value.slug_chuc_vu }}</td>
+                                        <td>{{ value.mo_ta }}</td>
                                         <td>
-                                            <button v-on:click="changeStatus(value)" v-if="value.tinh_trang == 1" class="btn btn-success btn-sm w-100 shadow-sm">Đang làm việc</button>
-                                            <button v-on:click="changeStatus(value)" v-else class="btn btn-secondary btn-sm w-100 shadow-sm">Đã nghỉ việc</button>
+                                            <button v-on:click="changeStatus(value)" v-if="value.tinh_trang == 1"
+                                                class="btn btn-success btn-sm w-100 shadow-sm">Đang làm việc</button>
+                                            <button v-on:click="changeStatus(value)" v-else
+                                                class="btn btn-secondary btn-sm w-100 shadow-sm">Đã nghỉ việc</button>
                                         </td>
                                         <td>
-                                            <button v-on:click="Object.assign(edit_chuc_vu,value)" class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
+                                            <button v-on:click="Object.assign(edit_chuc_vu, value)"
+                                                class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
                                                 data-bs-target="#editModal">
                                                 <i class="fa fa-edit"></i>
                                             </button>
-                                            <button v-on:click="Object.assign(xoa_chuc_vu,value)" class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal"
+                                            <button v-on:click="Object.assign(xoa_chuc_vu, value)"
+                                                class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal"
                                                 data-bs-target="#deleteModal">
                                                 <i class="fa fa-trash"></i>
                                             </button>
-                                        </td>                                       
+                                        </td>
                                     </tr>
-                                </template>                                                      
+                                </template>
                             </tbody>
                         </table>
                     </div>
@@ -96,11 +105,13 @@
                     <form>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tên Chức Vụ</label>
-                            <input v-model="edit_chuc_vu.ten_chuc_vu" type="text" class="form-control" placeholder="nhập tên Chức Vụ">
+                            <input v-model="edit_chuc_vu.ten_chuc_vu" type="text" class="form-control"
+                                placeholder="nhập tên Chức Vụ">
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Slug Chức Vụ</label>
-                            <input v-model="edit_chuc_vu.slug_chuc_vu" type="text" class="form-control" placeholder="nhập slug Chức Vụ">
+                            <input v-model="edit_chuc_vu.slug_chuc_vu" type="text" class="form-control"
+                                placeholder="nhập slug Chức Vụ">
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tình trạng</label>
@@ -111,12 +122,14 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Mô tả</label>
-                            <textarea v-model="edit_chuc_vu.mo_ta" class="form-control" rows="3" placeholder="nhập mô tả"></textarea>
+                            <textarea v-model="edit_chuc_vu.mo_ta" class="form-control" rows="3"
+                                placeholder="nhập mô tả"></textarea>
                         </div>
                         <div class="modal-footer ">
                             <button type="button" class="btn btn-secondary px-4 shadow-sm"
                                 data-bs-dismiss="modal">Hủy</button>
-                            <button v-on:click="editChucVu()" type="button" class="btn btn-primary px-4 shadow-sm">Cập Nhật</button>
+                            <button v-on:click="editChucVu()" type="button" class="btn btn-primary px-4 shadow-sm"
+                                data-bs-dismiss="modal">Cập Nhật</button>
                         </div>
                     </form>
                 </div>
@@ -140,7 +153,8 @@
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-secondary px-4 shadow-sm" data-bs-dismiss="modal">Hủy</button>
-                    <button v-on:click="xoaChucVu()" type="button" class="btn btn-danger px-4 shadow-sm" data-bs-dismiss="modal">Xác Nhận Xóa</button>
+                    <button v-on:click="xoaChucVu()" type="button" class="btn btn-danger px-4 shadow-sm"
+                        data-bs-dismiss="modal">Xác Nhận Xóa</button>
                 </div>
             </div>
         </div>
@@ -153,10 +167,10 @@ export default {
     data() {
         return {
             listChucVu: [],
-            them_chuc_vu:{},
-            edit_chuc_vu:{},
-            xoa_chuc_vu:{},
-            change_status:{}
+            them_chuc_vu: {},
+            edit_chuc_vu: {},
+            xoa_chuc_vu: {},
+            change_status: {}
         }
     },
     created() {
@@ -182,17 +196,17 @@ export default {
                     }
                 });
         },
-        themChucVu(){
+        themChucVu() {
             axios
                 .post('http://127.0.0.1:8000/api/admin/chuc-vu/create', this.them_chuc_vu)
                 .then(response => {
-                    if(response.data.status == 1) {
+                    if (response.data.status == 1) {
                         this.getChucVu();
                         this.them_chuc_vu = {};
-                        this.$toast.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);                      
+                        this.$toast.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
                     } else {
                         this.$toast.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
-                    }                  
+                    }
                 })
                 .catch(error => {
                     console.error('Lỗi khi thêm mới Chức Vụ:', error);
@@ -210,21 +224,21 @@ export default {
             axios
                 .delete('http://127.0.0.1:8000/api/admin/chuc-vu/delete/' + this.xoa_chuc_vu.id)
                 .then(response => {
-                    if(response.data.status == 1) {
+                    if (response.data.status == 1) {
                         this.getChucVu();
-                        this.$toast.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);                      
+                        this.$toast.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
                     } else {
                         this.$toast.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
-                    }                  
+                    }
                 })
         },
         editChucVu() {
             axios
                 .put('http://127.0.0.1:8000/api/admin/chuc-vu/update', this.edit_chuc_vu)
                 .then(response => {
-                    if(response.data.status == 1) {
+                    if (response.data.status == 1) {
                         this.getChucVu();
-                        this.$toast.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);                      
+                        this.$toast.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
                     } else {
                         this.$toast.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
                     }

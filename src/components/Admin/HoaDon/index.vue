@@ -49,6 +49,23 @@
                                 <option value="Quẹt thẻ">Quẹt thẻ</option>
                             </select>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Thanh Toán</label>
+                                <select class="form-select shadow-sm">
+                                    <option value="1" selected>Đã thanh toán</option>
+                                    <option value="0">Chưa thanh toán</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Trạng Thái</label>
+                                <select class="form-select shadow-sm">
+                                    <option value="1" selected>Hoàn thành</option>
+                                    <option value="0">Đang xử lý</option>
+                                    <option value="-1">Đã hủy</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Ghi Chú</label>
                             <textarea class="form-control" rows="3" placeholder="Nhập ghi chú..."></textarea>
@@ -241,6 +258,21 @@
                                     <option value="Tiền mặt">Tiền mặt</option>
                                     <option value="Chuyển khoản">Chuyển khoản</option>
                                     <option value="Quẹt thẻ">Quẹt thẻ</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Thanh Toán</label>
+                                <select class="form-select shadow-sm">
+                                    <option value="1" selected>Đã thanh toán</option>
+                                    <option value="0">Chưa thanh toán</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Trạng Thái</label>
+                                <select class="form-select shadow-sm">
+                                    <option value="1" selected>Hoàn thành</option>
+                                    <option value="0">Đang xử lý</option>
+                                    <option value="-1">Đã hủy</option>
                                 </select>
                             </div>
                             <div class="col-md-12 mb-3">

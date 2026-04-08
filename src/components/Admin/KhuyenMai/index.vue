@@ -8,7 +8,8 @@
                             <h5 class="card-title mb-0">Danh Sách Khuyến Mãi</h5>
                         </div>
                         <div class="col-lg-6 text-end">
-                            <button class="btn btn-primary px-4 shadow-sm" data-bs-toggle="modal" data-bs-target="#addModal">
+                            <button class="btn btn-primary px-4 shadow-sm" data-bs-toggle="modal"
+                                data-bs-target="#addModal">
                                 <i class="fa fa-plus me-1"></i>Thêm Mới
                             </button>
                         </div>
@@ -24,7 +25,8 @@
                                     <th>Tên</th>
                                     <th>Kiểu</th>
                                     <th>Giá Trị</th>
-                                    <th>Thời Gian</th>
+                                    <th>Thời Gian Bắt Đầu</th>
+                                    <th>Thời Gian Kết Thúc</th>
                                     <th>Đơn Tối Thiểu</th>
                                     <th>Trạng Thái</th>
                                     <th>Thao Tác</th>
@@ -37,21 +39,31 @@
                                         <td class="text-start">{{ item.ma_code }}</td>
                                         <td class="text-start">{{ item.ten }}</td>
                                         <td>
-                                            <span v-if="item.kieu == 1" class="badge bg-info">Phần trăm (%)</span>
-                                            <span v-else class="badge bg-secondary">Số tiền cố định (đ)</span>
+                                            <span v-if="item.kieu == 1" class="badge bg-info text-nowrap">Phần trăm
+                                                (%)
+                                            </span>
+                                            <span v-else class="badge bg-secondary text-nowrap">Số tiền cố định
+                                                (đ)</span>
                                         </td>
                                         <td>{{ item.gia_tri }} {{ item.kieu == 1 ? '%' : 'đ' }}</td>
-                                        <td class="small">{{ item.tu_ngay }} - {{ item.den_ngay }}</td>
+                                        <td class="small">{{ item.tu_ngay }}</td>
+                                        <td class="small">{{ item.den_ngay }}</td>
                                         <td>{{ item.dieu_kien_toi_thieu }}</td>
                                         <td>
-                                            <button v-on:click="changeStatus(item)" v-if="item.trang_thai == 1" class="btn btn-success btn-sm w-100 shadow-sm">Đang áp dụng</button>
-                                            <button v-on:click="changeStatus(item)" v-else class="btn btn-secondary btn-sm w-100 shadow-sm">Tạm ngưng</button>
+                                            <button v-on:click="changeStatus(item)" v-if="item.trang_thai == 1"
+                                                class="btn btn-success btn-sm w-100 shadow-sm">Đang áp dụng</button>
+                                            <button v-on:click="changeStatus(item)" v-else
+                                                class="btn btn-secondary btn-sm w-100 shadow-sm">Tạm ngưng</button>
                                         </td>
                                         <td class="text-nowrap">
-                                            <button type="button" class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal" data-bs-target="#editModal" v-on:click="Object.assign(edit_khuyen_mai, item)">
+                                            <button type="button" class="btn btn-warning btn-sm me-1 shadow-sm"
+                                                data-bs-toggle="modal" data-bs-target="#editModal"
+                                                v-on:click="Object.assign(edit_khuyen_mai, item)">
                                                 <i class="fa fa-edit"></i>
                                             </button>
-                                            <button type="button" class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" v-on:click="Object.assign(xoa_khuyen_mai, item)">
+                                            <button type="button" class="btn btn-danger btn-sm shadow-sm"
+                                                data-bs-toggle="modal" data-bs-target="#deleteModal"
+                                                v-on:click="Object.assign(xoa_khuyen_mai, item)">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </td>
@@ -74,18 +86,21 @@
             <div class="modal-content">
                 <div class="modal-header bg-primary text-white">
                     <h5 class="modal-title">Thêm Mới Khuyến Mãi</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Mã Khuyến Mãi</label>
-                                <input v-model="them_khuyen_mai.ma_code" type="text" class="form-control shadow-sm" placeholder="Nhập mã khuyến mãi">
+                                <input v-model="them_khuyen_mai.ma_code" type="text" class="form-control shadow-sm"
+                                    placeholder="Nhập mã khuyến mãi">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Tên Khuyến Mãi</label>
-                                <input v-model="them_khuyen_mai.ten" type="text" class="form-control shadow-sm" placeholder="Nhập tên khuyến mãi">
+                                <input v-model="them_khuyen_mai.ten" type="text" class="form-control shadow-sm"
+                                    placeholder="Nhập tên khuyến mãi">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Kiểu Khuyến Mãi</label>
@@ -97,19 +112,21 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Giá Trị</label>
-                                <input v-model="them_khuyen_mai.gia_tri" type="number" class="form-control shadow-sm" placeholder="Nhập giá trị">
+                                <input v-model="them_khuyen_mai.gia_tri" type="number" class="form-control shadow-sm"
+                                    placeholder="Nhập giá trị">
                             </div>
-                            <div class="col-md-3 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Từ Ngày</label>
                                 <input v-model="them_khuyen_mai.tu_ngay" type="date" class="form-control shadow-sm">
                             </div>
-                            <div class="col-md-3 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Đến Ngày</label>
                                 <input v-model="them_khuyen_mai.den_ngay" type="date" class="form-control shadow-sm">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Điều Kiện Tối Thiểu</label>
-                                <input v-model="them_khuyen_mai.dieu_kien_toi_thieu" type="number" class="form-control shadow-sm" placeholder="Nhập điều kiện tối thiểu">
+                                <input v-model="them_khuyen_mai.dieu_kien_toi_thieu" type="number"
+                                    class="form-control shadow-sm" placeholder="Nhập điều kiện tối thiểu">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Trạng Thái</label>
@@ -123,7 +140,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary px-4 shadow-sm" @click="themKhuyenMai">Lưu Khuyến Mãi</button>
+                    <button type="button" class="btn btn-primary px-4 shadow-sm" @click="themKhuyenMai">Lưu Khuyến
+                        Mãi</button>
                 </div>
             </div>
         </div>
@@ -142,11 +160,13 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Mã Khuyến Mãi</label>
-                                <input v-model="edit_khuyen_mai.ma_code" type="text" class="form-control shadow-sm" placeholder="Nhập mã khuyến mãi">
+                                <input v-model="edit_khuyen_mai.ma_code" type="text" class="form-control shadow-sm"
+                                    placeholder="Nhập mã khuyến mãi">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Tên Khuyến Mãi</label>
-                                <input v-model="edit_khuyen_mai.ten" type="text" class="form-control shadow-sm" placeholder="Nhập tên khuyến mãi">
+                                <input v-model="edit_khuyen_mai.ten" type="text" class="form-control shadow-sm"
+                                    placeholder="Nhập tên khuyến mãi">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Kiểu Khuyến Mãi</label>
@@ -157,19 +177,21 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Giá Trị</label>
-                                <input v-model="edit_khuyen_mai.gia_tri" type="number" class="form-control shadow-sm" placeholder="Nhập giá trị">
+                                <input v-model="edit_khuyen_mai.gia_tri" type="number" class="form-control shadow-sm"
+                                    placeholder="Nhập giá trị">
                             </div>
-                            <div class="col-md-3 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Từ Ngày</label>
                                 <input v-model="edit_khuyen_mai.tu_ngay" type="date" class="form-control shadow-sm">
                             </div>
-                            <div class="col-md-3 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Đến Ngày</label>
                                 <input v-model="edit_khuyen_mai.den_ngay" type="date" class="form-control shadow-sm">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Điều Kiện Tối Thiểu</label>
-                                <input v-model="edit_khuyen_mai.dieu_kien_toi_thieu" type="number" class="form-control shadow-sm" placeholder="Nhập điều kiện tối thiểu">
+                                <input v-model="edit_khuyen_mai.dieu_kien_toi_thieu" type="number"
+                                    class="form-control shadow-sm" placeholder="Nhập điều kiện tối thiểu">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Trạng Thái</label>
@@ -183,7 +205,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-warning shadow-sm px-4" @click="editKhuyenMai">Lưu Thay Đổi</button>
+                    <button type="button" class="btn btn-warning shadow-sm px-4" @click="editKhuyenMai">Lưu Thay
+                        Đổi</button>
                 </div>
             </div>
         </div>
@@ -195,7 +218,8 @@
             <div class="modal-content">
                 <div class="modal-header bg-danger text-white">
                     <h5 class="modal-title text-white">Xóa Khuyến Mãi</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center py-4">
                     <i class="fa fa-exclamation-triangle text-warning mb-3" style="font-size: 3rem;"></i>
@@ -204,7 +228,8 @@
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-secondary px-4 shadow-sm" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-danger px-4 shadow-sm" @click="xoaKhuyenMai">Xác Nhận Xóa</button>
+                    <button type="button" class="btn btn-danger px-4 shadow-sm" @click="xoaKhuyenMai">Xác Nhận
+                        Xóa</button>
                 </div>
             </div>
         </div>
@@ -230,7 +255,7 @@ export default {
             },
             edit_khuyen_mai: {},
             xoa_khuyen_mai: {},
-            change_Status:{},
+            change_Status: {},
         };
     },
     created() {
@@ -282,7 +307,7 @@ export default {
                     }
                 });
         },
-        
+
         editKhuyenMai() {
             axios
                 .put('http://127.0.0.1:8000/api/admin/khuyen-mai/update', this.edit_khuyen_mai)

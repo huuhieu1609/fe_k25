@@ -26,6 +26,8 @@
                                     <th>Loại Sản Phẩm</th>
                                     <th>Mô Tả</th>
                                     <th>Đơn Vị Tính</th>
+                                    <th>Quản Lý Lô</th>
+                                    <th>Quản Lý Serial</th>
                                     <th>Thuế VAT (%)</th>
                                     <th>Giá Nhập (Đ)</th>
                                     <th>Giá Bán (Đ)</th>
@@ -39,18 +41,20 @@
                                     <td>1</td>
                                     <td>
                                         <img src="https://tse1.mm.bing.net/th/id/OIP.1SqYM2HBWs9XERxsCusCXQHaE7?pid=Api&P=0&h=220"
-                                            alt="Sản Phẩm A" class="img-fluid"
-                                            style="width: 100px; height: 100px; object-fit: cover;">
+                                            alt="Nho Mẫu Đơn" class="img-fluid rounded shadow-sm"
+                                            style="width: 60px; height: 60px; object-fit: cover;">
                                     </td>
-                                    <td class="text-start">Trái Cây</td>
+                                    <td class="text-start fw-bold">Nho Mẫu Đơn</td>
                                     <td>Trái Cây</td>
-                                    <td class="text-start small">Trái cây tươi ngon nhập khẩu từ các nông trại tiêu
-                                        chuẩn VietGAP.</td>
+                                    <td class="text-start small">Nho mẫu đơn tươi ngon nhập khẩu từ các nông trại tiêu
+                                        chuẩn.</td>
                                     <td>Hộp</td>
+                                    <td class="text-center text-success fw-bold">Có</td>
+                                    <td class="text-center text-secondary">Không</td>
 
                                     <td>10%</td>
-                                    <td>100,000</td>
-                                    <td>150,000</td>
+                                    <td class="text-end fw-bold">100,000 đ</td>
+                                    <td class="text-end fw-bold text-danger">150,000 đ</td>
                                     <td>10</td>
                                     <td>
                                         <button class="btn btn-success btn-sm w-100 shadow-sm">Còn Kinh Doanh</button>
@@ -70,17 +74,19 @@
                                     <td>2</td>
                                     <td>
                                         <img src="https://cdn.tgdd.vn/2021/03/content/10-800x450-18.jpg"
-                                            alt="Sản Phẩm B" class="img-fluid"
-                                            style="width: 100px; height: 100px; object-fit: cover;">
+                                            alt="Thịt Ba Rọi" class="img-fluid rounded shadow-sm"
+                                            style="width: 60px; height: 60px; object-fit: cover;">
                                     </td>
-                                    <td class="text-start">Thịt Heo</td>
+                                    <td class="text-start fw-bold">Thịt Ba Rọi</td>
                                     <td>Thịt & Hải Sản</td>
                                     <td class="text-start small">Thịt heo sạch, tươi trong ngày, đảm bảo vệ sinh an toàn
                                         thực phẩm.</td>
-                                    <td>Cái</td>
+                                    <td>KG</td>
+                                    <td class="text-center text-secondary">Không</td>
+                                    <td class="text-center text-secondary">Không</td>
                                     <td>8%</td>
-                                    <td>250,000</td>
-                                    <td>385,000</td>
+                                    <td class="text-end fw-bold">250,000 đ</td>
+                                    <td class="text-end fw-bold text-danger">385,000 đ</td>
                                     <td>20</td>
                                     <td>
                                         <button class="btn btn-danger btn-sm w-100 shadow-sm">Ngừng Kinh Doanh</button>
@@ -100,17 +106,19 @@
                                     <td>3</td>
                                     <td>
                                         <img src="https://tse2.mm.bing.net/th/id/OIP.ocxk4giN-VfheOY07ZePQwHaHa?pid=Api&P=0&h=220"
-                                            alt="Sản Phẩm B" class="img-fluid"
-                                            style="width: 100px; height: 100px; object-fit: cover;">
+                                            alt="Bia Hà Nội" class="img-fluid rounded shadow-sm"
+                                            style="width: 60px; height: 60px; object-fit: cover;">
                                     </td>
-                                    <td class="text-start">bia Hà Nội</td>
+                                    <td class="text-start fw-bold">Bia Hà Nội (Thùng 24 lon)</td>
                                     <td>Đồ Uống</td>
                                     <td class="text-start small">Bia Hà Nội truyền thống, hương vị đậm đà, mát lạnh sảng
                                         khoái.</td>
                                     <td>Thùng</td>
+                                    <td class="text-center text-success fw-bold">Có</td>
+                                    <td class="text-center text-success fw-bold">Có</td>
                                     <td>8%</td>
-                                    <td>250,000</td>
-                                    <td>385,000</td>
+                                    <td class="text-end fw-bold">250,000 đ</td>
+                                    <td class="text-end fw-bold text-danger">385,000 đ</td>
                                     <td>20</td>
                                     <td>
                                         <button class="btn btn-success btn-sm w-100 shadow-sm">Còn Kinh Doanh</button>

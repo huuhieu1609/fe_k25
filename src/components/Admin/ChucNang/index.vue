@@ -1,4 +1,5 @@
 <template>
+
     <div class="row">
         <div class="col-lg-4">
             <div class="card border-top border-0 border-4 border-primary mt-2">
@@ -15,6 +16,14 @@
                         <div class="mb-3">
                             <label class="form-label fw-bold">Mô Tả</label>
                             <textarea class="form-control" rows="3" placeholder="Nhập mô tả chức năng..."></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">URL Chức Năng</label>
+                            <input type="text" class="form-control" placeholder="Nhập URL chức năng...">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Method Chức Năng</label>
+                            <input type="text" class="form-control" placeholder="Nhập method chức năng...">
                         </div>
                     </form>
                 </div>
@@ -35,7 +44,8 @@
                                 <tr>
                                     <th>STT</th>
                                     <th>Tên Chức Năng</th>
-
+                                    <th>URL Chức Năng</th>
+                                    <th>Method Chức Năng</th>
                                     <th>Mô Tả</th>
                                     <th>Thao Tác</th>
                                 </tr>
@@ -44,6 +54,8 @@
                                 <tr class="text-center">
                                     <td>1</td>
                                     <td>Quản lý chức vụ</td>
+                                    <td class="text-start">/api/admin/chuc-vu</td>
+                                    <td class="text-start">GET</td>
                                     <td class="text-start">Quản lý chức vụ</td>
                                     <td class="text-nowrap">
                                         <button class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
@@ -59,6 +71,8 @@
                                 <tr class="text-center">
                                     <td>2</td>
                                     <td>Thêm chức vụ</td>
+                                    <td class="text-start">/api/admin/chuc-vu</td>
+                                    <td class="text-start">POST</td>
                                     <td class="text-start">Thêm chức vụ</td>
                                     <td class="text-nowrap">
                                         <button class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
@@ -74,6 +88,8 @@
                                 <tr class="text-center">
                                     <td>3</td>
                                     <td>Sửa chức vụ</td>
+                                    <td class="text-start">/api/admin/chuc-vu</td>
+                                    <td class="text-start">PUT</td>
                                     <td class="text-start">Sửa chức vụ</td>
                                     <td class="text-nowrap">
                                         <button class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
@@ -89,6 +105,8 @@
                                 <tr class="text-center">
                                     <td>4</td>
                                     <td>Xóa chức vụ</td>
+                                    <td class="text-start">/api/admin/chuc-vu</td>
+                                    <td class="text-start">DELETE</td>
                                     <td class="text-start">Xóa chức vụ</td>
                                     <td class="text-nowrap">
                                         <button class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
@@ -104,6 +122,8 @@
                                 <tr class="text-center">
                                     <td>5</td>
                                     <td>Danh sách nhân viên</td>
+                                    <td class="text-start">/api/admin/nhan-vien</td>
+                                    <td class="text-start">GET</td>
                                     <td class="text-start">Danh sách nhân viên</td>
                                     <td class="text-nowrap">
                                         <button class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
@@ -119,6 +139,8 @@
                                 <tr class="text-center">
                                     <td>6</td>
                                     <td>Thêm nhân viên</td>
+                                    <td class="text-start">/api/admin/nhan-vien</td>
+                                    <td class="text-start">POST</td>
                                     <td class="text-start">Thêm nhân viên</td>
                                     <td class="text-nowrap">
                                         <button class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
@@ -134,6 +156,8 @@
                                 <tr class="text-center">
                                     <td>7</td>
                                     <td>Sửa nhân viên</td>
+                                    <td class="text-start">/api/admin/nhan-vien</td>
+                                    <td class="text-start">PUT</td>
                                     <td class="text-start">Sửa nhân viên</td>
                                     <td class="text-nowrap">
                                         <button class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
@@ -149,6 +173,8 @@
                                 <tr class="text-center">
                                     <td>8</td>
                                     <td>Xóa nhân viên</td>
+                                    <td class="text-start">/api/admin/nhan-vien</td>
+                                    <td class="text-start">DELETE</td>
                                     <td class="text-start">Xóa nhân viên</td>
                                     <td class="text-nowrap">
                                         <button class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
