@@ -31,6 +31,7 @@
                                     <th>Thuế VAT (%)</th>
                                     <th>Giá Nhập (Đ)</th>
                                     <th>Giá Bán (Đ)</th>
+                                    <th>Khuyến Mãi</th>
                                     <th>Tồn Tối Thiểu</th>
                                     <th>Trạng Thái</th>
                                     <th>Thao Tác</th>
@@ -55,6 +56,7 @@
                                     <td>10%</td>
                                     <td class="text-end fw-bold">100,000 đ</td>
                                     <td class="text-end fw-bold text-danger">150,000 đ</td>
+                                    <td>Voucher1</td>
                                     <td>10</td>
                                     <td>
                                         <button class="btn btn-success btn-sm w-100 shadow-sm">Còn Kinh Doanh</button>
@@ -87,6 +89,7 @@
                                     <td>8%</td>
                                     <td class="text-end fw-bold">250,000 đ</td>
                                     <td class="text-end fw-bold text-danger">385,000 đ</td>
+                                    <td>Voucher2</td>
                                     <td>20</td>
                                     <td>
                                         <button class="btn btn-danger btn-sm w-100 shadow-sm">Ngừng Kinh Doanh</button>
@@ -119,7 +122,9 @@
                                     <td>8%</td>
                                     <td class="text-end fw-bold">250,000 đ</td>
                                     <td class="text-end fw-bold text-danger">385,000 đ</td>
+                                    <td>Voucher1</td>
                                     <td>20</td>
+                                    
                                     <td>
                                         <button class="btn btn-success btn-sm w-100 shadow-sm">Còn Kinh Doanh</button>
                                     </td>
@@ -163,21 +168,30 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 mb-3">
+                                <div class="col-md-3 mb-3">
                                     <label class="form-label fw-bold">Đơn Vị Tính</label>
                                     <input type="text" class="form-control shadow-sm" placeholder="Ví dụ: Cái, Hộp, KG">
                                 </div>
-                                <div class="col-md-4 mb-3">
+                                <div class="col-md-3 mb-3">
                                     <label class="form-label fw-bold">Quản Lý Lô</label>
                                     <select class="form-select shadow-sm">
                                         <option value="1">Có</option>
                                         <option value="0" selected>Không</option>
                                     </select>
                                 </div>
-                                <div class="col-md-4 mb-3">
+                                <div class="col-md-3 mb-3">
                                     <label class="form-label fw-bold">Quản Lý Serial</label>
                                     <select class="form-select shadow-sm">
                                         <option value="1">Có</option>
+                                        <option value="0" selected>Không</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label fw-bold">Khuyến Mãi</label>
+                                    <select class="form-select shadow-sm">
+                                        <option value="1">Voucher1</option>
+                                        <option value="2">Voucher2</option>
+                                        <option value="3">Voucher3</option>
                                         <option value="0" selected>Không</option>
                                     </select>
                                 </div>
@@ -254,24 +268,34 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4 mb-3">
+                                <div class="col-md-3 mb-3">
                                     <label class="form-label fw-bold">Đơn Vị Tính</label>
                                     <input type="text" class="form-control shadow-sm" value="Hộp">
                                 </div>
-                                <div class="col-md-4 mb-3">
+                                <div class="col-md-3 mb-3">
                                     <label class="form-label fw-bold">Quản Lý Lô</label>
                                     <select class="form-select shadow-sm">
                                         <option value="1" selected>Có</option>
                                         <option value="0">Không</option>
                                     </select>
                                 </div>
-                                <div class="col-md-4 mb-3">
+                                <div class="col-md-3 mb-3">
                                     <label class="form-label fw-bold">Quản Lý Serial</label>
                                     <select class="form-select shadow-sm">
                                         <option value="1">Có</option>
                                         <option value="0" selected>Không</option>
                                     </select>
                                 </div>
+                                <div class="col-md-3 mb-3">
+                                    <label class="form-label fw-bold">Khuyến Mãi</label>
+                                    <select class="form-select shadow-sm">
+                                        <option value="1">Voucher1</option>
+                                        <option value="2">Voucher2</option>
+                                        <option value="3">Voucher3</option>
+                                        <option value="0" selected>Không</option>
+                                    </select>
+                                </div>
+                                
                             </div>
                             <div class="row">
                                 <div class="col-md-3 mb-3">
