@@ -3,7 +3,6 @@
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="card-title mb-0">Quản Lý Tất Cả Hóa Đơn</h5>
             <div class="d-flex gap-2">
-                <span class="badge bg-primary align-self-center">2 hóa đơn</span>
                 <button class="btn btn-sm btn-outline-primary" type="button">Tải lại</button>
             </div>
         </div>
@@ -42,10 +41,10 @@
                             <td class="text-end fw-bold text-primary">882,000</td>
                             <td>Tiền mặt</td>
                             <td>
-                                <span class="badge bg-success">Đã thanh toán</span>
+                                <button class="btn w-100 btn-success">Đã thanh toán</button>
                             </td>
                             <td>
-                                <span class="badge bg-primary">Hoàn thành</span>
+                                <button class="btn w-100 btn-primary">Hoàn thành</button>
                             </td>
                             <td>2</td>
                         </tr>
@@ -62,10 +61,10 @@
                             <td class="text-end fw-bold text-primary">568,000</td>
                             <td>Chuyển khoản</td>
                             <td>
-                                <span class="badge bg-secondary">Chưa thanh toán</span>
+                                <button class="btn w-100 btn-secondary">Chưa thanh toán</button>
                             </td>
                             <td>
-                                <span class="badge bg-warning text-dark">Mới tạo</span>
+                                <button class="btn w-100 btn-warning text-dark">Mới tạo</button>
                             </td>
                             <td>1</td>
                         </tr>
