@@ -22,8 +22,8 @@
                             <label class="form-label fw-bold">Tình trạng</label>
                             <select v-model="them_chuc_vu.tinh_trang" class="form-select">
                                 <option value="#">Chọn tình trạng</option>
-                                <option value="1">Đang làm việc</option>
-                                <option value="0">Đã nghỉ việc</option>
+                                <option value="1">Đang hoạt động</option>
+                                <option value="0">Ngừng hoạt động</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -67,9 +67,9 @@
                                         <td>{{ value.mo_ta }}</td>
                                         <td>
                                             <button v-on:click="changeStatus(value)" v-if="value.tinh_trang == 1"
-                                                class="btn btn-success btn-sm w-100 shadow-sm">Đang làm việc</button>
+                                                class="btn btn-success btn-sm w-100 shadow-sm">Đang hoạt động</button>
                                             <button v-on:click="changeStatus(value)" v-else
-                                                class="btn btn-secondary btn-sm w-100 shadow-sm">Đã nghỉ việc</button>
+                                                class="btn btn-secondary btn-sm w-100 shadow-sm">Ngừng hoạt động</button>
                                         </td>
                                         <td>
                                             <button v-on:click="Object.assign(edit_chuc_vu, value)"
@@ -258,11 +258,9 @@ export default {
         changeStatus(item) {
             const new_tinh_trang = item.tinh_trang == 1 ? 0 : 1;
             axios
-                .delete('http://127.0.0.1:8000/api/admin/chuc-vu/change-status', {
-                    data: {
-                        id: item.id,
-                        tinh_trang: new_tinh_trang
-                    }
+                .patch('http://127.0.0.1:8000/api/admin/chuc-vu/change-status', {
+                    id: item.id,
+                    tinh_trang: new_tinh_trang
                 })
                 .then(response => {
                     if (response.data.status == 1) {

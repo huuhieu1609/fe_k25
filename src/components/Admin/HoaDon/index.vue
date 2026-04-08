@@ -1,134 +1,193 @@
 <template>
     <div class="row">
-        <!-- 1. Form Tạo Hóa Đơn (Trái - 4) -->
-        <div class="col-lg-4">
+        <div class="col-lg-5">
             <div class="card border-top border-0 border-4 border-primary shadow-sm mt-2">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Tạo Mới Hóa Đơn</h5>
+                    <h5 class="card-title mb-0">Tạo Hóa Đơn Mới</h5>
                 </div>
                 <div class="card-body">
                     <form>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Khách Hàng</label>
-                            <select class="form-select shadow-sm">
-                                <option selected disabled>Chọn khách hàng...</option>
-                                <option value="1">Nguyễn Văn A</option>
-                                <option value="2">Trần Thị B</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Nhân Viên Bán Hàng</label>
-                            <select class="form-select shadow-sm">
-                                <option value="1">Nguyễn Văn A</option>
-                                <option value="2">Trần Thị B</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Ca Làm Việc</label>
-                            <select class="form-select shadow-sm border-primary">
-                                <option selected disabled>Chọn ca làm việc...</option>
-                                <option value="1">Ca Sáng (06:00 - 14:00)</option>
-                                <option value="2">Ca Chiều (14:00 - 22:00)</option>
-                            </select>
-                        </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Mã Hóa Đơn</label>
-                                <input type="text" class="form-control " placeholder="Nhập Mã Hóa Đơn">
+                                <label class="form-label fw-bold">Mã hóa đơn</label>
+                                <input type="text" class="form-control" value="HD-MAU-001" placeholder="VD: HD0001">
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Ngày Bán</label>
-                                <input type="date" class="form-control shadow-sm">
+                                <label class="form-label fw-bold">Ngày bán</label>
+                                <input type="date" class="form-control" value="2026-04-08">
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Hình Thức Thanh Toán</label>
-                            <select class="form-select shadow-sm">
-                                <option value="Tiền mặt">Tiền mặt</option>
-                                <option value="Chuyển khoản">Chuyển khoản</option>
-                                <option value="Quẹt thẻ">Quẹt thẻ</option>
-                            </select>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Ca làm việc</label>
+                                <input type="text" class="form-control" value="Ca sang" placeholder="Ca sáng">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Nhân viên</label>
+                                <input type="text" class="form-control" value="Tran Van B" placeholder="Nguyen Van A">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Khách hàng</label>
+                                <input type="text" class="form-control" value="Nguyen Thi C" placeholder="Le Thi B">
+                            </div>
                         </div>
+
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Thanh Toán</label>
-                                <select class="form-select shadow-sm">
+                                <label class="form-label fw-bold">Giảm giá hóa đơn</label>
+                                <input type="number" min="0" class="form-control" value="20000" placeholder="0">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Thuế VAT hóa đơn</label>
+                                <input type="number" min="0" class="form-control" value="30000" placeholder="0">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Loại thanh toán</label>
+                                <select class="form-select">
+                                    <option value="tien_mat" selected>Tiền mặt</option>
+                                    <option value="chuyen_khoan">Chuyển khoản</option>
+                                    <option value="the">Thẻ</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Đã thanh toán</label>
+                                <select class="form-select">
                                     <option value="1" selected>Đã thanh toán</option>
                                     <option value="0">Chưa thanh toán</option>
                                 </select>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Trạng Thái</label>
-                                <select class="form-select shadow-sm">
-                                    <option value="1" selected>Hoàn thành</option>
-                                    <option value="0">Đang xử lý</option>
-                                    <option value="-1">Đã hủy</option>
-                                </select>
-                            </div>
                         </div>
+
                         <div class="mb-3">
-                            <label class="form-label fw-bold">Ghi Chú</label>
-                            <textarea class="form-control" rows="3" placeholder="Nhập ghi chú..."></textarea>
+                            <label class="form-label fw-bold">Trạng thái đơn</label>
+                            <select class="form-select">
+                                <option value="0">Mới tạo</option>
+                                <option value="1" selected>Hoàn thành</option>
+                                <option value="2">Đã hủy</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Ghi chú</label>
+                            <textarea class="form-control" rows="3" placeholder="Nhập ghi chú...">Don mau de demo giao dien tao hoa don</textarea>
+                        </div>
+
+                        <div class="border rounded p-3 bg-light">
+                            <div class="row">
+                                <div class="col-6 small text-muted">Tổng tiền hàng</div>
+                                <div class="col-6 text-end fw-bold">880,000</div>
+                                <div class="col-6 small text-muted">Giảm giá</div>
+                                <div class="col-6 text-end">- 40,000</div>
+                                <div class="col-6 small text-muted">Thuế VAT</div>
+                                <div class="col-6 text-end">+ 42,000</div>
+                                <div class="col-6 pt-2 mt-2 border-top fw-bold">Tổng thanh toán</div>
+                                <div class="col-6 pt-2 mt-2 border-top text-end text-primary fw-bold">882,000</div>
+                            </div>
                         </div>
                     </form>
                 </div>
-                <div class="card-footer text-end">
-                    <button class="btn btn-primary px-4 shadow-sm fw-bold w-100">
-                        <i class="fa fa-save me-2"></i>TẠO HÓA ĐƠN
+                <div class="card-footer d-grid">
+                    <button class="btn btn-primary fw-bold" type="button">
+                        <i class="fa fa-save me-2"></i>Tạo hóa đơn và thanh toán
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- 2. Danh Sách Hóa Đơn (Phải - 8) -->
-        <div class="col-lg-8">
+        <div class="col-lg-7">
             <div class="card border-top border-0 border-4 border-primary shadow-sm mt-2">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Danh sách Hóa Đơn</h5>
+                    <h5 class="card-title mb-0">Thêm Sản Phẩm Vào Hóa Đơn</h5>
                 </div>
                 <div class="card-body">
+                    <div class="row g-2 align-items-end mb-3">
+                        <div class="col-md-5">
+                            <label class="form-label fw-bold">Sản phẩm</label>
+                            <input type="text" class="form-control" placeholder="Thit bo My nhap khau">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label fw-bold">SL</label>
+                            <input type="number" min="1" class="form-control" placeholder="1">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label fw-bold">Đơn giá</label>
+                            <input type="number" min="0" class="form-control" placeholder="0">
+                        </div>
+                        <div class="col-md-3 d-grid">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fa fa-plus me-1"></i>Thêm sản phẩm
+                            </button>
+                        </div>
+                    </div>
+
                     <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-hover align-middle">
-                            <thead class="text-center text-nowrap table-light">
+                        <table class="table table-bordered table-striped align-middle">
+                            <thead class="table-light text-center text-nowrap">
                                 <tr>
                                     <th>STT</th>
-                                    <th>Mã Hóa Đơn</th>
-                                    <th>Ngày Bán</th>
-                                    <th>Khách Hàng</th>
-                                    <th>Nhân Viên</th>
-                                    <th>Ca Làm Việc</th>
-                                    <th>Tổng Tiền</th>
-                                    <th>Thanh Toán</th>
-                                    <th>Trạng Thái</th>
-                                    <th>Ghi Chú</th>
-                                    <th>Thao Tác</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>SL</th>
+                                    <th>Đơn giá</th>
+                                    <th>Giảm giá</th>
+                                    <th>VAT</th>
+                                    <th>Thành tiền</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="text-center">
                                     <td>1</td>
-                                    <td>HD0001</td>
-                                    <td>04/04/2026</td>
-                                    <td class="text-start">Nguyễn Văn A</td>
-                                    <td class="text-start">Trần Văn B</td>
-                                    <td>Ca Sáng</td>
-                                    <td class="fw-bold ">1,250,000</td>
-                                    <td><button class="btn btn-success btn-sm w-100 shadow-sm">Đã thanh toán</button>
+                                    <td class="text-start">Thit bo My nhap khau</td>
+                                    <td>
+                                        <input type="number" min="1" value="2"
+                                            class="form-control form-control-sm text-center">
                                     </td>
-                                    <td><button class="btn btn-primary btn-sm w-100 shadow-sm">Hoàn thành</button></td>
-                                    <td class="text-start">Khách quen, tặng thêm túi</td>
-                                    <td class="text-nowrap text-center">
-                                        <button class="btn btn-info btn-sm me-1 shadow-sm text-white"
-                                            data-bs-toggle="modal" data-bs-target="#chiTietModal">
-                                            <i class="fa fa-shopping-cart"></i>
+                                    <td>
+                                        <input type="number" min="0" value="350000"
+                                            class="form-control form-control-sm text-end">
+                                    </td>
+                                    <td>
+                                        <input type="number" min="0" value="15000"
+                                            class="form-control form-control-sm text-end">
+                                    </td>
+                                    <td>
+                                        <input type="number" min="0" value="30000"
+                                            class="form-control form-control-sm text-end">
+                                    </td>
+                                    <td class="text-end fw-bold">715,000</td>
+                                    <td>
+                                        <button class="btn btn-outline-danger btn-sm" type="button">
+                                            <i class="fa fa-times"></i>
                                         </button>
-                                        <button class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
-                                            data-bs-target="#editModal">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal">
-                                            <i class="fa fa-trash"></i>
+                                    </td>
+                                </tr>
+                                <tr class="text-center">
+                                    <td>2</td>
+                                    <td class="text-start">Ca hoi Na Uy dong goi</td>
+                                    <td>
+                                        <input type="number" min="1" value="1"
+                                            class="form-control form-control-sm text-center">
+                                    </td>
+                                    <td>
+                                        <input type="number" min="0" value="180000"
+                                            class="form-control form-control-sm text-end">
+                                    </td>
+                                    <td>
+                                        <input type="number" min="0" value="5000"
+                                            class="form-control form-control-sm text-end">
+                                    </td>
+                                    <td>
+                                        <input type="number" min="0" value="12000"
+                                            class="form-control form-control-sm text-end">
+                                    </td>
+                                    <td class="text-end fw-bold">187,000</td>
+                                    <td>
+                                        <button class="btn btn-outline-danger btn-sm" type="button">
+                                            <i class="fa fa-times"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -139,188 +198,12 @@
             </div>
         </div>
     </div>
-
-    <!-- 3. Modal Chi Tiết Hóa Đơn (Giỏ Hàng) -->
-    <div class="modal fade" id="chiTietModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title fw-bold">Chi Tiết Hóa Đơn: <span class="text-primary">HD0001</span></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <!-- Tìm kiếm sản phẩm -->
-                        <div class="col-md-12 mb-3">
-                            <div class="input-group shadow-sm">
-                                <span class="input-group-text bg-primary text-white border-primary"><i
-                                        class="fa fa-search"></i></span>
-                                <input type="text" class="form-control"
-                                    placeholder="Quét mã vạch hoặc nhập tên sản phẩm...">
-                                <button class="btn btn-primary px-4 shadow-sm">Thêm Vào Giỏ</button>
-                            </div>
-                        </div>
-                        <!-- Danh sách sản phẩm -->
-                        <div class="col-md-12">
-                            <div class="table-responsive">
-                                <table class="table table-bordered align-middle">
-                                    <thead class="table-light text-center">
-                                        <tr>
-                                            <th>STT</th>
-                                            <th>Sản Phẩm</th>
-                                            <th style="width: 100px;">ĐVT</th>
-                                            <th style="width: 120px;">Số Lượng</th>
-                                            <th style="width: 150px;">Đơn Giá</th>
-                                            <th>Thành Tiền</th>
-                                            <th>Xóa</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="text-center">
-                                            <td>1</td>
-                                            <td class="text-start">Thịt bò Mỹ nhập khẩu</td>
-                                            <td>Kg</td>
-                                            <td><input type="number" class="form-control form-control-sm text-center"
-                                                    value="2"></td>
-                                            <td><input type="number" class="form-control form-control-sm text-end"
-                                                    value="350000"></td>
-                                            <td class="text-end fw-bold">700,000</td>
-                                            <td><button class="btn btn-outline-danger btn-sm p-1"><i
-                                                        class="fa fa-times"></i></button></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer bg-light py-3 border-0">
-                    <div class="container-fluid">
-                        <div class="row align-items-center">
-                            <div class="col-md-6">
-                                <h5 class="mb-0 fw-bold">TỔNG CỘNG: <span class="text-danger ms-2">700,000đ</span></h5>
-                            </div>
-                            <div class="col-md-6 text-end">
-                                <button type="button" class="btn btn-secondary shadow-sm me-2"
-                                    data-bs-dismiss="modal">Đóng</button>
-                                <button type="button" class="btn btn-primary shadow-sm px-4">Lưu Giỏ Hàng</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 4. Modal Cập Nhật Hóa Đơn -->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title fw-bold">Cập Nhật Hóa Đơn</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Mã Hóa Đơn</label>
-                                <input type="text" class="form-control bg-light" value="HD0001" readonly>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Khách Hàng</label>
-                                <select class="form-select shadow-sm">
-                                    <option value="1">Nguyễn Văn A</option>
-                                    <option value="2">Trần Thị B</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Nhân Viên Bán Hàng</label>
-                                <select class="form-select shadow-sm">
-                                    <option value="1">Nguyễn Văn A</option>
-                                    <option value="2">Trần Thị B</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Ca Làm Việc</label>
-                                <select class="form-select shadow-sm">
-                                    <option value="1">Ca Sáng (06:00 - 14:00)</option>
-                                    <option value="2">Ca Chiều (14:00 - 22:00)</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Ngày Bán</label>
-                                <input type="date" class="form-control shadow-sm" value="2026-04-04">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Hình Thức Thanh Toán</label>
-                                <select class="form-select shadow-sm">
-                                    <option value="Tiền mặt">Tiền mặt</option>
-                                    <option value="Chuyển khoản">Chuyển khoản</option>
-                                    <option value="Quẹt thẻ">Quẹt thẻ</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Thanh Toán</label>
-                                <select class="form-select shadow-sm">
-                                    <option value="1" selected>Đã thanh toán</option>
-                                    <option value="0">Chưa thanh toán</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Trạng Thái</label>
-                                <select class="form-select shadow-sm">
-                                    <option value="1" selected>Hoàn thành</option>
-                                    <option value="0">Đang xử lý</option>
-                                    <option value="-1">Đã hủy</option>
-                                </select>
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label class="form-label fw-bold">Ghi Chú</label>
-                                <textarea class="form-control shadow-sm" rows="3">Khách quen, tặng thêm túi</textarea>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary shadow-sm">Lưu Thay Đổi</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- 5. Modal Xóa -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title text-white">Xóa Hóa Đơn</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center py-4">
-                    <i class="fa fa-exclamation-triangle text-warning mb-3" style="font-size: 3rem;"></i>
-                    <h5 class="fw-bold fs-5">Bạn có chắc chắn muốn xóa hóa đơn này?</h5>
-                    <p class="text-muted small">Hành động này không thể hoàn tác.</p>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-secondary px-4 shadow-sm" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-danger px-4 shadow-sm">Xác Nhận Xóa</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </template>
 
 <script>
 export default {
-    name: "HoaDonManager",
-    data() {
-        return {
-        }
-    }
-}
+    name: 'HoaDonManager',
+};
 </script>
 
 <style scoped></style>

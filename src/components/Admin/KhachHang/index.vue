@@ -184,7 +184,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-warning shadow-sm px-4" @click="editKhachHang">Lưu Thay
+                    <button data-bs-dismiss="modal" type="button" class="btn btn-warning shadow-sm px-4" @click="editKhachHang">Lưu Thay
                         Đổi</button>
                 </div>
             </div>
@@ -242,11 +242,18 @@ export default {
             axios
                 .get('http://127.0.0.1:8000/api/admin/khach-hang')
                 .then(response => {
-                    this.listKhachHang = response.data.data || [];
+                    this.listKhachHang = response.data.data;
                 })
                 .catch(error => {
                     console.error('Lỗi khi tải danh sách Khách Hàng:', error);
-                    this.$toast?.error('Đã xảy ra lỗi khi tải danh sách Khách Hàng.');
+                    if (error.response && error.response.data && error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
+                        const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
+                        this.$toast.error(messages);
+                    } else {
+                        this.$toast.error('Đã xảy ra lỗi khi tải danh sách Khách Hàng.');
+                    }
                 });
         },
         themKhachHang() {
@@ -262,12 +269,11 @@ export default {
                             dia_chi: '',
                             trang_thai: '1',
                             ghi_chu: '',
+                            diem_tich_luy: '',
                         };
-                        this.$toast?.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
-                        const modal = document.querySelector('#addModal .btn-close');
-                        modal && modal.click();
+                        this.$toast.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
                     } else {
-                        this.$toast?.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                        this.$toast.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
                     }
                 })
                 .catch(error => {
@@ -275,24 +281,22 @@ export default {
                     if (error.response && error.response.data && error.response.data.errors) {
                         const errors = error.response.data.errors;
                         const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
-                        this.$toast?.error(`<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`);
+                        const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
+                        this.$toast.error(messages);
                     } else {
-                        this.$toast?.error('Đã xảy ra lỗi khi thêm mới Khách Hàng.');
+                        this.$toast.error('Đã xảy ra lỗi khi thêm mới Khách Hàng.');
                     }
                 });
         },
-
         editKhachHang() {
             axios
                 .put('http://127.0.0.1:8000/api/admin/khach-hang/update', this.edit_khach_hang)
                 .then(response => {
                     if (response.data.status == 1) {
                         this.getKhachHang();
-                        this.$toast?.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
-                        const modal = document.querySelector('#editModal .btn-close');
-                        modal && modal.click();
+                        this.$toast.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
                     } else {
-                        this.$toast?.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                        this.$toast.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
                     }
                 })
                 .catch(error => {
@@ -300,45 +304,49 @@ export default {
                     if (error.response && error.response.data && error.response.data.errors) {
                         const errors = error.response.data.errors;
                         const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
-                        this.$toast?.error(`<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`);
+                        const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
+                        this.$toast.error(messages);
                     } else {
-                        this.$toast?.error('Đã xảy ra lỗi khi cập nhật Khách Hàng.');
+                        this.$toast.error('Đã xảy ra lỗi khi cập nhật Khách Hàng.');
                     }
                 });
         },
         xoaKhachHang() {
             axios
-                .delete(`http://127.0.0.1:8000/api/admin/khach-hang/delete/${this.xoa_khach_hang.id}`)
+                .delete('http://127.0.0.1:8000/api/admin/khach-hang/delete/' + this.xoa_khach_hang.id)
                 .then(response => {
                     if (response.data.status == 1) {
                         this.getKhachHang();
-                        this.$toast?.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
-                        const modal = document.querySelector('#deleteModal .btn-close');
-                        modal && modal.click();
+                        this.$toast.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
                     } else {
-                        this.$toast?.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                        this.$toast.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
                     }
                 })
                 .catch(error => {
                     console.error('Lỗi khi xóa Khách Hàng:', error);
-                    this.$toast?.error('Đã xảy ra lỗi khi xóa Khách Hàng.');
+                    if (error.response && error.response.data && error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
+                        const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
+                        this.$toast.error(messages);
+                    } else {
+                        this.$toast.error('Đã xảy ra lỗi khi xóa Khách Hàng.');
+                    }
                 });
         },
         changeStatus(item) {
             const new_trang_thai = item.trang_thai == 1 ? 0 : 1;
             axios
-                .delete('http://127.0.0.1:8000/api/admin/khach-hang/change-status', {
-                    data: {
-                        id: item.id,
-                        trang_thai: new_trang_thai
-                    }
+                .patch('http://127.0.0.1:8000/api/admin/khach-hang/change-status', {
+                    id: item.id,
+                    trang_thai: new_trang_thai
                 })
                 .then(response => {
                     if (response.data.status == 1) {
                         this.getKhachHang();
-                        this.$toast?.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                        this.$toast.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
                     } else {
-                        this.$toast?.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                        this.$toast.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
                     }
                 })
                 .catch(error => {
@@ -346,12 +354,13 @@ export default {
                     if (error.response && error.response.data && error.response.data.errors) {
                         const errors = error.response.data.errors;
                         const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
-                        this.$toast?.error(`<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`);
+                        const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
+                        this.$toast.error(messages);
                     } else {
-                        this.$toast?.error('Đã xảy ra lỗi khi thay đổi trạng thái Khách Hàng.');
+                        this.$toast.error('Đã xảy ra lỗi khi thay đổi trạng thái Khách Hàng.');
                     }
                 });
-        },
+        }
     },
 };
 </script>

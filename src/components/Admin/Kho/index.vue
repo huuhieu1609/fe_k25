@@ -21,8 +21,8 @@
                             <label class="form-label fw-bold">Tình trạng</label>
                             <select v-model="them_kho.tinh_trang" class="form-select">
                                 <option value="#">Chọn tình trạng</option>
-                                <option value="1">Đang làm việc</option>
-                                <option value="0">Đã nghỉ việc</option>
+                                <option value="1">Đang hoạt động</option>
+                                <option value="0">Ngừng hoạt động</option>
                             </select>
                         </div>
                     </form>
@@ -59,9 +59,9 @@
                                         <td class="text-start">{{ item.ghi_chu }}</td>
                                         <td>
                                             <button v-on:click="changeStatus(item)" v-if="item.tinh_trang == 1"
-                                                class="btn btn-success btn-sm w-100 shadow-sm">Đang làm việc</button>
+                                                class="btn btn-success btn-sm w-100 shadow-sm">Đang hoạt động</button>
                                             <button v-on:click="changeStatus(item)" v-else
-                                                class="btn btn-secondary btn-sm w-100 shadow-sm">Đã nghỉ việc</button>
+                                                class="btn btn-secondary btn-sm w-100 shadow-sm">Ngừng hoạt động</button>
                                         </td>
                                         <td class="text-nowrap">
 
@@ -112,15 +112,15 @@
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tình Trạng</label>
                             <select v-model="edit_kho.tinh_trang" class="form-select shadow-sm">
-                                <option value="1">Đang làm việc</option>
-                                <option value="0">Đã nghỉ việc</option>
+                                <option value="1">Đang hoạt động</option>
+                                <option value="0">Ngừng hoạt động</option>
                             </select>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-warning shadow-sm px-4" @click="editKho">Lưu Thay Đổi</button>
+                    <button type="button" class="btn btn-warning shadow-sm px-4" data-bs-dismiss="modal" @click="editKho">Lưu Thay Đổi</button>
                 </div>
             </div>
         </div>
@@ -252,7 +252,7 @@ export default {
         changeStatus(item) {
             const new_tinh_trang = item.tinh_trang == 1 ? 0 : 1;
             axios
-                .put('http://127.0.0.1:8000/api/admin/kho/change-status', {
+                .patch('http://127.0.0.1:8000/api/admin/kho/change-status', {
                     id: item.id,
                     tinh_trang: new_tinh_trang
                 })

@@ -251,7 +251,7 @@ export default {
         changeStatus(item) {
             const new_trang_thai = item.trang_thai == 1 ? 0 : 1;
             axios
-                .put('http://127.0.0.1:8000/api/admin/loai-san-pham/change-status', {
+                .patch('http://127.0.0.1:8000/api/admin/loai-san-pham/change-status', {
                     id: item.id,
                     trang_thai: new_trang_thai
                 })

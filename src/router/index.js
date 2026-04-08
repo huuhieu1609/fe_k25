@@ -47,6 +47,10 @@ const routes = [
         component: () => import('../components/Admin/HoaDon/index.vue')
     },
     {
+        path: '/admin/quan-ly-hoa-don',
+        component: () => import('../components/Admin/QuanLyHoaDon/index.vue')
+    },
+    {
         path: '/admin/phan-quyen',
         component: () => import('../components/Admin/PhanQuyen/index.vue')
     },

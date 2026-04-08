@@ -138,14 +138,29 @@
             </li>
           </ul>
         </li>
+        
         <li class="nav-item dropdown">
-          <router-link
-            to="/admin/hoa-don"
+          <a
+            href="javascript:;"
             class="nav-link dropdown-toggle dropdown-toggle-nocaret"
+            data-bs-toggle="dropdown"
           >
-            <div class="parent-icon"><i class="bx bx-receipt"></i></div>
-            <div class="menu-title">Quản lý hóa đơn</div>
-          </router-link>
+            <div class="parent-icon"><i class="bx bx-package"></i></div>
+            <div class="menu-title">Hoá đơn</div>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <router-link to="/admin/hoa-don" class="dropdown-item">
+                <i class="bx bx-right-arrow-alt"></i>Tạo hoá đơn
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/admin/quan-ly-hoa-don" class="dropdown-item">
+                <i class="bx bx-right-arrow-alt"></i>Quản lý hoá đơn
+              </router-link>
+            </li>
+            
+          </ul>
         </li>
         <li class="nav-item dropdown">
           <router-link

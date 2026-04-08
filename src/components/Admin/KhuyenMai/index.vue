@@ -353,11 +353,9 @@ export default {
         changeStatus(item) {
             const new_trang_thai = item.trang_thai == 1 ? 0 : 1;
             axios
-                .delete('http://127.0.0.1:8000/api/admin/khuyen-mai/change-status', {
-                    data: {
-                        id: item.id,
-                        trang_thai: new_trang_thai
-                    }
+                .patch('http://127.0.0.1:8000/api/admin/khuyen-mai/change-status', {
+                    id: item.id,
+                    trang_thai: new_trang_thai
                 })
                 .then(response => {
                     if (response.data.status == 1) {
