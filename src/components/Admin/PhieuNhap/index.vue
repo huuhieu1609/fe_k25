@@ -27,11 +27,11 @@
               >
                 <option value="">Chọn nhà cung cấp...</option>
                 <option
-                  v-for="item in list_nha_cung_cap"
-                  :key="item.id"
-                  :value="item.id"
+                  v-for="(value, index) in list_nha_cung_cap"
+                  :key="value.id || index"
+                  :value="value.id"
                 >
-                  {{ item.ten }}
+                  {{ value.ten }}
                 </option>
               </select>
             </div>
@@ -40,11 +40,11 @@
               <select v-model="them_phieu_nhap.id_kho" class="form-select">
                 <option value="">Chọn kho...</option>
                 <option
-                  v-for="item in list_kho"
-                  :key="item.id"
-                  :value="item.id"
+                  v-for="(value, index) in list_kho"
+                  :key="value.id || index"
+                  :value="value.id"
                 >
-                  {{ item.ten }}
+                  {{ value.ten }}
                 </option>
               </select>
             </div>
@@ -56,11 +56,11 @@
               >
                 <option value="">Chọn nhân viên...</option>
                 <option
-                  v-for="item in list_nhan_vien"
-                  :key="item.id"
-                  :value="item.id"
+                  v-for="(value, index) in list_nhan_vien"
+                  :key="value.id || index"
+                  :value="value.id"
                 >
-                  {{ item.ten }}
+                  {{ value.ten }}
                 </option>
               </select>
             </div>
@@ -149,11 +149,11 @@
                       >
                         <option value="">Chọn SP...</option>
                         <option
-                          v-for="sp in list_san_pham"
-                          :key="sp.id"
-                          :value="sp.id"
+                          v-for="(value, index) in list_san_pham"
+                          :key="value.id || index"
+                          :value="value.id"
                         >
-                          {{ sp.ten }}
+                          {{ value.ten }}
                         </option>
                       </select>
                     </td>
@@ -451,11 +451,11 @@
                 >
                   <option value="">Chọn nhà cung cấp...</option>
                   <option
-                    v-for="item in list_nha_cung_cap"
-                    :key="item.id"
-                    :value="item.id"
+                    v-for="(value, index) in list_nha_cung_cap"
+                    :key="value.id || index"
+                    :value="value.id"
                   >
-                    {{ item.ten }}
+                    {{ value.ten }}
                   </option>
                 </select>
               </div>
@@ -464,11 +464,11 @@
                 <select v-model="edit_phieu_nhap.id_kho" class="form-select">
                   <option value="">Chọn kho...</option>
                   <option
-                    v-for="item in list_kho"
-                    :key="item.id"
-                    :value="item.id"
+                    v-for="(value, index) in list_kho"
+                    :key="value.id || index"
+                    :value="value.id"
                   >
-                    {{ item.ten }}
+                    {{ value.ten }}
                   </option>
                 </select>
               </div>
@@ -480,11 +480,11 @@
                 >
                   <option value="">Chọn nhân viên...</option>
                   <option
-                    v-for="item in list_nhan_vien"
-                    :key="item.id"
-                    :value="item.id"
+                    v-for="(value, index) in list_nhan_vien"
+                    :key="value.id || index"
+                    :value="value.id"
                   >
-                    {{ item.ten }}
+                    {{ value.ten }}
                   </option>
                 </select>
               </div>
@@ -580,11 +580,11 @@
                           >
                             <option value="">Chọn SP...</option>
                             <option
-                              v-for="sp in list_san_pham"
-                              :key="sp.id"
-                              :value="sp.id"
+                              v-for="(value, index) in list_san_pham"
+                              :key="value.id || index"
+                              :value="value.id"
                             >
-                              {{ sp.ten }}
+                              {{ value.ten }}
                             </option>
                           </select>
                         </td>
@@ -737,41 +737,67 @@ export default {
   },
 
   created() {
-    this.getFormOptions();
+    this.getKho();
+    this.getNhaCungCap();
+    this.getNhanVien();
+    this.getSanPham();
     this.getPhieuNhap();
   },
   methods: {
-    getFormOptions() {
-      Promise.all([
-        axios.get("http://127.0.0.1:8000/api/admin/kho"),
-        axios.get("http://127.0.0.1:8000/api/admin/nha-cung-cap"),
-        axios.get("http://127.0.0.1:8000/api/admin/nhan-vien"),
-        axios.get("http://127.0.0.1:8000/api/admin/san-pham"),
-      ])
-        .then(([khoRes, nccRes, nvRes, spRes]) => {
-          this.list_kho = (khoRes.data.data || []).map((item) => ({
+    getKho() {
+      axios
+        .get("http://127.0.0.1:8000/api/admin/kho")
+        .then((response) => {
+          this.list_kho = (response.data.data || []).map((item) => ({
             id: item.id,
             ten: item.ten,
           }));
-
-          this.list_nha_cung_cap = (nccRes.data.data || []).map((item) => ({
+        })
+        .catch((error) => {
+          console.error("Lỗi khi tải danh sách Kho:", error);
+          this.$toast?.error("Đã xảy ra lỗi khi tải danh sách Kho.");
+        });
+    },
+    getNhaCungCap() {
+      axios
+        .get("http://127.0.0.1:8000/api/admin/nha-cung-cap")
+        .then((response) => {
+          this.list_nha_cung_cap = (response.data.data || []).map((item) => ({
             id: item.id,
             ten: item.ten,
           }));
-
-          this.list_nhan_vien = (nvRes.data.data || []).map((item) => ({
+        })
+        .catch((error) => {
+          console.error("Lỗi khi tải danh sách Nhà Cung Cấp:", error);
+          this.$toast?.error("Đã xảy ra lỗi khi tải danh sách Nhà Cung Cấp.");
+        });
+    },
+    getNhanVien() {
+      axios
+        .get("http://127.0.0.1:8000/api/admin/nhan-vien")
+        .then((response) => {
+          this.list_nhan_vien = (response.data.data || []).map((item) => ({
             id: item.id,
             ten: item.ho_va_ten || item.ten,
           }));
-
-          this.list_san_pham = (spRes.data.data || []).map((item) => ({
+        })
+        .catch((error) => {
+          console.error("Lỗi khi tải danh sách Nhân Viên:", error);
+          this.$toast?.error("Đã xảy ra lỗi khi tải danh sách Nhân Viên.");
+        });
+    },
+    getSanPham() {
+      axios
+        .get("http://127.0.0.1:8000/api/admin/san-pham")
+        .then((response) => {
+          this.list_san_pham = (response.data.data || []).map((item) => ({
             id: item.id,
             ten: item.ten_san_pham || item.ten,
           }));
         })
         .catch((error) => {
-          console.error("Lỗi khi tải dữ liệu options Phiếu Nhập:", error);
-          this.$toast?.error("Đã xảy ra lỗi khi tải danh mục chọn.");
+          console.error("Lỗi khi tải danh sách Sản Phẩm:", error);
+          this.$toast?.error("Đã xảy ra lỗi khi tải danh sách Sản Phẩm.");
         });
     },
     getPhieuNhap() {
@@ -802,19 +828,32 @@ export default {
       const donGia = Number(item?.don_gia) || 0;
       return soLuong * donGia;
     },
-    buildPayload(form) {
-      return {
-        id_kho: form.id_kho,
-        id_nha_cung_cap: form.id_nha_cung_cap,
-        id_nhan_vien: form.id_nhan_vien,
-        ma_phieu: form.ma_phieu,
-        ngay_nhap: form.ngay_nhap,
-        chiet_khau: Number(form.chiet_khau) || 0,
-        thue_vat: Number(form.thue_vat) || 0,
-        da_thanh_toan: Number(form.da_thanh_toan) || 0,
-        trang_thai: Number(form.trang_thai) || 1,
-        ghi_chu: form.ghi_chu || null,
-        chi_tiet: (form.chi_tiet || []).map((item) => ({
+    showValidationErrors(error, fallbackMessage) {
+      if (error.response && error.response.data && error.response.data.errors) {
+        const errors = error.response.data.errors;
+        const items = Object.values(errors)
+          .flat()
+          .map((msg) => `<li>${msg}</li>`)
+          .join("");
+        const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
+        this.$toast?.error(messages);
+      } else {
+        this.$toast?.error(fallbackMessage);
+      }
+    },
+    addPhieuNhap() {
+      const payload = {
+        id_kho: this.them_phieu_nhap.id_kho,
+        id_nha_cung_cap: this.them_phieu_nhap.id_nha_cung_cap,
+        id_nhan_vien: this.them_phieu_nhap.id_nhan_vien,
+        ma_phieu: this.them_phieu_nhap.ma_phieu,
+        ngay_nhap: this.them_phieu_nhap.ngay_nhap,
+        chiet_khau: Number(this.them_phieu_nhap.chiet_khau) || 0,
+        thue_vat: Number(this.them_phieu_nhap.thue_vat) || 0,
+        da_thanh_toan: Number(this.them_phieu_nhap.da_thanh_toan) || 0,
+        trang_thai: Number(this.them_phieu_nhap.trang_thai) || 1,
+        ghi_chu: this.them_phieu_nhap.ghi_chu || null,
+        chi_tiet: (this.them_phieu_nhap.chi_tiet || []).map((item) => ({
           id_san_pham: item.id_san_pham,
           id_lo_hang: item.id_lo_hang || null,
           so_luong: Number(item.so_luong) || 0,
@@ -824,13 +863,9 @@ export default {
           ghi_chu: item.ghi_chu || null,
         })),
       };
-    },
-    addPhieuNhap() {
+
       axios
-        .post(
-          "http://127.0.0.1:8000/api/admin/phieu-nhap/create",
-          this.buildPayload(this.them_phieu_nhap),
-        )
+        .post("http://127.0.0.1:8000/api/admin/phieu-nhap/create", payload)
         .then((response) => {
           this.$toast?.success(
             response.data.message || "Thêm phiếu nhập thành công",
@@ -852,7 +887,10 @@ export default {
         })
         .catch((error) => {
           console.error("Lỗi khi thêm phiếu nhập:", error);
-          this.$toast?.error("Đã xảy ra lỗi khi thêm phiếu nhập.");
+          this.showValidationErrors(
+            error,
+            "Đã xảy ra lỗi khi thêm phiếu nhập.",
+          );
         });
     },
     openEdit(item) {
@@ -863,10 +901,9 @@ export default {
       axios
         .get(`http://127.0.0.1:8000/api/admin/phieu-nhap/${item.id}`)
         .then((response) => {
-          const payload = response.data || {};
-          const data = payload.data || {};
+          const data = response.data.data || {};
           const header = data.phieu_nhap || {};
-          const details = payload.chi_tiet || data.chi_tiet || [];
+          const details = data.chi_tiet || [];
 
           this.edit_phieu_nhap = {
             id: header.id || item.id,
@@ -906,10 +943,32 @@ export default {
         return;
       }
 
+      const payload = {
+        id_kho: this.edit_phieu_nhap.id_kho,
+        id_nha_cung_cap: this.edit_phieu_nhap.id_nha_cung_cap,
+        id_nhan_vien: this.edit_phieu_nhap.id_nhan_vien,
+        ma_phieu: this.edit_phieu_nhap.ma_phieu,
+        ngay_nhap: this.edit_phieu_nhap.ngay_nhap,
+        chiet_khau: Number(this.edit_phieu_nhap.chiet_khau) || 0,
+        thue_vat: Number(this.edit_phieu_nhap.thue_vat) || 0,
+        da_thanh_toan: Number(this.edit_phieu_nhap.da_thanh_toan) || 0,
+        trang_thai: Number(this.edit_phieu_nhap.trang_thai) || 1,
+        ghi_chu: this.edit_phieu_nhap.ghi_chu || null,
+        chi_tiet: (this.edit_phieu_nhap.chi_tiet || []).map((item) => ({
+          id_san_pham: item.id_san_pham,
+          id_lo_hang: item.id_lo_hang || null,
+          so_luong: Number(item.so_luong) || 0,
+          don_gia: Number(item.don_gia) || 0,
+          chiet_khau: Number(item.chiet_khau) || 0,
+          thue_vat: Number(item.thue_vat) || 0,
+          ghi_chu: item.ghi_chu || null,
+        })),
+      };
+
       axios
         .put(
           `http://127.0.0.1:8000/api/admin/phieu-nhap/update/${this.edit_phieu_nhap.id}`,
-          this.buildPayload(this.edit_phieu_nhap),
+          payload,
         )
         .then((response) => {
           this.$toast?.success(
@@ -919,7 +978,10 @@ export default {
         })
         .catch((error) => {
           console.error("Lỗi khi cập nhật phiếu nhập:", error);
-          this.$toast?.error("Đã xảy ra lỗi khi cập nhật phiếu nhập.");
+          this.showValidationErrors(
+            error,
+            "Đã xảy ra lỗi khi cập nhật phiếu nhập.",
+          );
         });
     },
     openChiTiet(item) {
@@ -940,8 +1002,7 @@ export default {
       axios
         .get(`http://127.0.0.1:8000/api/admin/phieu-nhap/${item.id}`)
         .then((response) => {
-          const payload = response.data || {};
-          const data = payload.data || {};
+          const data = response.data.data || {};
 
           this.chi_tiet_meta = {
             phieu_nhap: data.phieu_nhap || null,
@@ -950,7 +1011,7 @@ export default {
             nhan_vien: data.nhan_vien || null,
           };
 
-          this.chi_tiet_list = data.chi_tiet || payload.chi_tiet || [];
+          this.chi_tiet_list = data.chi_tiet || [];
         })
         .catch((error) => {
           console.error("Lỗi khi tải chi tiết Phiếu Nhập:", error);
