@@ -37,103 +37,49 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="text-center">
-                                    <td>1</td>
-                                    <td>
-                                        <img src="https://tse1.mm.bing.net/th/id/OIP.1SqYM2HBWs9XERxsCusCXQHaE7?pid=Api&P=0&h=220"
-                                            alt="Nho Mẫu Đơn" class="img-fluid rounded shadow-sm"
-                                            style="width: 60px; height: 60px; object-fit: cover;">
-                                    </td>
-                                    <td class="text-start fw-bold">Nho Mẫu Đơn</td>
-                                    <td>Trái Cây</td>
-                                    <td class="text-start small">Nho mẫu đơn tươi ngon nhập khẩu từ các nông trại tiêu
-                                        chuẩn.</td>
-                                    <td>Hộp</td>
-                                    <td class="text-center text-success fw-bold">Có</td>
-                                    <td class="text-center text-secondary">Không</td>
+                                <template v-for="(value, index) in list_san_pham" :key="index">
+                                    <tr class="text-center">
+                                        <td>{{ index + 1 }}</td>
+                                        <td>
+                                            <img :src="value.hinh_anh" alt="Nho Mẫu Đơn"
+                                                class="img-fluid rounded shadow-sm"
+                                                style="width: 60px; height: 60px; object-fit: cover;">
+                                        </td>
+                                        <td class="text-start fw-bold">{{ value.ten_san_pham }}</td>
+                                        <td>{{ value.ten }}</td>
+                                        <td class="text-start small">{{ value.mo_ta }}</td>
+                                        <td>{{ value.don_vi_tinh }}</td>
+                                        <td class="text-center text-success fw-bold">{{ value.quan_ly_lo }}</td>
+                                        <td class="text-center text-secondary">{{ value.quan_ly_serial }}</td>
 
-                                    <td>10%</td>
-                                    <td class="text-end fw-bold">100,000 đ</td>
-                                    <td class="text-end fw-bold text-danger">150,000 đ</td>
-                                    <td>10</td>
-                                    <td>
-                                        <button class="btn btn-success btn-sm w-100 shadow-sm">Còn Kinh Doanh</button>
-                                    </td>
-                                    <td class="text-nowrap">
-                                        <button class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
-                                            data-bs-target="#editModal">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="text-center">
-                                    <td>2</td>
-                                    <td>
-                                        <img src="https://cdn.tgdd.vn/2021/03/content/10-800x450-18.jpg"
-                                            alt="Thịt Ba Rọi" class="img-fluid rounded shadow-sm"
-                                            style="width: 60px; height: 60px; object-fit: cover;">
-                                    </td>
-                                    <td class="text-start fw-bold">Thịt Ba Rọi</td>
-                                    <td>Thịt & Hải Sản</td>
-                                    <td class="text-start small">Thịt heo sạch, tươi trong ngày, đảm bảo vệ sinh an toàn
-                                        thực phẩm.</td>
-                                    <td>KG</td>
-                                    <td class="text-center text-secondary">Không</td>
-                                    <td class="text-center text-secondary">Không</td>
-                                    <td>8%</td>
-                                    <td class="text-end fw-bold">250,000 đ</td>
-                                    <td class="text-end fw-bold text-danger">385,000 đ</td>
-                                    <td>20</td>
-                                    <td>
-                                        <button class="btn btn-danger btn-sm w-100 shadow-sm">Ngừng Kinh Doanh</button>
-                                    </td>
-                                    <td class="text-nowrap">
-                                        <button class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
-                                            data-bs-target="#editModal">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="text-center">
-                                    <td>3</td>
-                                    <td>
-                                        <img src="https://tse2.mm.bing.net/th/id/OIP.ocxk4giN-VfheOY07ZePQwHaHa?pid=Api&P=0&h=220"
-                                            alt="Bia Hà Nội" class="img-fluid rounded shadow-sm"
-                                            style="width: 60px; height: 60px; object-fit: cover;">
-                                    </td>
-                                    <td class="text-start fw-bold">Bia Hà Nội (Thùng 24 lon)</td>
-                                    <td>Đồ Uống</td>
-                                    <td class="text-start small">Bia Hà Nội truyền thống, hương vị đậm đà, mát lạnh sảng
-                                        khoái.</td>
-                                    <td>Thùng</td>
-                                    <td class="text-center text-success fw-bold">Có</td>
-                                    <td class="text-center text-success fw-bold">Có</td>
-                                    <td>8%</td>
-                                    <td class="text-end fw-bold">250,000 đ</td>
-                                    <td class="text-end fw-bold text-danger">385,000 đ</td>
-                                    <td>20</td>
-                                    <td>
-                                        <button class="btn btn-success btn-sm w-100 shadow-sm">Còn Kinh Doanh</button>
-                                    </td>
-                                    <td class="text-nowrap">
-                                        <button class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
-                                            data-bs-target="#editModal">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                        <td>{{ value.thue_vat }}%</td>
+                                        <td class="text-end fw-bold">{{ formatCurrency(value.gia_nhap_mac_dinh) }}
+                                        </td>
+                                        <td class="text-end fw-bold text-danger">{{
+                                            formatCurrency(value.gia_ban_mac_dinh) }} </td>
+                                        <td>{{ value.ton_toi_thieu }}</td>
+                                        <td>
+                                            <button v-on:click="changeStatus(value)" v-if="value.trang_thai == 1"
+                                                class="btn btn-success btn-sm w-100 shadow-sm">Còn Kinh Doanh</button>
+                                            <button v-on:click="changeStatus(value)" v-else
+                                                class="btn btn-danger btn-sm w-100 shadow-sm">Ngừng Kinh
+                                                Doanh</button>
+                                        </td>
+                                        <td class="text-nowrap">
+                                            <button @click="Object.assign(edit_san_pham, value)"
+                                                class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
+                                                data-bs-target="#editModal">
+                                                <i class="fa fa-edit"></i>
+                                            </button>
+                                            <button @click="Object.assign(delete_san_pham, value)"
+                                                class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </template>
+
                             </tbody>
                         </table>
                     </div>
@@ -155,28 +101,31 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label fw-bold">Tên Sản Phẩm</label>
-                                    <input type="text" class="form-control shadow-sm" placeholder="Nhập tên sản phẩm">
+                                    <input v-model="them_san_pham.ten_san_pham" type="text"
+                                        class="form-control shadow-sm" placeholder="Nhập tên sản phẩm">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label fw-bold">Hình Ảnh (URL)</label>
-                                    <input type="text" class="form-control shadow-sm" placeholder="Nhập URL hình ảnh">
+                                    <input v-model="them_san_pham.hinh_anh" type="text" class="form-control shadow-sm"
+                                        placeholder="Nhập URL hình ảnh">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label fw-bold">Đơn Vị Tính</label>
-                                    <input type="text" class="form-control shadow-sm" placeholder="Ví dụ: Cái, Hộp, KG">
+                                    <input v-model="them_san_pham.don_vi_tinh" type="text"
+                                        class="form-control shadow-sm" placeholder="Ví dụ: Cái, Hộp, KG">
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label fw-bold">Quản Lý Lô</label>
-                                    <select class="form-select shadow-sm">
+                                    <select v-model="them_san_pham.quan_ly_lo" class="form-select shadow-sm">
                                         <option value="1">Có</option>
                                         <option value="0" selected>Không</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label fw-bold">Quản Lý Serial</label>
-                                    <select class="form-select shadow-sm">
+                                    <select v-model="them_san_pham.quan_ly_serial" class="form-select shadow-sm">
                                         <option value="1">Có</option>
                                         <option value="0" selected>Không</option>
                                     </select>
@@ -185,39 +134,42 @@
                             <div class="row">
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label fw-bold">Thuế VAT (%)</label>
-                                    <input type="number" class="form-control shadow-sm" value="10">
+                                    <input v-model="them_san_pham.thue_vat" type="number"
+                                        class="form-control shadow-sm">
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label fw-bold">Giá Nhập Mặc Định</label>
-                                    <input type="number" class="form-control shadow-sm" placeholder="0">
+                                    <input v-model="them_san_pham.gia_nhap_mac_dinh" type="number"
+                                        class="form-control shadow-sm" placeholder="0">
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label fw-bold">Giá Bán Mặc Định</label>
-                                    <input type="number" class="form-control shadow-sm" placeholder="0">
+                                    <input v-model="them_san_pham.gia_ban_mac_dinh" type="number"
+                                        class="form-control shadow-sm" placeholder="0">
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label fw-bold">Tồn Tối Thiểu</label>
-                                    <input type="number" class="form-control shadow-sm" value="10">
+                                    <input v-model="them_san_pham.ton_toi_thieu" type="number"
+                                        class="form-control shadow-sm">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label fw-bold">Trạng Thái</label>
-                                    <select class="form-select shadow-sm">
+                                    <select v-model="them_san_pham.trang_thai" class="form-select shadow-sm">
                                         <option value="1" selected>Còn Kinh Doanh</option>
                                         <option value="0">Ngừng Kinh Doanh</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label fw-bold">Loại Sản Phẩm</label>
-                                    <select class="form-select shadow-sm">
+                                    <select v-model="them_san_pham.id_loai_san_pham" class="form-select shadow-sm">
                                         <option value="">Chọn loại sản phẩm...</option>
-                                        <option value="1">Trái Cây</option>
-                                        <option value="2">Thịt & Hải Sản</option>
-                                        <option value="3">Đồ Uống</option>
+                                        <option v-for="loai in list_loai_san_pham" :key="loai.id" :value="loai.id">{{
+                                            loai.ten }}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label fw-bold">Mô Tả Sản Phẩm</label>
-                                    <textarea class="form-control shadow-sm" rows="3"
+                                    <textarea v-model="them_san_pham.mo_ta" class="form-control shadow-sm" rows="3"
                                         placeholder="Nhập mô tả sản phẩm..."></textarea>
                                 </div>
                             </div>
@@ -225,7 +177,9 @@
                     </div>
                     <div class="modal-footer text-end">
                         <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal">Đóng</button>
-                        <button type="button" class="btn btn-primary px-4 shadow-sm">Lưu Sản Phẩm</button>
+                        <button @click="addSanPham()" type="button" class="btn btn-primary px-4 shadow-sm"
+                            data-bs-dismiss="modal">Thêm Sản
+                            Phẩm</button>
                     </div>
                 </div>
             </div>
@@ -245,29 +199,30 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label fw-bold">Tên Sản Phẩm</label>
-                                    <input type="text" class="form-control shadow-sm" value="Sản Phẩm A">
+                                    <input type="text" class="form-control shadow-sm"
+                                        v-model="edit_san_pham.ten_san_pham">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label fw-bold">Hình Ảnh (URL)</label>
-                                    <input type="text" class="form-control shadow-sm"
-                                        value="https://via.placeholder.com/50">
+                                    <input type="text" class="form-control shadow-sm" v-model="edit_san_pham.hinh_anh">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label fw-bold">Đơn Vị Tính</label>
-                                    <input type="text" class="form-control shadow-sm" value="Hộp">
+                                    <input type="text" class="form-control shadow-sm"
+                                        v-model="edit_san_pham.don_vi_tinh">
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label fw-bold">Quản Lý Lô</label>
-                                    <select class="form-select shadow-sm">
+                                    <select class="form-select shadow-sm" v-model="edit_san_pham.quan_ly_lo">
                                         <option value="1" selected>Có</option>
                                         <option value="0">Không</option>
                                     </select>
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label class="form-label fw-bold">Quản Lý Serial</label>
-                                    <select class="form-select shadow-sm">
+                                    <select class="form-select shadow-sm" v-model="edit_san_pham.quan_ly_serial">
                                         <option value="1">Có</option>
                                         <option value="0" selected>Không</option>
                                     </select>
@@ -276,45 +231,51 @@
                             <div class="row">
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label fw-bold">Thuế VAT (%)</label>
-                                    <input type="number" class="form-control shadow-sm" value="10">
+                                    <input type="number" class="form-control shadow-sm"
+                                        v-model="edit_san_pham.thue_vat">
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label fw-bold">Giá Nhập Mặc Định</label>
-                                    <input type="number" class="form-control shadow-sm" value="100000">
+                                    <input type="number" class="form-control shadow-sm"
+                                        v-model="edit_san_pham.gia_nhap_mac_dinh">
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label fw-bold">Giá Bán Mặc Định</label>
-                                    <input type="number" class="form-control shadow-sm" value="150000">
+                                    <input type="number" class="form-control shadow-sm"
+                                        v-model="edit_san_pham.gia_ban_mac_dinh">
                                 </div>
                                 <div class="col-md-3 mb-3">
                                     <label class="form-label fw-bold">Tồn Tối Thiểu</label>
-                                    <input type="number" class="form-control shadow-sm" value="10">
+                                    <input type="number" class="form-control shadow-sm"
+                                        v-model="edit_san_pham.ton_toi_thieu">
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label fw-bold">Trạng Thái</label>
-                                    <select class="form-select shadow-sm">
+                                    <select class="form-select shadow-sm" v-model="edit_san_pham.trang_thai">
                                         <option value="1" selected>Còn Kinh Doanh</option>
                                         <option value="0">Ngừng Kinh Doanh</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label fw-bold">Loại Sản Phẩm</label>
-                                    <select class="form-select shadow-sm">
-                                        <option value="1" selected>Trái Cây</option>
-                                        <option value="2">Thịt & Hải Sản</option>
-                                        <option value="3">Đồ Uống</option>
+                                    <select class="form-select shadow-sm" v-model="edit_san_pham.id_loai_san_pham">
+                                        <option v-for="loai in list_loai_san_pham" :key="loai.id" :value="loai.id">{{
+                                            loai.ten
+                                        }}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label class="form-label fw-bold">Mô Tả Sản Phẩm</label>
-                                    <textarea class="form-control shadow-sm" rows="3">Mô tả sản phẩm mẫu...</textarea>
+                                    <textarea class="form-control shadow-sm" rows="3"
+                                        v-model="edit_san_pham.mo_ta"></textarea>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer text-end">
                         <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal">Đóng</button>
-                        <button type="button" class="btn btn-info text-white px-4 shadow-sm">Cập Nhật Sản Phẩm</button>
+                        <button @click="updateSanPham()" type="button" data-bs-dismiss="modal"
+                            class="btn btn-info text-white px-4 shadow-sm">Cập Nhật Sản Phẩm</button>
                     </div>
                 </div>
             </div>
@@ -337,7 +298,8 @@
                     <div class="modal-footer justify-content-center">
                         <button type="button" class="btn btn-secondary px-4 shadow-sm"
                             data-bs-dismiss="modal">Hủy</button>
-                        <button type="button" class="btn btn-danger px-4 shadow-sm">Xác Nhận Xóa</button>
+                        <button @click="deleteSanPham()" type="button" data-bs-dismiss="modal"
+                            class="btn btn-danger px-4 shadow-sm">Xác Nhận Xóa</button>
                     </div>
                 </div>
             </div>
@@ -346,10 +308,178 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     name: 'SanPhamManager',
     data() {
         return {
+            list_loai_san_pham: [],
+            list_san_pham: [],
+            them_san_pham: {
+                ten_san_pham: '',
+                hinh_anh: '',
+                don_vi_tinh: '',
+                quan_ly_lo: 0,
+                quan_ly_serial: 0,
+                thue_vat: 10,
+                gia_nhap_mac_dinh: 0,
+                gia_ban_mac_dinh: 0,
+                ton_toi_thieu: 10,
+                trang_thai: 1,
+                id_loai_san_pham: '',
+                mo_ta: '',
+            },
+            edit_san_pham: {
+                ten_san_pham: '',
+                hinh_anh: '',
+                don_vi_tinh: '',
+                quan_ly_lo: 0,
+                quan_ly_serial: 0,
+                thue_vat: 10,
+                gia_nhap_mac_dinh: 0,
+                gia_ban_mac_dinh: 0,
+                ton_toi_thieu: 10,
+                trang_thai: 1,
+                id_loai_san_pham: '',
+                mo_ta: '',
+            },
+            delete_san_pham: {
+                ten_san_pham: '',
+                hinh_anh: '',
+                don_vi_tinh: '',
+                quan_ly_lo: 0,
+                quan_ly_serial: 0,
+                thue_vat: 10,
+                gia_nhap_mac_dinh: 0,
+                gia_ban_mac_dinh: 0,
+                ton_toi_thieu: 10,
+                trang_thai: 1,
+                id_loai_san_pham: '',
+                mo_ta: '',
+            }
+        }
+    },
+    created() {
+        this.getLoaiSanPham();
+        this.getSanPham();
+    },
+    methods: {
+        getLoaiSanPham() {
+            axios
+                .get('http://127.0.0.1:8000/api/admin/loai-san-pham')
+                .then(response => {
+                    this.list_loai_san_pham = response.data.data || [];
+
+                })
+                .catch(error => {
+                    console.error('Lỗi khi tải danh sách Loại Sản Phẩm:', error);
+                    this.$toast?.error('Đã xảy ra lỗi khi tải danh sách Loại Sản Phẩm.');
+                });
+        },
+        getSanPham() {
+            axios
+                .get('http://127.0.0.1:8000/api/admin/san-pham')
+                .then(response => {
+                    this.list_san_pham = response.data.data || [];
+
+                })
+                .catch(error => {
+                    console.error('Lỗi khi tải danh sách Sản Phẩm:', error);
+                    this.$toast?.error('Đã xảy ra lỗi khi tải danh sách Sản Phẩm.');
+                });
+        },
+        addSanPham() {
+            // Gọi API để thêm mới Ca Làm Việc
+            axios
+                .post('http://127.0.0.1:8000/api/admin/san-pham/create', this.them_san_pham)
+                .then(response => {
+                    this.$toast.success(response.data.message);
+                    this.getSanPham();
+                })
+                .catch(error => {
+                    console.error('Lỗi khi thêm mới Ca Làm Việc:', error);
+                    if (error.response && error.response.data && error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
+                        const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
+                        this.$toast.error(messages);
+                    } else {
+                        this.$toast.error('Đã xảy ra lỗi khi thêm mới Ca Làm Việc.');
+                    }
+                });
+        },
+        updateSanPham() {
+            // Gọi API để cập nhật Ca Làm Việc
+            axios
+                .put('http://127.0.0.1:8000/api/admin/san-pham/update', this.edit_san_pham)
+                .then(response => {
+                    this.$toast.success(response.data.message);
+                    this.getSanPham();
+                })
+                .catch(error => {
+                    console.error('Lỗi khi cập nhật Ca Làm Việc:', error);
+                    if (error.response && error.response.data && error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
+                        const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
+                        this.$toast.error(messages);
+                    } else {
+                        this.$toast.error('Đã xảy ra lỗi khi cập nhật Ca Làm Việc.');
+                    }
+                });
+        },
+        deleteSanPham() {
+            // Gọi API để xóa Ca Làm Việc
+            axios
+                .delete('http://127.0.0.1:8000/api/admin/san-pham/delete/' + this.delete_san_pham.id)
+                .then(response => {
+                    this.$toast.success(response.data.message);
+                    this.getSanPham();
+                })
+                .catch(error => {
+                    console.error('Lỗi khi xóa Ca Làm Việc:', error);
+                    if (error.response && error.response.data && error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
+                        const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
+                        this.$toast.error(messages);
+                    } else {
+                        this.$toast.error('Đã xảy ra lỗi khi xóa Ca Làm Việc.');
+                    }
+                });
+        },
+        changeStatus(item) {
+            const new_trang_thai = item.trang_thai == 1 ? 0 : 1;
+            axios
+                .patch('http://127.0.0.1:8000/api/admin/san-pham/change-status', {
+                    id: item.id,
+                    trang_thai: new_trang_thai
+                })
+                .then(response => {
+                    if (response.data.status == 1) {
+                        this.getSanPham();
+                        this.$toast.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                    } else {
+                        this.$toast.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi khi thay đổi trạng thái Sản Phẩm:', error);
+                    if (error.response && error.response.data && error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
+                        const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
+                        this.$toast.error(messages);
+                    } else {
+                        this.$toast.error('Đã xảy ra lỗi khi thay đổi trạng thái Sản Phẩm.');
+                    }
+                });
+        },
+        // Source - https://stackoverflow.com/a/64980253
+        // Posted by MinIsNghia
+        // Retrieved 2026-04-09, License - CC BY-SA 4.0
+        formatCurrency(value) {
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
         }
     }
 }

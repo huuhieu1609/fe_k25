@@ -11,44 +11,55 @@
                     <form>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Nhân Viên</label>
-                            <select class="form-select shadow-sm">
+                            <select v-model="them_ca_lam_viec.nhan_vien_id" class="form-select shadow-sm">
                                 <option selected disabled>Chọn nhân viên...</option>
-                                <option value="1">Nguyễn Văn A</option>
-                                <option value="2">Trần Thị B</option>
+                                <option v-for="item in list_nhan_vien" :key="item.id" :value="item.id">
+                                    {{ item.ho_va_ten }}
+                                </option>
                             </select>
                         </div>
-                       
+
                         <div class="mb-3">
                             <label class="form-label fw-bold">Giờ Mở</label>
-                            <input type="datetime-local" class="form-control shadow-sm">
+                            <input v-model="them_ca_lam_viec.gio_mo" type="datetime-local"
+                                class="form-control shadow-sm">
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Giờ Đóng</label>
-                            <input type="datetime-local" class="form-control shadow-sm">
+                            <input v-model="them_ca_lam_viec.gio_dong" type="datetime-local"
+                                class="form-control shadow-sm">
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tiền Đầu Ca</label>
-                            <input type="number" class="form-control shadow-sm" placeholder="Nhập số tiền đầu ca...">
+                            <input v-model="them_ca_lam_viec.tien_dau_ca" type="number" class="form-control shadow-sm"
+                                placeholder="Nhập số tiền đầu ca...">
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tiền Kết Ca</label>
-                            <input type="number" class="form-control shadow-sm" placeholder="Nhập số tiền kết ca...">
+                            <input v-model="them_ca_lam_viec.tien_ket_ca" type="number" class="form-control shadow-sm"
+                                placeholder="Nhập số tiền kết ca...">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">chênh lệch</label>
+                            <input v-model="them_ca_lam_viec.chenh_lech" type="number" class="form-control shadow-sm"
+                                placeholder="Nhập số tiền chênh lệch...">
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Ghi Chú</label>
-                            <textarea class="form-control shadow-sm" rows="3" placeholder="Nhập ghi chú..."></textarea>
+                            <textarea v-model="them_ca_lam_viec.ghi_chu" class="form-control shadow-sm" rows="3"
+                                placeholder="Nhập ghi chú..."></textarea>
                         </div>
-                         <div class="mb-3">
+                        <div class="mb-3">
                             <label class="form-label fw-bold">Trạng Thái</label>
-                            <select class="form-select shadow-sm">
-                                <option value="1" selected>Đang Mở</option>
-                                <option value="0">Đã Kết Ca</option>
+                            <select v-model="them_ca_lam_viec.trang_thai" class="form-select shadow-sm">
+                                <option value="0">Đang Mở</option>
+                                <option value="1">Đã Kết Ca</option>
                             </select>
                         </div>
                     </form>
                 </div>
                 <div class="card-footer text-end ">
-                    <button class="btn btn-primary px-4 shadow-sm">Thêm Mới</button>
+                    <button @click="addCaLamViec()" class="btn btn-primary px-4 shadow-sm">Thêm Mới</button>
                 </div>
             </div>
         </div>
@@ -71,52 +82,46 @@
                                     <th>Tiền Đầu Ca</th>
                                     <th>Tiền Kết Ca</th>
                                     <th>Lệch</th>
+                                    <th>Ghi Chú</th>
                                     <th>Trạng Thái</th>
                                     <th>Thao Tác</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="text-center">
-                                    <td>1</td>
-                                    <td class="text-start">Nguyễn Văn A</td>
-                                    <td class="text-center text-success fw-bold">08:00</td>
-                                    <td class="text-center text-danger fw-bold">16:00</td>
-                                    <td class="text-end text-muted">500,000</td>
-                                    <td class="text-end fw-bold">1,200,000</td>
-                                    <td>0</td>
-                                    <td><button class="btn btn-success btn-sm w-100 shadow-sm">Đã Kết Ca</button></td>
-                                    <td class="text-nowrap">
-                                        <button class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
-                                            data-bs-target="#editModal">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr class="text-center">
-                                    <td>2</td>
-                                    <td class="text-start">Phạm Văn E</td>
-                                    <td class="text-center text-success fw-bold">08:24</td>
-                                    <td class="text-center text-muted fst-italic">--:--</td>
-                                    <td class="text-end text-muted">500,000</td>
-                                    <td class="text-end text-primary fw-bold">Đang bán...</td>
-                                    <td>...</td>
-                                    <td><button class="btn btn-warning btn-sm w-100 shadow-sm text-white">Đang
-                                            Mở</button></td>
-                                    <td class="text-nowrap">
-                                        <button class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
-                                            data-bs-target="#editModal">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                <template v-for="(item, index) in list_ca_lam_viec" :key="item.id">
+                                    <tr class="text-center">
+                                        <td>{{ index + 1 }}</td>
+                                        <td class="text-start">{{ item.ho_va_ten }}</td>
+                                        <td class="text-center text-success fw-bold">{{ item.gio_mo }}</td>
+                                        <td class="text-center text-danger fw-bold">{{ item.gio_dong }}</td>
+                                        <td class="text-end">{{ item.tien_dau_ca }}</td>
+                                        <td class="text-end">{{ item.tien_ket_ca }}</td>
+                                        <td>{{ item.chenh_lech }}</td>
+                                        <td class="text-start">
+                                            {{ item.ghi_chu }}
+                                        </td>
+                                        <td>
+                                            <button v-if="item.trang_thai == 1" v-on:click="changeStatus(item)"
+                                                class="btn btn-success btn-sm w-100 shadow-sm">Đã Kết Ca</button>
+                                            <button v-else v-on:click="changeStatus(item)"
+                                                class="btn btn-danger btn-sm w-100 shadow-sm">Đang
+                                                Mở</button>
+                                        </td>
+                                        <td class="text-nowrap">
+                                            <button v-on:click="Object.assign(edit_ca_lam_viec, item)"
+                                                class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
+                                                data-bs-target="#editModal">
+                                                <i class="fa fa-edit"></i>
+                                            </button>
+                                            <button v-on:click="Object.assign(delete_ca_lam_viec, item)"
+                                                class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </template>
+
                             </tbody>
                         </table>
                     </div>
@@ -138,43 +143,57 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Nhân Viên</label>
-                                <select class="form-select shadow-sm">
-                                    <option value="1">Nguyễn Văn A</option>
+                                <select v-model="edit_ca_lam_viec.nhan_vien_id" class="form-select shadow-sm">
+                                    <option v-for="item in list_nhan_vien" :key="item.id" :value="item.id">{{
+                                        item.ho_va_ten
+                                        }}</option>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Trạng Thái</label>
-                                <select class="form-select shadow-sm">
-                                    <option value="0">Đã Kết Ca</option>
-                                    <option value="1" >Đang Mở</option>
+                                <select v-model="edit_ca_lam_viec.trang_thai" class="form-select shadow-sm">
+                                    <option value="0">Đang Mở</option>
+                                    <option value="1">Đã Kết Ca</option>
                                 </select>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Giờ Mở</label>
-                                <input type="datetime-local" class="form-control shadow-sm" value="2026-04-04T08:00">
+                                <input v-model="edit_ca_lam_viec.gio_mo" type="datetime-local"
+                                    class="form-control shadow-sm">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Giờ Đóng</label>
-                                <input type="datetime-local" class="form-control shadow-sm" value="2026-04-04T16:00">
+                                <input v-model="edit_ca_lam_viec.gio_dong" type="datetime-local"
+                                    class="form-control shadow-sm">
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label class="form-label fw-bold">Tiền Đầu Ca</label>
-                                <input type="number" class="form-control shadow-sm" value="500000">
+                                <input v-model="edit_ca_lam_viec.tien_dau_ca" type="number"
+                                    class="form-control shadow-sm">
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label class="form-label fw-bold">Tiền Kết Ca</label>
-                                <input type="number" class="form-control shadow-sm" value="1200000">
+                                <input v-model="edit_ca_lam_viec.tien_ket_ca" type="number"
+                                    class="form-control shadow-sm">
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label fw-bold">Chênh Lệch</label>
+                                <input v-model="edit_ca_lam_viec.chenh_lech" type="number"
+                                    class="form-control shadow-sm">
                             </div>
                             <div class="col-md-12 mb-3">
                                 <label class="form-label fw-bold">Ghi Chú</label>
-                                <textarea class="form-control shadow-sm" rows="3">Ca sáng</textarea>
+                                <textarea v-model="edit_ca_lam_viec.ghi_chu" class="form-control shadow-sm" rows="3">Ca
+                                sáng</textarea>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary shadow-sm px-4">Lưu Thay Đổi</button>
+                    <button v-on:click="updateCaLamViec()" type="button" data-bs-dismiss="modal"
+                        class="btn btn-primary shadow-sm px-4">Lưu Thay
+                        Đổi</button>
                 </div>
             </div>
         </div>
@@ -196,7 +215,9 @@
                 </div>
                 <div class="modal-footer justify-content-center">
                     <button type="button" class="btn btn-secondary px-4 shadow-sm" data-bs-toggle="modal">Hủy</button>
-                    <button type="button" class="btn btn-danger px-4 shadow-sm">Xác Nhận Xóa</button>
+                    <button v-on:click="deleteCaLamViec()" type="button" class="btn btn-danger px-4 shadow-sm"
+                        data-bs-toggle="modal">Xác Nhận
+                        Xóa</button>
                 </div>
             </div>
         </div>
@@ -205,13 +226,173 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     name: 'CaLamViecManager',
     data() {
         return {
+            list_nhan_vien: [],
+            list_ca_lam_viec: [],
+            them_ca_lam_viec: {
+                nhan_vien_id: '',
+                gio_mo: '',
+                gio_dong: '',
+                tien_dau_ca: '',
+                tien_ket_ca: '',
+                chenh_lech: '',
+                ghi_chu: '',
+                trang_thai: 1,
+            },
+            edit_ca_lam_viec: {
+                nhan_vien_id: '',
+                gio_mo: '',
+                gio_dong: '',
+                tien_dau_ca: '',
+                tien_ket_ca: '',
+                chenh_lech: '',
+                ghi_chu: '',
+                trang_thai: '',
+            },
+            delete_ca_lam_viec: {
+                id: '',
+
+            },
         }
+    },
+    created() {
+        this.getNhanVien();
+        this.getCaLamViec();
+    },
+    methods: {
+        getNhanVien() {
+            // Gọi API để lấy danh sách Nhân Viên
+            axios
+                .get('http://127.0.0.1:8000/api/admin/nhan-vien')
+                .then(response => {
+                    this.list_nhan_vien = response.data.data;
+                })
+                .catch(error => {
+                    console.error('Lỗi khi thêm mới Nhân Viên:', error);
+                    if (error.response && error.response.data && error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
+                        const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
+                        this.$toast.error(messages);
+                    } else {
+                        this.$toast.error('Đã xảy ra lỗi khi thêm mới Nhân Viên.');
+                    }
+                });
+        },
+        getCaLamViec() {
+            // Gọi API để lấy danh sách Ca Làm Việc
+            axios
+                .get('http://127.0.0.1:8000/api/admin/ca-lam-viec')
+                .then(response => {
+                    this.list_ca_lam_viec = response.data.data;
+                })
+                .catch(error => {
+                    console.error('Lỗi khi thêm mới Ca Làm Việc:', error);
+                    if (error.response && error.response.data && error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
+                        const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
+                        this.$toast.error(messages);
+                    } else {
+                        this.$toast.error('Đã xảy ra lỗi khi thêm mới Ca Làm Việc.');
+                    }
+                });
+        },
+        addCaLamViec() {
+            // Gọi API để thêm mới Ca Làm Việc
+            axios
+                .post('http://127.0.0.1:8000/api/admin/ca-lam-viec/create', this.them_ca_lam_viec)
+                .then(response => {
+                    this.$toast.success(response.data.message);
+                    this.getCaLamViec();
+                })
+                .catch(error => {
+                    console.error('Lỗi khi thêm mới Ca Làm Việc:', error);
+                    if (error.response && error.response.data && error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
+                        const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
+                        this.$toast.error(messages);
+                    } else {
+                        this.$toast.error('Đã xảy ra lỗi khi thêm mới Ca Làm Việc.');
+                    }
+                });
+        },
+        updateCaLamViec() {
+            // Gọi API để cập nhật Ca Làm Việc
+            axios
+                .put('http://127.0.0.1:8000/api/admin/ca-lam-viec/update', this.edit_ca_lam_viec)
+                .then(response => {
+                    this.$toast.success(response.data.message);
+                    this.getCaLamViec();
+                })
+                .catch(error => {
+                    console.error('Lỗi khi cập nhật Ca Làm Việc:', error);
+                    if (error.response && error.response.data && error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
+                        const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
+                        this.$toast.error(messages);
+                    } else {
+                        this.$toast.error('Đã xảy ra lỗi khi cập nhật Ca Làm Việc.');
+                    }
+                });
+        },
+        deleteCaLamViec() {
+            // Gọi API để xóa Ca Làm Việc
+            axios
+                .delete(`http://127.0.0.1:8000/api/admin/ca-lam-viec/delete/${this.delete_ca_lam_viec.id}`)
+                .then(response => {
+                    this.$toast.success(response.data.message);
+                    this.getCaLamViec();
+                })
+                .catch(error => {
+                    console.error('Lỗi khi xóa Ca Làm Việc:', error);
+                    if (error.response && error.response.data && error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
+                        const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
+                        this.$toast.error(messages);
+                    } else {
+                        this.$toast.error('Đã xảy ra lỗi khi xóa Ca Làm Việc.');
+                    }
+                });
+        },
+        changeStatus(item) {
+            const new_trang_thai = item.trang_thai == 1 ? 0 : 1;
+            axios
+                .patch('http://127.0.0.1:8000/api/admin/ca-lam-viec/change-status', {
+                    id: item.id,
+                    trang_thai: new_trang_thai
+                })
+                .then(response => {
+                    if (response.data.status == 1) {
+                        this.getCaLamViec();
+                        this.$toast.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                    } else {
+                        this.$toast.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Lỗi khi thay đổi trạng thái Ca Làm Việc:', error);
+                    if (error.response && error.response.data && error.response.data.errors) {
+                        const errors = error.response.data.errors;
+                        const items = Object.values(errors).flat().map(msg => `<li>${msg}</li>`).join('');
+                        const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
+                        this.$toast.error(messages);
+                    } else {
+                        this.$toast.error('Đã xảy ra lỗi khi thay đổi trạng thái Ca Làm Việc.');
+                    }
+                });
+        }
+
     }
 }
+
 </script>
 
 <style scoped>
