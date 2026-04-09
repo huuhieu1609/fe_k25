@@ -37,10 +37,10 @@
                                         <td>{{ index + 1 }}</td>
                                         <td class="text-start">{{ item.ten }}</td>
                                         <td>{{ item.so_dien_thoai }}</td>
-                                        <td>{{ item.email }}</td>
+                                        <td class="text-start">{{ item.email }}</td>
                                         <td class="text-start">{{ item.dia_chi }}</td>
                                         <td>{{ item.ma_so_thue }}</td>
-                                        <td>{{ item.ghi_chu }}</td>
+                                        <td class="text-start">{{ item.ghi_chu }}</td>
                                         <td>
                                             <button v-on:click="changeStatus(item)" v-if="item.tinh_trang == 1"
                                                 class="btn btn-success btn-sm w-100 shadow-sm">Đang làm việc</button>
