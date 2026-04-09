@@ -12,9 +12,14 @@
                             <label class="form-label fw-bold">Nhân Viên</label>
                             <select v-model="them_ca_lam_viec.nhan_vien_id" class="form-select shadow-sm">
                                 <option selected disabled>Chọn nhân viên...</option>
-                                <option v-for="item in list_nhan_vien" :key="item.id" :value="item.id">
-                                    {{ item.ho_va_ten }}
-                                </option>
+                                <template v-for="(value, index ) in list_nhan_vien" :key="index">
+                                    <option v-if="value.tinh_trang == 1" :value="value.id">
+                                        {{ value.ho_va_ten }}
+                                    </option>
+                                    <option v-else :value="value.id" disabled>
+                                        {{ value.ho_va_ten }}
+                                    </option>
+                                </template>
                             </select>
                         </div>
 
