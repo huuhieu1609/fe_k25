@@ -828,19 +828,6 @@ export default {
       const donGia = Number(item?.don_gia) || 0;
       return soLuong * donGia;
     },
-    showValidationErrors(error, fallbackMessage) {
-      if (error.response && error.response.data && error.response.data.errors) {
-        const errors = error.response.data.errors;
-        const items = Object.values(errors)
-          .flat()
-          .map((msg) => `<li>${msg}</li>`)
-          .join("");
-        const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
-        this.$toast?.error(messages);
-      } else {
-        this.$toast?.error(fallbackMessage);
-      }
-    },
     addPhieuNhap() {
       const payload = {
         id_kho: this.them_phieu_nhap.id_kho,
@@ -887,10 +874,21 @@ export default {
         })
         .catch((error) => {
           console.error("Lỗi khi thêm phiếu nhập:", error);
-          this.showValidationErrors(
-            error,
-            "Đã xảy ra lỗi khi thêm phiếu nhập.",
-          );
+          if (
+            error.response &&
+            error.response.data &&
+            error.response.data.errors
+          ) {
+            const errors = error.response.data.errors;
+            const items = Object.values(errors)
+              .flat()
+              .map((msg) => `<li>${msg}</li>`)
+              .join("");
+            const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
+            this.$toast?.error(messages);
+          } else {
+            this.$toast?.error("Đã xảy ra lỗi khi thêm phiếu nhập.");
+          }
         });
     },
     openEdit(item) {
@@ -978,10 +976,21 @@ export default {
         })
         .catch((error) => {
           console.error("Lỗi khi cập nhật phiếu nhập:", error);
-          this.showValidationErrors(
-            error,
-            "Đã xảy ra lỗi khi cập nhật phiếu nhập.",
-          );
+          if (
+            error.response &&
+            error.response.data &&
+            error.response.data.errors
+          ) {
+            const errors = error.response.data.errors;
+            const items = Object.values(errors)
+              .flat()
+              .map((msg) => `<li>${msg}</li>`)
+              .join("");
+            const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
+            this.$toast?.error(messages);
+          } else {
+            this.$toast?.error("Đã xảy ra lỗi khi cập nhật phiếu nhập.");
+          }
         });
     },
     openChiTiet(item) {
