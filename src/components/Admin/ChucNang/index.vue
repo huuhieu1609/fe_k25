@@ -34,7 +34,7 @@
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tình trạng</label>
                             <select v-model="them_chuc_nang.tinh_trang" class="form-select">
-                                <option value="#">Chọn tình trạng</option>
+                                <option value="">Chọn tình trạng</option>
                                 <option value="1">Đang hoạt động</option>
                                 <option value="0">Ngừng hoạt động</option>
                             </select>
@@ -77,7 +77,8 @@
                                             <button v-on:click="changeStatus(value)" v-if="value.tinh_trang == 1"
                                                 class="btn btn-success btn-sm w-100 shadow-sm">Đang hoạt động</button>
                                             <button v-on:click="changeStatus(value)" v-else
-                                                class="btn btn-secondary btn-sm w-100 shadow-sm">Ngừng hoạt động</button>
+                                                class="btn btn-secondary btn-sm w-100 shadow-sm">Ngừng hoạt
+                                                động</button>
                                         </td>
                                         <td class="text-nowrap">
                                             <button v-on:click="Object.assign(edit_chuc_nang, value)"
@@ -137,13 +138,15 @@
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tình trạng</label>
                             <select v-model="edit_chuc_nang.tinh_trang" class="form-select">
+                                <option value="">Chọn Tình Trạng</option>
                                 <option value="1">Đang hoạt động</option>
                                 <option value="0">Ngừng hoạt động</option>
                             </select>
                         </div>
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal">Đóng</button>
+                            <button type="button" class="btn btn-secondary shadow-sm"
+                                data-bs-dismiss="modal">Đóng</button>
                             <button v-on:click="editChucNang()" type="button" class="btn btn-primary shadow-sm"
                                 data-bs-dismiss="modal">Lưu Lại</button>
                         </div>
@@ -183,7 +186,9 @@ export default {
     data() {
         return {
             listChucNang: [],
-            them_chuc_nang: {},
+            them_chuc_nang: {
+                tinh_trang: '',
+            },
             edit_chuc_nang: {},
             xoa_chuc_nang: {}
         }

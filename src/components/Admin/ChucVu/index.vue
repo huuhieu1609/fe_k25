@@ -21,7 +21,7 @@
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tình trạng</label>
                             <select v-model="them_chuc_vu.tinh_trang" class="form-select">
-                                <option value="#">Chọn tình trạng</option>
+                                <option value="">Chọn Tình Trạng</option>
                                 <option value="1">Đang hoạt động</option>
                                 <option value="0">Ngừng hoạt động</option>
                             </select>
@@ -168,7 +168,9 @@ export default {
     data() {
         return {
             listChucVu: [],
-            them_chuc_vu: {},
+            them_chuc_vu: {
+                tinh_trang: '',
+            },
             edit_chuc_vu: {},
             xoa_chuc_vu: {},
             change_status: {}
@@ -203,7 +205,9 @@ export default {
                 .then(response => {
                     if (response.data.status == 1) {
                         this.getChucVu();
-                        this.them_chuc_vu = {};
+                        this.them_chuc_vu = {
+                            tinh_trang: '',
+                        };
                         this.$toast.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
                     } else {
                         this.$toast.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);

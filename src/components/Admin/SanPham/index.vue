@@ -36,7 +36,7 @@
                 </tr>
               </thead>
               <tbody>
-                <template v-for="(value, index) in list_san_pham" :key="index">
+                <template v-for="(value, index) in list_san_pham" :key="value.id">
                   <tr class="text-center">
                     <td>{{ index + 1 }}</td>
                     <td>
@@ -410,8 +410,27 @@ export default {
           this.them_san_pham,
         )
         .then((response) => {
-          this.$toast.success(response.data.message);
-          this.getSanPham();
+          if (response.data.status == 1) {
+            this.$toast.success(response.data.message);
+            this.getSanPham();
+            this.them_san_pham = {
+              ten_san_pham: "",
+              hinh_anh: "",
+              don_vi_tinh: "",
+              id_kho: "",
+              quan_ly_lo: 0,
+              quan_ly_serial: 0,
+              thue_vat: 10,
+              gia_nhap_mac_dinh: 0,
+              gia_ban_mac_dinh: 0,
+              ton_toi_thieu: 10,
+              trang_thai: 1,
+              id_loai_san_pham: "",
+              mo_ta: "",
+            };
+          } else {
+            this.$toast.error(response.data.message);
+          }
         })
         .catch((error) => {
           console.error("Lỗi khi thêm mới Ca Làm Việc:", error);
@@ -440,8 +459,12 @@ export default {
           this.edit_san_pham,
         )
         .then((response) => {
-          this.$toast.success(response.data.message);
-          this.getSanPham();
+          if (response.data.status == 1) {
+            this.$toast.success(response.data.message);
+            this.getSanPham();
+          } else {
+            this.$toast.error(response.data.message);
+          }
         })
         .catch((error) => {
           console.error("Lỗi khi cập nhật Ca Làm Việc:", error);
@@ -470,8 +493,12 @@ export default {
           this.delete_san_pham.id,
         )
         .then((response) => {
-          this.$toast.success(response.data.message);
-          this.getSanPham();
+          if (response.data.status == 1) {
+            this.$toast.success(response.data.message);
+            this.getSanPham();
+          } else {
+            this.$toast.error(response.data.message);
+          }
         })
         .catch((error) => {
           console.error("Lỗi khi xóa Sản Phẩm:", error);
