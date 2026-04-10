@@ -154,12 +154,18 @@
               <thead class="text-center text-nowrap table-light">
                 <tr>
                   <th>STT</th>
+                  <th>Kho</th>
+                  <th>Nhà Cung Cấp</th>
+                  <th>Nhân Viên</th>
                   <th>Mã Phiếu</th>
                   <th>Ngày Nhập</th>
                   <th>Sản Phẩm</th>
                   <th>Số Lượng</th>
                   <th>Đơn Giá</th>
                   <th>Tổng Tiền</th>
+                  <th>Chiết Khấu</th>
+                  <th>Thuế VAT</th>
+                  <th>Đã Thanh Toán</th>
                   <th>Trạng Thái</th>
                   <th>Ghi Chú</th>
                   <th>Thao Tác</th>
@@ -167,11 +173,14 @@
               </thead>
               <tbody>
                 <template v-for="(value, index) in list_phieu_nhap" :key="index">
-                  <tr class="text-center">
-                    <td>{{ index + 1 }}</td>
-                    <td>{{ value.ma_phieu }}</td>
-                    <td>{{ value.ngay_nhap }}</td>
-                    <td class="text-start">
+                  <tr>
+                    <td class="text-center align-middle">{{ index + 1 }}</td>
+                    <td class="align-middle">{{ value.ten_kho }}</td>
+                    <td class="align-middle">{{ value.ten_nha_cung_cap }}</td>
+                    <td class="align-middle">{{ value.ten_nhan_vien }}</td>
+                    <td class="text-center align-middle">{{ value.ma_phieu }}</td>
+                    <td class="text-center align-middle">{{ value.ngay_nhap }}</td>
+                    <td class="text-start align-middle">
                       {{
                         value.ten_san_pham || value.danh_sach_san_pham || "---"
                       }}
@@ -184,6 +193,15 @@
                     </td>
                     <td class="text-end fw-bold text-primary">
                       {{ formatCurrency(value.tong_tien_hang || 0) }}
+                    </td>
+                    <td class="text-end fw-bold text-primary">
+                      {{ formatCurrency(value.chiet_khau || 0) }}
+                    </td>
+                    <td class="text-end fw-bold text-primary">
+                      {{ formatCurrency(value.thue_vat || 0) }}
+                    </td>
+                    <td class="text-end fw-bold text-primary">
+                      {{ formatCurrency(value.da_thanh_toan || 0) }}
                     </td>
                     <td>
                       <button v-if="value.trang_thai == 1" class="btn btn-success btn-sm w-100 shadow-sm">
@@ -204,7 +222,8 @@
                         <i class="fa fa-edit"></i>
                       </button>
                       <button class="btn btn-danger btn-sm shadow-sm" data-bs-toggle="modal"
-                        data-bs-target="#deleteModal">
+                        data-bs-target="#deleteModal"
+                        @click="Object.assign(xoa_phieu_nhap, value)">
                         <i class="fa fa-trash"></i>
                       </button>
                     </td>
@@ -494,7 +513,7 @@
           <button type="button" class="btn btn-secondary px-4 shadow-sm" data-bs-dismiss="modal">
             Hủy
           </button>
-          <button type="button" class="btn btn-danger px-4 shadow-sm">
+          <button @click="deletePhieuNhap()" type="button" class="btn btn-danger px-4 shadow-sm">
             Xác Nhận Xóa
           </button>
         </div>
@@ -629,18 +648,6 @@ export default {
           this.$toast?.error("Đã xảy ra lỗi khi tải danh sách Phiếu Nhập.");
         });
     },
-    addChiTietRow(target) {
-      if (!target.chi_tiet) {
-        target.chi_tiet = [];
-      }
-      target.chi_tiet.push({ id_san_pham: "", so_luong: 1, don_gia: 0 });
-    },
-    removeChiTietRow(target, idx) {
-      if (!target.chi_tiet || target.chi_tiet.length <= 1) {
-        return;
-      }
-      target.chi_tiet.splice(idx, 1);
-    },
     calculateThanhTien(item) {
       const soLuong = Number(item?.so_luong) || 0;
       const donGia = Number(item?.don_gia) || 0;
@@ -656,7 +663,7 @@ export default {
         chiet_khau: Number(this.them_phieu_nhap.chiet_khau) || 0,
         thue_vat: Number(this.them_phieu_nhap.thue_vat) || 0,
         da_thanh_toan: Number(this.them_phieu_nhap.da_thanh_toan) || 0,
-        trang_thai: Number(this.them_phieu_nhap.trang_thai) || 1,
+        trang_thai: Number(this.them_phieu_nhap.trang_thai) === 0 ? 0 : 1,
         ghi_chu: this.them_phieu_nhap.ghi_chu || null,
         chi_tiet: (this.them_phieu_nhap.chi_tiet || []).map((item) => ({
           id_san_pham: item.id_san_pham,
@@ -731,7 +738,7 @@ export default {
             chiet_khau: Number(header.chiet_khau) || 0,
             thue_vat: Number(header.thue_vat) || 0,
             da_thanh_toan: Number(header.da_thanh_toan) || 0,
-            trang_thai: Number(header.trang_thai) || 1,
+            trang_thai: Number(header.trang_thai) === 0 ? 0 : 1,
             ghi_chu: header.ghi_chu || "",
             chi_tiet:
               details.length > 0
@@ -768,7 +775,7 @@ export default {
         chiet_khau: Number(this.edit_phieu_nhap.chiet_khau) || 0,
         thue_vat: Number(this.edit_phieu_nhap.thue_vat) || 0,
         da_thanh_toan: Number(this.edit_phieu_nhap.da_thanh_toan) || 0,
-        trang_thai: Number(this.edit_phieu_nhap.trang_thai) || 1,
+        trang_thai: Number(this.edit_phieu_nhap.trang_thai) === 0 ? 0 : 1,
         ghi_chu: this.edit_phieu_nhap.ghi_chu || null,
         chi_tiet: (this.edit_phieu_nhap.chi_tiet || []).map((item) => ({
           id_san_pham: item.id_san_pham,
@@ -811,48 +818,41 @@ export default {
           }
         });
     },
-    openChiTiet(item) {
-      if (!item?.id) {
-        this.$toast?.error("Không tìm thấy ID phiếu nhập.");
-        return;
-      }
-
-      this.is_loading_chi_tiet = true;
-      this.chi_tiet_meta = {
-        phieu_nhap: null,
-        kho: null,
-        nha_cung_cap: null,
-        nhan_vien: null,
-      };
-      this.chi_tiet_list = [];
-
-      axios
-        .get(`http://127.0.0.1:8000/api/admin/phieu-nhap/${item.id}`)
-        .then((response) => {
-          const data = response.data.data || {};
-
-          this.chi_tiet_meta = {
-            phieu_nhap: data.phieu_nhap || null,
-            kho: data.kho || null,
-            nha_cung_cap: data.nha_cung_cap || null,
-            nhan_vien: data.nhan_vien || null,
-          };
-
-          this.chi_tiet_list = data.chi_tiet || [];
-        })
-        .catch((error) => {
-          console.error("Lỗi khi tải chi tiết Phiếu Nhập:", error);
-          this.$toast?.error("Đã xảy ra lỗi khi tải chi tiết Phiếu Nhập.");
-        })
-        .finally(() => {
-          this.is_loading_chi_tiet = false;
-        });
-    },
     formatCurrency(value) {
       return new Intl.NumberFormat("vi-VN", {
         style: "currency",
         currency: "VND",
       }).format(Number(value) || 0);
+    },
+    deletePhieuNhap() {
+      axios
+        .delete(
+          `http://127.0.0.1:8000/api/admin/phieu-nhap/delete/${this.xoa_phieu_nhap.id}`,
+        )
+        .then((response) => {
+          this.$toast?.success(
+            response.data.message || "Xóa phiếu nhập thành công",
+          );
+          this.getPhieuNhap();
+        })
+        .catch((error) => {
+          console.error("Lỗi khi xóa phiếu nhập:", error);
+          if (
+            error.response &&
+            error.response.data &&
+            error.response.data.errors
+          ) {
+            const errors = error.response.data.errors;
+            const items = Object.values(errors)
+              .flat()
+              .map((msg) => `<li>${msg}</li>`)
+              .join("");
+            const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
+            this.$toast?.error(messages);
+          } else {
+            this.$toast?.error("Đã xảy ra lỗi khi xóa phiếu nhập.");
+          }
+        });
     },
   },
 };

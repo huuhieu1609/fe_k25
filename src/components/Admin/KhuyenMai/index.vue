@@ -140,7 +140,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary px-4 shadow-sm" @click="themKhuyenMai">Lưu Khuyến
+                    <button type="button" class="btn btn-primary px-4 shadow-sm" @click="themKhuyenMai">Thêm Khuyến
                         Mãi</button>
                 </div>
             </div>

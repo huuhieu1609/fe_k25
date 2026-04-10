@@ -60,18 +60,18 @@
                             </thead>
                             <tbody>
                                 <template v-for="(value, index) in listChucVu" :key="index">
-                                    <tr class="text-center">
-                                        <td>{{ index + 1 }}</td>
-                                        <td class="text-start">{{ value.ten_chuc_vu }}</td>
-                                        <td class="text-start">{{ value.slug_chuc_vu }}</td>
-                                        <td>{{ value.mo_ta }}</td>
-                                        <td>
+                                    <tr>
+                                        <td class="text-center align-middle">{{ index + 1 }}</td>
+                                        <td class="text-start align-middle">{{ value.ten_chuc_vu }}</td>
+                                        <td class="text-start align-middle">{{ value.slug_chuc_vu }}</td>
+                                        <td class="align-middle">{{ value.mo_ta }}</td>
+                                        <td class="align-middle">
                                             <button v-on:click="changeStatus(value)" v-if="value.tinh_trang == 1"
                                                 class="btn btn-success btn-sm w-100 shadow-sm">Đang hoạt động</button>
                                             <button v-on:click="changeStatus(value)" v-else
                                                 class="btn btn-secondary btn-sm w-100 shadow-sm">Ngừng hoạt động</button>
                                         </td>
-                                        <td>
+                                        <td class="align-middle">
                                             <button v-on:click="Object.assign(edit_chuc_vu, value)"
                                                 class="btn btn-warning btn-sm me-1 shadow-sm" data-bs-toggle="modal"
                                                 data-bs-target="#editModal">
