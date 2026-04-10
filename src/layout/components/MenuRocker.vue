@@ -138,7 +138,29 @@
             </li>
           </ul>
         </li>
-        
+
+        <li class="nav-item dropdown">
+          <a
+            href="javascript:;"
+            class="nav-link dropdown-toggle dropdown-toggle-nocaret"
+            data-bs-toggle="dropdown"
+          >
+            <div class="parent-icon"><i class="bx bx-package"></i></div>
+            <div class="menu-title">Quản lý Khuyến mãi</div>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <router-link to="/admin/khuyen-mai" class="dropdown-item">
+                <i class="bx bx-right-arrow-alt"></i>Khuyến mãi
+              </router-link>
+            </li>
+            <li>
+              <router-link to="/admin/khuyen-mai-san-pham" class="dropdown-item">
+                <i class="bx bx-right-arrow-alt"></i>Khuyến mãi sản phẩm
+              </router-link>
+            </li>
+          </ul>
+        </li>
         <li class="nav-item dropdown">
           <a
             href="javascript:;"
@@ -159,7 +181,6 @@
                 <i class="bx bx-right-arrow-alt"></i>Quản lý hoá đơn
               </router-link>
             </li>
-            
           </ul>
         </li>
         <li class="nav-item dropdown">
