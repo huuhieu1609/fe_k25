@@ -19,11 +19,10 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tình trạng</label>
-                            <select v-model="them_kho.tinh_trang" class="form-select"
-                                aria-label="Default select example">
-                                <option selected>Chọn tình trạng</option>
-                                <option value="1">Đang hoạt động</option>
-                                <option value="0">Ngừng hoạt động</option>
+                            <select v-model="them_kho.tinh_trang" class="form-select">
+                                <option value="">Chọn tình trạng</option>
+                                <option :value="1">Đang hoạt động</option>
+                                <option :value="0">Ngừng hoạt động</option>
                             </select>
                         </div>
                     </form>
@@ -114,8 +113,8 @@
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tình Trạng</label>
                             <select v-model="edit_kho.tinh_trang" class="form-select shadow-sm">
-                                <option value="1">Đang hoạt động</option>
-                                <option value="0">Ngừng hoạt động</option>
+                                <option :value="1">Đang hoạt động</option>
+                                <option :value="0">Ngừng hoạt động</option>
                             </select>
                         </div>
                     </form>
@@ -162,6 +161,7 @@ export default {
             them_kho: {
                 ten: '',
                 ghi_chu: '',
+                tinh_trang: "",
             },
             edit_kho: {},
             xoa_kho: {},
@@ -191,6 +191,7 @@ export default {
                         this.them_kho = {
                             ten: '',
                             ghi_chu: '',
+                            tinh_trang: "",
                         };
                         this.$toast?.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
                     } else {
