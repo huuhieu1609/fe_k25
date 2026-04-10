@@ -64,12 +64,13 @@
                                         <td>{{ index + 1 }}</td>
                                         <td class="text-start">{{ value.ten_chuc_vu }}</td>
                                         <td class="text-start">{{ value.slug_chuc_vu }}</td>
-                                        <td>{{ value.mo_ta }}</td>
+                                        <td class="text-start">{{ value.mo_ta }}</td>
                                         <td>
                                             <button v-on:click="changeStatus(value)" v-if="value.tinh_trang == 1"
                                                 class="btn btn-success btn-sm w-100 shadow-sm">Đang hoạt động</button>
                                             <button v-on:click="changeStatus(value)" v-else
-                                                class="btn btn-secondary btn-sm w-100 shadow-sm">Ngừng hoạt động</button>
+                                                class="btn btn-secondary btn-sm w-100 shadow-sm">Ngừng hoạt
+                                                động</button>
                                         </td>
                                         <td>
                                             <button v-on:click="Object.assign(edit_chuc_vu, value)"

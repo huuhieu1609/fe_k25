@@ -56,7 +56,7 @@
                                     <tr v-for="(item, index) in listLoaiSanPham" :key="item.id" class="text-center">
                                         <td>{{ index + 1 }}</td>
                                         <td class="text-start">{{ item.ten }}</td>
-                                        <td class="text-start small text-muted">{{ item.mo_ta }}</td>
+                                        <td class="text-start">{{ item.mo_ta }}</td>
                                         <td>
                                             <button v-on:click="changeStatus(item)" v-if="item.trang_thai == 1"
                                                 class="btn btn-success btn-sm w-100 shadow-sm">Hoạt Động</button>
@@ -77,7 +77,7 @@
                                         </td>
                                     </tr>
                                 </template>
-                               
+
                             </tbody>
                         </table>
                     </div>

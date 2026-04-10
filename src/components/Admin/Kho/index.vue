@@ -19,8 +19,9 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tình trạng</label>
-                            <select v-model="them_kho.tinh_trang" class="form-select">
-                                <option value="#">Chọn tình trạng</option>
+                            <select v-model="them_kho.tinh_trang" class="form-select"
+                                aria-label="Default select example">
+                                <option selected>Chọn tình trạng</option>
                                 <option value="1">Đang hoạt động</option>
                                 <option value="0">Ngừng hoạt động</option>
                             </select>
@@ -61,7 +62,8 @@
                                             <button v-on:click="changeStatus(item)" v-if="item.tinh_trang == 1"
                                                 class="btn btn-success btn-sm w-100 shadow-sm">Đang hoạt động</button>
                                             <button v-on:click="changeStatus(item)" v-else
-                                                class="btn btn-secondary btn-sm w-100 shadow-sm">Ngừng hoạt động</button>
+                                                class="btn btn-secondary btn-sm w-100 shadow-sm">Ngừng hoạt
+                                                động</button>
                                         </td>
                                         <td class="text-nowrap">
 
@@ -120,7 +122,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-warning shadow-sm px-4" data-bs-dismiss="modal" @click="editKho">Lưu Thay Đổi</button>
+                    <button type="button" class="btn btn-warning shadow-sm px-4" data-bs-dismiss="modal"
+                        @click="editKho">Lưu Thay Đổi</button>
                 </div>
             </div>
         </div>

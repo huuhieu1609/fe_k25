@@ -48,7 +48,7 @@
                                         <td>{{ item.gia_tri }} {{ item.kieu == 1 ? '%' : 'đ' }}</td>
                                         <td class="small">{{ item.tu_ngay }}</td>
                                         <td class="small">{{ item.den_ngay }}</td>
-                                        <td>{{ item.dieu_kien_toi_thieu }}</td>
+                                        <td>{{ formatCurrency(item.dieu_kien_toi_thieu) }}</td>
                                         <td>
                                             <button v-on:click="changeStatus(item)" v-if="item.trang_thai == 1"
                                                 class="btn btn-success btn-sm w-100 shadow-sm">Đang áp dụng</button>
@@ -69,9 +69,6 @@
                                         </td>
                                     </tr>
                                 </template>
-                                <tr v-else class="text-center">
-                                    <td colspan="9">Không có dữ liệu khuyến mãi</td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -375,7 +372,13 @@ export default {
                         this.$toast?.error('Đã xảy ra lỗi khi thay đổi trạng thái Khuyến Mãi.');
                     }
                 });
-        }
+        },
+        formatCurrency(value) {
+            return new Intl.NumberFormat("vi-VN", {
+                style: "currency",
+                currency: "VND",
+            }).format(value);
+        },
     },
 };
 </script>

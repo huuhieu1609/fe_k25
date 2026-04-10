@@ -80,7 +80,7 @@
                                 <div class="mb-3">
                                     <label for="ho_va_ten" class="form-label">Họ và tên</label>
                                     <input v-model="them_Nhan_Vien.ho_va_ten" type="text" class="form-control"
-                                        placeholder="nhập họ và tên">
+                                        placeholder="Nhập Họ Và Tên....">
                                 </div>
 
                             </div>
@@ -88,7 +88,7 @@
                                 <div class="mb-3">
                                     <label for="so_dien_thoai" class="form-label">Số điện thoại</label>
                                     <input v-model="them_Nhan_Vien.so_dien_thoai" type="text" class="form-control"
-                                        placeholder="nhập số điện thoại">
+                                        placeholder="Nhập Số Điện Thoại....">
                                 </div>
                             </div>
 
@@ -98,14 +98,14 @@
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
                                     <input v-model="them_Nhan_Vien.email" type="text" class="form-control"
-                                        placeholder="nhập email">
+                                        placeholder="Nhập Email....">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="mb-3">
                                     <label for="password" class="form-label">Mật khẩu</label>
                                     <input v-model="them_Nhan_Vien.password" type="password" class="form-control"
-                                        placeholder="nhập mật khẩu">
+                                        placeholder="Nhập Mật Khẩu....">
                                 </div>
                             </div>
 
@@ -115,13 +115,14 @@
                                 <div class="mb-3">
                                     <label for="ngay_sinh" class="form-label">Ngày sinh</label>
                                     <input v-model="them_Nhan_Vien.ngay_sinh" type="date" class="form-control"
-                                        placeholder="nhập ngày sinh">
+                                        placeholder="Nhập Ngày Sinh....">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="mb-3">
                                     <label for="gioi_tinh" class="form-label">Giới tính</label>
                                     <select v-model="them_Nhan_Vien.gioi_tinh" class="form-select">
+                                        <option value="">Chọn Giới Tính</option>
                                         <option value="1">Nam</option>
                                         <option value="0">Nữ</option>
                                         <option value="2">Khác</option>
@@ -134,13 +135,14 @@
                                 <div class="mb-3">
                                     <label for="dia_chi" class="form-label">Địa chỉ</label>
                                     <input v-model="them_Nhan_Vien.dia_chi" type="text" class="form-control"
-                                        placeholder="nhập địa chỉ">
+                                        placeholder="Nhập Địa Chỉ....">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="mb-3">
                                     <label for="id_chuc_vu" class="form-label">Chức vụ</label>
                                     <select v-model="them_Nhan_Vien.id_chuc_vu" class="form-select">
+                                        <option value="">Chọn Chức Vụ</option>
                                         <option v-for="item in list_chuc_vu" :key="item.id" :value="item.id">{{
                                             item.ten_chuc_vu }}</option>
                                     </select>
@@ -151,6 +153,7 @@
                             <div class="mb-3">
                                 <label for="tinh_trang" class="form-label">Tình trạng</label>
                                 <select v-model="them_Nhan_Vien.tinh_trang" class="form-select">
+                                    <option value="">Chọn Tình Trạng</option>
                                     <option value="1">Đang làm việc</option>
                                     <option value="0">Đã nghỉ việc</option>
                                 </select>
@@ -184,7 +187,7 @@
                                 <div class="mb-3">
                                     <label for="ho_va_ten" class="form-label">Họ và tên</label>
                                     <input v-model="edit_Nhan_Vien.ho_va_ten" type="text" class="form-control"
-                                        placeholder="nhập họ và tên">
+                                        placeholder="Nhập Họ Và Tên....">
                                 </div>
 
                             </div>
@@ -192,7 +195,7 @@
                                 <div class="mb-3">
                                     <label for="so_dien_thoai" class="form-label">Số điện thoại</label>
                                     <input v-model="edit_Nhan_Vien.so_dien_thoai" type="text" class="form-control"
-                                        placeholder="nhập số điện thoại">
+                                        placeholder="Nhập Số Điện Thoại....">
                                 </div>
                             </div>
 
@@ -202,31 +205,32 @@
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
                                     <input v-model="edit_Nhan_Vien.email" type="text" class="form-control"
-                                        placeholder="nhập email">
+                                        placeholder="Nhập Email....">
                                 </div>
                             </div>
+
                             <div class="col-lg-6">
                                 <div class="mb-3">
-                                    <label for="tinh_trang" class="form-label">Tình trạng</label>
-                                    <select v-model="edit_Nhan_Vien.tinh_trang" class="form-select">
-                                        <option value="1">Đang làm việc</option>
-                                        <option value="0">Đã nghỉ việc</option>
-                                    </select>
+                                    <label for="mat_khau" class="form-label">Mật Khẩu</label>
+                                    <input v-model="edit_Nhan_Vien.password" type="password" class="form-control"
+                                        placeholder="Nhập Mật Khẩu....">
                                 </div>
                             </div>
+
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="mb-3">
                                     <label for="ngay_sinh" class="form-label">Ngày sinh</label>
                                     <input v-model="edit_Nhan_Vien.ngay_sinh" type="date" class="form-control"
-                                        placeholder="nhập ngày sinh">
+                                        placeholder="Nhập Ngày Sinh....">
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="mb-3">
                                     <label for="gioi_tinh" class="form-label">Giới tính</label>
                                     <select v-model="edit_Nhan_Vien.gioi_tinh" class="form-select">
+                                        <option value="">Chọn Giới Tính</option>
                                         <option value="1">Nam</option>
                                         <option value="0">Nữ</option>
                                         <option value="2">Khác</option>
@@ -239,7 +243,7 @@
                                 <div class="mb-3">
                                     <label for="dia_chi" class="form-label">Địa chỉ</label>
                                     <input v-model="edit_Nhan_Vien.dia_chi" type="text" class="form-control"
-                                        placeholder="nhập địa chỉ">
+                                        placeholder="Nhập Địa Chỉ....">
                                 </div>
                             </div>
 
@@ -251,6 +255,15 @@
                                             item.ten_chuc_vu }}</option>
                                     </select>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label for="tinh_trang" class="form-label">Tình trạng</label>
+                                <select v-model="edit_Nhan_Vien.tinh_trang" class="form-select">
+                                    <option value="1">Đang làm việc</option>
+                                    <option value="0">Đã nghỉ việc</option>
+                                </select>
                             </div>
                         </div>
 
