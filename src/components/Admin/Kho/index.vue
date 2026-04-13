@@ -20,9 +20,9 @@
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tình trạng</label>
                             <select v-model="them_kho.tinh_trang" class="form-select">
-                                <option value="#">Chọn tình trạng</option>
-                                <option value="1">Đang hoạt động</option>
-                                <option value="0">Ngừng hoạt động</option>
+                                <option value="">Chọn tình trạng</option>
+                                <option :value="1">Đang hoạt động</option>
+                                <option :value="0">Ngừng hoạt động</option>
                             </select>
                         </div>
                     </form>
@@ -61,7 +61,8 @@
                                             <button v-on:click="changeStatus(item)" v-if="item.tinh_trang == 1"
                                                 class="btn btn-success btn-sm w-100 shadow-sm">Đang hoạt động</button>
                                             <button v-on:click="changeStatus(item)" v-else
-                                                class="btn btn-secondary btn-sm w-100 shadow-sm">Ngừng hoạt động</button>
+                                                class="btn btn-secondary btn-sm w-100 shadow-sm">Ngừng hoạt
+                                                động</button>
                                         </td>
                                         <td class="text-nowrap">
 
@@ -112,15 +113,16 @@
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tình Trạng</label>
                             <select v-model="edit_kho.tinh_trang" class="form-select shadow-sm">
-                                <option value="1">Đang hoạt động</option>
-                                <option value="0">Ngừng hoạt động</option>
+                                <option :value="1">Đang hoạt động</option>
+                                <option :value="0">Ngừng hoạt động</option>
                             </select>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-warning shadow-sm px-4" data-bs-dismiss="modal" @click="editKho">Lưu Thay Đổi</button>
+                    <button type="button" class="btn btn-warning shadow-sm px-4" data-bs-dismiss="modal"
+                        @click="editKho">Lưu Thay Đổi</button>
                 </div>
             </div>
         </div>
@@ -159,6 +161,7 @@ export default {
             them_kho: {
                 ten: '',
                 ghi_chu: '',
+                tinh_trang: "",
             },
             edit_kho: {},
             xoa_kho: {},
@@ -188,6 +191,7 @@ export default {
                         this.them_kho = {
                             ten: '',
                             ghi_chu: '',
+                            tinh_trang: "",
                         };
                         this.$toast?.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
                     } else {

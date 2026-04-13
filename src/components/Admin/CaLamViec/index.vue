@@ -11,10 +11,15 @@
                         <div class="mb-3">
                             <label class="form-label fw-bold">Nhân Viên</label>
                             <select v-model="them_ca_lam_viec.nhan_vien_id" class="form-select shadow-sm">
-                                <option selected disabled>Chọn nhân viên...</option>
-                                <option v-for="item in list_nhan_vien" :key="item.id" :value="item.id">
-                                    {{ item.ho_va_ten }}
-                                </option>
+                                <option value="">Chọn Nhân Viên...</option>
+                                <template v-for="(value, index) in list_nhan_vien" :key="index">
+                                    <option v-if="value.tinh_trang == 1" :value="value.id">
+                                        {{ value.ho_va_ten }}
+                                    </option>
+                                    <option v-else :value="value.id" disabled>
+                                        {{ value.ho_va_ten }}
+                                    </option>
+                                </template>
                             </select>
                         </div>
 
@@ -31,22 +36,22 @@
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tiền Đầu Ca</label>
                             <input v-model="them_ca_lam_viec.tien_dau_ca" type="number" class="form-control shadow-sm"
-                                placeholder="Nhập số tiền đầu ca..." />
+                                placeholder="Nhập Số Tiền Đầu Ca..." />
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tiền Kết Ca</label>
                             <input v-model="them_ca_lam_viec.tien_ket_ca" type="number" class="form-control shadow-sm"
-                                placeholder="Nhập số tiền kết ca..." />
+                                placeholder="Nhập Số Tiền Kết Ca..." />
                         </div>
                         <div class="mb-3">
-                            <label class="form-label fw-bold">chênh lệch</label>
+                            <label class="form-label fw-bold">Chênh Lệch</label>
                             <input v-model="them_ca_lam_viec.chenh_lech" type="number" class="form-control shadow-sm"
-                                placeholder="Nhập số tiền chênh lệch..." />
+                                placeholder="Nhập Số Tiền Chênh Lệch..." />
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Ghi Chú</label>
                             <textarea v-model="them_ca_lam_viec.ghi_chu" class="form-control shadow-sm" rows="3"
-                                placeholder="Nhập ghi chú..."></textarea>
+                                placeholder="Nhập Ghi Chú..."></textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">Trạng Thái</label>
@@ -99,9 +104,9 @@
                                         <td class="text-center text-danger fw-bold">
                                             {{ item.gio_dong }}
                                         </td>
-                                        <td class="text-end">{{ item.tien_dau_ca }}</td>
-                                        <td class="text-end">{{ item.tien_ket_ca }}</td>
-                                        <td>{{ item.chenh_lech }}</td>
+                                        <td class="text-end">{{ formatCurrency(item.tien_dau_ca) }}</td>
+                                        <td class="text-end">{{ formatCurrency(item.tien_ket_ca) }}</td>
+                                        <td>{{ formatCurrency(item.chenh_lech) }}</td>
                                         <td class="text-start">
                                             {{ item.ghi_chu }}
                                         </td>
@@ -468,6 +473,12 @@ export default {
                         );
                     }
                 });
+        },
+        formatCurrency(value) {
+            return new Intl.NumberFormat("vi-VN", {
+                style: "currency",
+                currency: "VND",
+            }).format(value);
         },
     },
 };

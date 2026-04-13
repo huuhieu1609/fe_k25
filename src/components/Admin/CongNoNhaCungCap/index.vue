@@ -32,9 +32,14 @@
                             <input type="number" class="form-control" placeholder="0">
                         </div>
                         <div class="mb-3">
+                            <label class="form-label fw-bold">Còn Nợ</label>
+                            <input type="number" class="form-control" placeholder="0">
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label fw-bold">Hạn Thanh Toán</label>
                             <input type="date" class="form-control">
                         </div>
+
                         <div class="mb-3">
                             <label class="form-label fw-bold">Trạng Thái</label>
                             <select class="form-select">
@@ -74,7 +79,7 @@
                             <tbody>
                                 <tr class="text-center">
                                     <td>1</td>
-                                    <td>Công ty TNHH Thực Phẩm Sạch</td>
+                                    <td class="text-start">Công ty TNHH Thực Phẩm Sạch</td>
                                     <td>PN0001</td>
                                     <td class="text-end">5,000,000</td>
                                     <td class="text-end">2,000,000</td>
@@ -95,8 +100,8 @@
                                     </td>
                                 </tr>
                                 <tr class="text-center">
-                                    <td>2</td>
-                                    <td>NPP Đồ Uống Hà Nội</td>
+                                    <td class="text-start">2</td>
+                                    <td class="text-start">NPP Đồ Uống Hà Nội</td>
                                     <td>PN0002</td>
                                     <td class="text-end">12,000,000</td>
                                     <td class="text-end">12,000,000</td>

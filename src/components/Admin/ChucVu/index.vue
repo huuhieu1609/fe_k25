@@ -21,7 +21,7 @@
                         <div class="mb-3">
                             <label class="form-label fw-bold">Tình trạng</label>
                             <select v-model="them_chuc_vu.tinh_trang" class="form-select">
-                                <option value="#">Chọn tình trạng</option>
+                                <option value="">Chọn Tình Trạng</option>
                                 <option value="1">Đang hoạt động</option>
                                 <option value="0">Ngừng hoạt động</option>
                             </select>
@@ -64,12 +64,13 @@
                                         <td>{{ index + 1 }}</td>
                                         <td class="text-start">{{ value.ten_chuc_vu }}</td>
                                         <td class="text-start">{{ value.slug_chuc_vu }}</td>
-                                        <td>{{ value.mo_ta }}</td>
+                                        <td class="text-start">{{ value.mo_ta }}</td>
                                         <td>
                                             <button v-on:click="changeStatus(value)" v-if="value.tinh_trang == 1"
                                                 class="btn btn-success btn-sm w-100 shadow-sm">Đang hoạt động</button>
                                             <button v-on:click="changeStatus(value)" v-else
-                                                class="btn btn-secondary btn-sm w-100 shadow-sm">Ngừng hoạt động</button>
+                                                class="btn btn-secondary btn-sm w-100 shadow-sm">Ngừng hoạt
+                                                động</button>
                                         </td>
                                         <td>
                                             <button v-on:click="Object.assign(edit_chuc_vu, value)"
@@ -167,7 +168,9 @@ export default {
     data() {
         return {
             listChucVu: [],
-            them_chuc_vu: {},
+            them_chuc_vu: {
+                tinh_trang: '',
+            },
             edit_chuc_vu: {},
             xoa_chuc_vu: {},
             change_status: {}
@@ -202,7 +205,9 @@ export default {
                 .then(response => {
                     if (response.data.status == 1) {
                         this.getChucVu();
-                        this.them_chuc_vu = {};
+                        this.them_chuc_vu = {
+                            tinh_trang: '',
+                        };
                         this.$toast.success(`<div style="text-align:left"><strong>✅ Thành công!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);
                     } else {
                         this.$toast.error(`<div style="text-align:left"><strong>❌ Lỗi!</strong><p style="margin:4px 0 0 0">${response.data.message}</p></div>`);

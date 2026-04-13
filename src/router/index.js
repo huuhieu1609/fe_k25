@@ -27,6 +27,10 @@ const routes = [
         component: () => import('../components/Admin/KhuyenMai/index.vue')
     },
     {
+        path: '/admin/khuyen-mai-san-pham',
+        component: () => import('../components/Admin/KhuyenMaiSanPham/index.vue')
+    },
+    {
         path: '/admin/san-pham',
         component: () => import('../components/Admin/SanPham/index.vue')
     },

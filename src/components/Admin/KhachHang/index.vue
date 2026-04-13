@@ -37,7 +37,7 @@
                                         <td>{{ index + 1 }}</td>
                                         <td class="text-start">{{ item.ho_ten }}</td>
                                         <td>{{ item.so_dien_thoai }}</td>
-                                        <td>{{ item.email }}</td>
+                                        <td class="text-start">{{ item.email }}</td>
                                         <td class="text-start">{{ item.dia_chi }}</td>
                                         <td>{{ item.diem_tich_luy }}</td>
                                         <td class="text-start">{{ item.ghi_chu }}</td>
@@ -85,27 +85,32 @@
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Họ Tên</label>
                                 <input v-model="them_khach_hang.ho_ten" type="text" class="form-control shadow-sm"
-                                    placeholder="Nhập họ tên">
+                                    placeholder="Nhập Họ Và Tên....">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Số Điện Thoại</label>
                                 <input v-model="them_khach_hang.so_dien_thoai" type="text"
-                                    class="form-control shadow-sm" placeholder="Nhập số điện thoại">
+                                    class="form-control shadow-sm" placeholder="Nhập Số Điện Thoại....">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Email</label>
                                 <input v-model="them_khach_hang.email" type="email" class="form-control shadow-sm"
-                                    placeholder="Nhập email">
+                                    placeholder="Nhập Email....">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Địa Chỉ</label>
                                 <input v-model="them_khach_hang.dia_chi" type="text" class="form-control shadow-sm"
-                                    placeholder="Nhập địa chỉ">
+                                    placeholder="Nhập Địa Chỉ....">
                             </div>
-                            <div class="col-md-12 mb-3">
-                                <label class="form-label fw-bold">Ghi Chú</label>
-                                <textarea v-model="them_khach_hang.ghi_chu" class="form-control shadow-sm" rows="3"
-                                    placeholder="Nhập ghi chú"></textarea>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Điểm Tích Lũy</label>
+                                <input v-model="them_khach_hang.diem_tich_luy" type="number"
+                                    class="form-control shadow-sm" placeholder="Nhập Điểm Tích Lũy....">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Mật Khẩu</label>
+                                <input v-model="them_khach_hang.password" type="password" class="form-control shadow-sm"
+                                    placeholder="Nhập Mật Khẩu....">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Trạng Thái</label>
@@ -114,10 +119,11 @@
                                     <option value="0">Vô hiệu</option>
                                 </select>
                             </div>
+
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Điểm Tích Lũy</label>
-                                <input v-model="them_khach_hang.diem_tich_luy" type="number"
-                                    class="form-control shadow-sm" placeholder="Nhập điểm tích lũy">
+                                <label class="form-label fw-bold">Ghi Chú</label>
+                                <textarea v-model="them_khach_hang.ghi_chu" class="form-control shadow-sm" rows="3"
+                                    placeholder="Nhập Ghi Chú...."></textarea>
                             </div>
                         </div>
                     </form>
@@ -162,10 +168,15 @@
                                 <input v-model="edit_khach_hang.dia_chi" type="text" class="form-control shadow-sm"
                                     placeholder="Nhập địa chỉ">
                             </div>
-                            <div class="col-md-12 mb-3">
-                                <label class="form-label fw-bold">Ghi Chú</label>
-                                <textarea v-model="edit_khach_hang.ghi_chu" class="form-control shadow-sm" rows="3"
-                                    placeholder="Nhập ghi chú"></textarea>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Điểm Tích Lũy</label>
+                                <input v-model="edit_khach_hang.diem_tich_luy" type="number"
+                                    class="form-control shadow-sm" placeholder="Nhập điểm tích lũy">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Mật Khẩu</label>
+                                <input v-model="edit_khach_hang.password" type="password" class="form-control shadow-sm"
+                                    placeholder="Nhập mật khẩu">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold">Trạng Thái</label>
@@ -174,17 +185,19 @@
                                     <option value="0">Vô hiệu</option>
                                 </select>
                             </div>
+
                             <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Điểm Tích Lũy</label>
-                                <input v-model="edit_khach_hang.diem_tich_luy" type="number"
-                                    class="form-control shadow-sm" placeholder="Nhập điểm tích lũy">
+                                <label class="form-label fw-bold">Ghi Chú</label>
+                                <textarea v-model="edit_khach_hang.ghi_chu" class="form-control shadow-sm" rows="3"
+                                    placeholder="Nhập ghi chú"></textarea>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="modal">Đóng</button>
-                    <button data-bs-dismiss="modal" type="button" class="btn btn-warning shadow-sm px-4" @click="editKhachHang">Lưu Thay
+                    <button data-bs-dismiss="modal" type="button" class="btn btn-warning shadow-sm px-4"
+                        @click="editKhachHang">Lưu Thay
                         Đổi</button>
                 </div>
             </div>

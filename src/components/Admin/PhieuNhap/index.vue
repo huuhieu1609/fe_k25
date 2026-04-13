@@ -50,7 +50,7 @@
                   :key="value.id || index"
                   :value="value.id"
                 >
-                  {{ value.ten }}
+                  {{ value.ho_va_ten }}
                 </option>
               </select>
             </div>
@@ -65,12 +65,12 @@
             <div class="mb-3">
               <label class="form-label fw-bold">Tình Trạng</label>
               <select v-model="them_phieu_nhap.trang_thai" class="form-select">
-                <option value="1">Đã Nhập Kho</option>
-                <option value="0">Tạm Lưu</option>
+                <option :value="1">Đã Nhập Kho</option>
+                <option :value="0">Tạm Lưu</option>
               </select>
             </div>
             <div class="mb-3">
-              <label class="form-label fw-bold">Chiết Khấu</label>
+              <label class="form-label fw-bold">Chiết Khấu (%)</label>
               <input
                 v-model.number="them_phieu_nhap.chiet_khau"
                 type="number"
@@ -79,7 +79,7 @@
               />
             </div>
             <div class="mb-3">
-              <label class="form-label fw-bold">Thuế VAT</label>
+              <label class="form-label fw-bold">Thuế VAT (%)</label>
               <input
                 v-model.number="them_phieu_nhap.thue_vat"
                 type="number"
@@ -102,11 +102,10 @@
                 v-model="them_phieu_nhap.ghi_chu"
                 class="form-control"
                 rows="3"
-                placeholder="Ghi chú nội bộ..."
               ></textarea>
             </div>
 
-            <div class="mb-2 d-flex justify-content-between align-items-center">
+            <div class="mb-2">
               <label class="form-label fw-bold mb-0">Thông Tin Sản Phẩm</label>
             </div>
             <div class="border rounded-3 p-3 bg-light">
@@ -123,7 +122,7 @@
                       :key="value.id || index"
                       :value="Number(value.id)"
                     >
-                      {{ value.ten }}
+                      {{ value.ten_san_pham }}
                     </option>
                   </select>
                 </div>
@@ -146,14 +145,9 @@
                   />
                 </div>
                 <div class="col-md-4">
-                  <label class="form-label fw-bold">Thành tiền</label>
+                  <label class="form-label fw-bold">Tạm tính</label>
                   <input
-                    :value="
-                      formatCurrency(
-                        (them_phieu_nhap.so_luong || 0) *
-                          (them_phieu_nhap.don_gia || 0),
-                      )
-                    "
+                    :value="formatCurrency(tinhTongTienHang(them_phieu_nhap))"
                     type="text"
                     class="form-control text-end"
                     disabled
@@ -164,10 +158,7 @@
           </form>
         </div>
         <div class="card-footer text-end">
-          <button
-            class="btn btn-primary px-4 shadow-sm"
-            @click="themPhieuNhap()"
-          >
+          <button class="btn btn-primary px-4 shadow-sm" @click="themPhieuNhap">
             Tạo Phiếu
           </button>
         </div>
@@ -192,76 +183,64 @@
                   <th>Mã Phiếu</th>
                   <th>Ngày Nhập</th>
                   <th>Sản Phẩm</th>
-                  <th>Số Lượng</th>
+                  <th>SL</th>
                   <th>Tổng Tiền Hàng</th>
                   <th>Tổng Thanh Toán</th>
-                  <th>Ghi Chú</th>
-                  <th>Trạng Thái</th>
+                  <th>Đã Thanh Toán</th>
+                  <th>Còn Nợ</th>
                   <th>Thao Tác</th>
                 </tr>
               </thead>
               <tbody>
-                <template
+                <tr
                   v-for="(value, index) in list_phieu_nhap"
                   :key="index"
+                  class="text-center"
                 >
-                  <tr class="text-center">
-                    <td>{{ index + 1 }}</td>
-                    <td>{{ value.ma_phieu }}</td>
-                    <td>{{ value.ngay_nhap }}</td>
-                    <td class="text-start">
-                      {{ value.ten_san_pham || "---" }}
-                    </td>
-                    <td>{{ value.so_luong || 0 }}</td>
-                    <td class="text-end">
-                      {{ formatCurrency(value.tong_tien_hang || 0) }}
-                    </td>
-                    <td class="text-end">
-                      {{ formatCurrency(value.tong_thanh_toan || 0) }}
-                    </td>
-                    <td class="text-start">{{ value.ghi_chu || "---" }}</td>
-                    <td>
-                      <button
-                        v-if="value.trang_thai == 1"
-                        class="btn btn-success btn-sm w-100 shadow-sm"
-                      >
-                        Đã Nhập Kho
-                      </button>
-                      <button
-                        v-else
-                        class="btn btn-secondary btn-sm w-100 shadow-sm"
-                      >
-                        Tạm Lưu
-                      </button>
-                    </td>
-                    <td class="text-nowrap text-center">
-                      <button
-                        class="btn btn-info btn-sm me-1 shadow-sm text-white"
-                        data-bs-toggle="modal"
-                        data-bs-target="#chiTietModal"
-                        @click="openChiTiet(value)"
-                      >
-                        <i class="fa fa-list"></i>
-                      </button>
-                      <button
-                        class="btn btn-warning btn-sm me-1 shadow-sm"
-                        data-bs-toggle="modal"
-                        data-bs-target="#editModal"
-                        @click="openEdit(value)"
-                      >
-                        <i class="fa fa-edit"></i>
-                      </button>
-                      <button
-                        class="btn btn-danger btn-sm shadow-sm"
-                        data-bs-toggle="modal"
-                        data-bs-target="#deleteModal"
-                        @click="openDelete(value)"
-                      >
-                        <i class="fa fa-trash"></i>
-                      </button>
-                    </td>
-                  </tr>
-                </template>
+                  <td>{{ index + 1 }}</td>
+                  <td>{{ value.ma_phieu }}</td>
+                  <td>{{ value.ngay_nhap }}</td>
+                  <td class="text-start">{{ value.ten_san_pham || "---" }}</td>
+                  <td>{{ value.so_luong || 0 }}</td>
+                  <td class="text-end">
+                    {{ formatCurrency(value.tong_tien_hang || 0) }}
+                  </td>
+                  <td class="text-end">
+                    {{ formatCurrency(value.tong_thanh_toan || 0) }}
+                  </td>
+                  <td class="text-end text-success">
+                    {{ formatCurrency(value.da_thanh_toan || 0) }}
+                  </td>
+                  <td class="text-end text-danger fw-bold">
+                    {{ formatCurrency(value.con_no || 0) }}
+                  </td>
+                  <td class="text-nowrap text-center">
+                    <button
+                      class="btn btn-info btn-sm me-1 text-white"
+                      data-bs-toggle="modal"
+                      data-bs-target="#chiTietModal"
+                      @click="openChiTiet(value)"
+                    >
+                      <i class="fa fa-list"></i>
+                    </button>
+                    <button
+                      class="btn btn-warning btn-sm me-1"
+                      data-bs-toggle="modal"
+                      data-bs-target="#editModal"
+                      @click="openEdit(value)"
+                    >
+                      <i class="fa fa-edit"></i>
+                    </button>
+                    <button
+                      class="btn btn-danger btn-sm"
+                      data-bs-toggle="modal"
+                      data-bs-target="#deleteModal"
+                      @click="openDelete(value)"
+                    >
+                      <i class="fa fa-trash"></i>
+                    </button>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
@@ -287,7 +266,6 @@
               <label class="form-label fw-bold">Mã phiếu</label>
               <input
                 :value="chi_tiet_phieu_nhap.ma_phieu || '---'"
-                type="text"
                 class="form-control"
                 readonly
               />
@@ -296,7 +274,6 @@
               <label class="form-label fw-bold">Ngày nhập</label>
               <input
                 :value="chi_tiet_phieu_nhap.ngay_nhap || '---'"
-                type="text"
                 class="form-control"
                 readonly
               />
@@ -305,7 +282,6 @@
               <label class="form-label fw-bold">Kho</label>
               <input
                 :value="chi_tiet_kho.ten || '---'"
-                type="text"
                 class="form-control"
                 readonly
               />
@@ -314,7 +290,6 @@
               <label class="form-label fw-bold">Nhà cung cấp</label>
               <input
                 :value="chi_tiet_nha_cung_cap.ten || '---'"
-                type="text"
                 class="form-control"
                 readonly
               />
@@ -323,7 +298,6 @@
               <label class="form-label fw-bold">Nhân viên</label>
               <input
                 :value="chi_tiet_nhan_vien.ten || '---'"
-                type="text"
                 class="form-control"
                 readonly
               />
@@ -332,63 +306,56 @@
               <label class="form-label fw-bold">Sản phẩm</label>
               <input
                 :value="chi_tiet_item.san_pham_ten || '---'"
-                type="text"
                 class="form-control"
                 readonly
               />
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label class="form-label fw-bold">Số lượng</label>
               <input
                 :value="chi_tiet_item.so_luong || 0"
-                type="text"
                 class="form-control"
                 readonly
               />
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label class="form-label fw-bold">Đơn giá</label>
               <input
                 :value="formatCurrency(chi_tiet_item.don_gia || 0)"
-                type="text"
                 class="form-control text-end"
                 readonly
               />
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label class="form-label fw-bold">Tổng tiền hàng</label>
               <input
                 :value="formatCurrency(chi_tiet_phieu_nhap.tong_tien_hang || 0)"
-                type="text"
                 class="form-control text-end"
                 readonly
               />
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label class="form-label fw-bold">Tổng thanh toán</label>
               <input
                 :value="
                   formatCurrency(chi_tiet_phieu_nhap.tong_thanh_toan || 0)
                 "
-                type="text"
                 class="form-control text-end"
                 readonly
               />
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label class="form-label fw-bold">Đã thanh toán</label>
               <input
                 :value="formatCurrency(chi_tiet_phieu_nhap.da_thanh_toan || 0)"
-                type="text"
                 class="form-control text-end"
                 readonly
               />
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label class="form-label fw-bold">Còn nợ</label>
               <input
                 :value="formatCurrency(chi_tiet_phieu_nhap.con_no || 0)"
-                type="text"
                 class="form-control text-end"
                 readonly
               />
@@ -397,8 +364,8 @@
               <label class="form-label fw-bold">Ghi chú</label>
               <textarea
                 :value="chi_tiet_phieu_nhap.ghi_chu || '---'"
-                class="form-control"
                 rows="2"
+                class="form-control"
                 readonly
               ></textarea>
             </div>
@@ -462,7 +429,7 @@
                   :key="value.id || index"
                   :value="value.id"
                 >
-                  {{ value.ten }}
+                  {{ value.ho_va_ten }}
                 </option>
               </select>
             </div>
@@ -477,8 +444,8 @@
             <div class="col-md-6">
               <label class="form-label fw-bold">Tình Trạng</label>
               <select v-model="edit_phieu_nhap.trang_thai" class="form-select">
-                <option value="1">Đã Nhập Kho</option>
-                <option value="0">Tạm Lưu</option>
+                <option :value="1">Đã Nhập Kho</option>
+                <option :value="0">Tạm Lưu</option>
               </select>
             </div>
             <div class="col-md-6">
@@ -490,7 +457,7 @@
                   :key="value.id || index"
                   :value="Number(value.id)"
                 >
-                  {{ value.ten }}
+                  {{ value.ten_san_pham }}
                 </option>
               </select>
             </div>
@@ -522,16 +489,7 @@
               />
             </div>
             <div class="col-md-4">
-              <label class="form-label fw-bold">Còn nợ</label>
-              <input
-                :value="formatCurrency(tinhConNo(edit_phieu_nhap))"
-                type="text"
-                class="form-control text-end"
-                disabled
-              />
-            </div>
-            <div class="col-md-6">
-              <label class="form-label fw-bold">Chiết khấu</label>
+              <label class="form-label fw-bold">Chiết khấu (%)</label>
               <input
                 v-model.number="edit_phieu_nhap.chiet_khau"
                 type="number"
@@ -539,13 +497,21 @@
                 class="form-control"
               />
             </div>
-            <div class="col-md-6">
-              <label class="form-label fw-bold">Thuế VAT</label>
+            <div class="col-md-4">
+              <label class="form-label fw-bold">Thuế VAT (%)</label>
               <input
                 v-model.number="edit_phieu_nhap.thue_vat"
                 type="number"
                 min="0"
                 class="form-control"
+              />
+            </div>
+            <div class="col-md-4">
+              <label class="form-label fw-bold">Còn nợ</label>
+              <input
+                :value="formatCurrency(tinhConNo(edit_phieu_nhap))"
+                class="form-control text-end"
+                disabled
               />
             </div>
             <div class="col-md-12">
@@ -666,7 +632,6 @@ export default {
       chi_tiet_nhan_vien: {},
     };
   },
-
   created() {
     this.getKho();
     this.getNhaCungCap();
@@ -676,75 +641,34 @@ export default {
   },
   methods: {
     getKho() {
-      axios
-        .get("http://127.0.0.1:8000/api/admin/kho")
-        .then((response) => {
-          this.list_kho = (response.data.data || []).map((item) => ({
-            id: item.id,
-            ten: item.ten,
-          }));
-        })
-        .catch(() => {
-          this.$toast?.error("Đã xảy ra lỗi khi tải danh sách Kho.");
-        });
+      axios.get("http://127.0.0.1:8000/api/admin/kho").then((response) => {
+        this.list_kho = response.data.data;
+      });
     },
     getNhaCungCap() {
       axios
         .get("http://127.0.0.1:8000/api/admin/nha-cung-cap")
         .then((response) => {
-          this.list_nha_cung_cap = (response.data.data || []).map((item) => ({
-            id: item.id,
-            ten: item.ten,
-          }));
-        })
-        .catch(() => {
-          this.$toast?.error("Đã xảy ra lỗi khi tải danh sách Nhà Cung Cấp.");
+          this.list_nha_cung_cap = response.data.data;
         });
     },
     getNhanVien() {
       axios
         .get("http://127.0.0.1:8000/api/admin/nhan-vien")
         .then((response) => {
-          this.list_nhan_vien = (response.data.data || []).map((item) => ({
-            id: item.id,
-            ten: item.ho_va_ten || item.ten,
-          }));
-        })
-        .catch(() => {
-          this.$toast?.error("Đã xảy ra lỗi khi tải danh sách Nhân Viên.");
+          this.list_nhan_vien = response.data.data;
         });
     },
     getSanPham() {
-      axios
-        .get("http://127.0.0.1:8000/api/admin/san-pham")
-        .then((response) => {
-          const uniqueSanPham = new Map();
-
-          (response.data.data || []).forEach((item) => {
-            const id = Number(item.id || item.id_san_pham);
-
-            if (!uniqueSanPham.has(id)) {
-              uniqueSanPham.set(id, {
-                id,
-                ten: item.ten_san_pham || item.ten,
-              });
-            }
-          });
-
-          this.list_san_pham = Array.from(uniqueSanPham.values());
-        })
-        .catch(() => {
-          this.$toast?.error("Đã xảy ra lỗi khi tải danh sách Sản Phẩm.");
-        });
+      axios.get("http://127.0.0.1:8000/api/admin/san-pham").then((response) => {
+        this.list_san_pham = response.data.data;
+      });
     },
     getPhieuNhap() {
       axios
         .get("http://127.0.0.1:8000/api/admin/phieu-nhap")
         .then((response) => {
-          this.list_phieu_nhap = response.data.data || [];
-        })
-        .catch(() => {
-          this.$toast?.error("Đã xảy ra lỗi khi tải danh sách Phiếu Nhập.");
+          this.list_phieu_nhap = response.data.data;
         });
     },
     formatCurrency(value) {
@@ -753,14 +677,16 @@ export default {
         currency: "VND",
       }).format(Number(value) || 0);
     },
+    tinhTongTienHang(data) {
+      return (Number(data.so_luong) || 0) * (Number(data.don_gia) || 0);
+    },
     tinhConNo(data) {
-      const tongTienHang =
-        (Number(data.so_luong) || 0) * (Number(data.don_gia) || 0);
+      const tongTienHang = this.tinhTongTienHang(data);
+      const chietKhau = Number(data.chiet_khau) || 0;
+      const thueVat = Number(data.thue_vat) || 0;
+      const tienSauChietKhau = tongTienHang - (tongTienHang * chietKhau) / 100;
       const tongThanhToan =
-        tongTienHang -
-        (Number(data.chiet_khau) || 0) +
-        (Number(data.thue_vat) || 0);
-
+        tienSauChietKhau + (tienSauChietKhau * thueVat) / 100;
       return tongThanhToan - (Number(data.da_thanh_toan) || 0);
     },
     taoPayload(data) {
@@ -796,29 +722,17 @@ export default {
       };
     },
     themPhieuNhap() {
-      const payload = this.taoPayload(this.them_phieu_nhap);
-
       axios
-        .post("http://127.0.0.1:8000/api/admin/phieu-nhap/create", payload)
+        .post(
+          "http://127.0.0.1:8000/api/admin/phieu-nhap/create",
+          this.taoPayload(this.them_phieu_nhap),
+        )
         .then((response) => {
           this.$toast?.success(
             response.data.message || "Thêm phiếu nhập thành công.",
           );
           this.getPhieuNhap();
           this.resetFormThem();
-        })
-        .catch((error) => {
-          if (error.response?.data?.errors) {
-            const errors = error.response.data.errors;
-            const items = Object.values(errors)
-              .flat()
-              .map((msg) => `<li>${msg}</li>`)
-              .join("");
-            const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
-            this.$toast?.error(messages);
-          } else {
-            this.$toast?.error("Đã xảy ra lỗi khi thêm phiếu nhập.");
-          }
         });
     },
     openChiTiet(item) {
@@ -827,15 +741,11 @@ export default {
         .then((response) => {
           const data = response.data.data || {};
           const chiTiet = (response.data.chi_tiet || [])[0] || {};
-
           this.chi_tiet_phieu_nhap = data.phieu_nhap || {};
           this.chi_tiet_kho = data.kho || {};
           this.chi_tiet_nha_cung_cap = data.nha_cung_cap || {};
           this.chi_tiet_nhan_vien = data.nhan_vien || {};
           this.chi_tiet_item = chiTiet;
-        })
-        .catch(() => {
-          this.$toast?.error("Không tải được chi tiết phiếu nhập.");
         });
     },
     openEdit(item) {
@@ -845,7 +755,6 @@ export default {
           const data = response.data.data || {};
           const phieu = data.phieu_nhap || {};
           const chiTiet = (response.data.chi_tiet || [])[0] || {};
-
           this.edit_phieu_nhap = {
             id: phieu.id || item.id,
             id_kho: phieu.id_kho || "",
@@ -861,37 +770,19 @@ export default {
             so_luong: Number(chiTiet.so_luong) || 1,
             don_gia: Number(chiTiet.don_gia) || 0,
           };
-        })
-        .catch(() => {
-          this.$toast?.error("Không tải được dữ liệu cập nhật.");
         });
     },
     capNhatPhieuNhap() {
-      const payload = this.taoPayload(this.edit_phieu_nhap);
-
       axios
         .put(
           `http://127.0.0.1:8000/api/admin/phieu-nhap/update/${this.edit_phieu_nhap.id}`,
-          payload,
+          this.taoPayload(this.edit_phieu_nhap),
         )
         .then((response) => {
           this.$toast?.success(
             response.data.message || "Cập nhật phiếu nhập thành công.",
           );
           this.getPhieuNhap();
-        })
-        .catch((error) => {
-          if (error.response?.data?.errors) {
-            const errors = error.response.data.errors;
-            const items = Object.values(errors)
-              .flat()
-              .map((msg) => `<li>${msg}</li>`)
-              .join("");
-            const messages = `<div style="text-align:left"><strong>⚠️ Vui lòng kiểm tra lại:</strong><ul style="margin:6px 0 0 0;padding-left:18px">${items}</ul></div>`;
-            this.$toast?.error(messages);
-          } else {
-            this.$toast?.error("Đã xảy ra lỗi khi cập nhật phiếu nhập.");
-          }
         });
     },
     openDelete(item) {
@@ -899,7 +790,6 @@ export default {
     },
     xoaPhieuNhap() {
       if (!this.xoa_phieu_nhap.id) return;
-
       axios
         .delete(
           `http://127.0.0.1:8000/api/admin/phieu-nhap/delete/${this.xoa_phieu_nhap.id}`,
@@ -910,9 +800,6 @@ export default {
           );
           this.getPhieuNhap();
           this.xoa_phieu_nhap = {};
-        })
-        .catch(() => {
-          this.$toast?.error("Đã xảy ra lỗi khi xóa phiếu nhập.");
         });
     },
   },

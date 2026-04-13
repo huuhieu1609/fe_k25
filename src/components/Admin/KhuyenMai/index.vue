@@ -38,18 +38,18 @@
                                         <td>{{ index + 1 }}</td>
                                         <td class="text-start">{{ item.ma_code }}</td>
                                         <td class="text-start">{{ item.ten }}</td>
-                                        <td>
-                                            <span v-if="item.kieu == 1" class="badge bg-info text-nowrap">Phần trăm
+                                        <td class="text-start">
+                                            <span v-if="item.kieu == 1" class="">Phần trăm
                                                 (%)
                                             </span>
-                                            <span v-else class="badge bg-secondary text-nowrap">Số tiền cố định
+                                            <span v-else class="">Số tiền cố định
                                                 (đ)</span>
                                         </td>
-                                        <td>{{ item.gia_tri }} {{ item.kieu == 1 ? '%' : 'đ' }}</td>
+                                        <td class="text-end">{{ item.gia_tri }} {{ item.kieu == 1 ? '%' : 'đ' }}</td>
                                         <td class="small">{{ item.tu_ngay }}</td>
                                         <td class="small">{{ item.den_ngay }}</td>
-                                        <td>{{ item.dieu_kien_toi_thieu }}</td>
-                                        <td>
+                                        <td class="text-end">{{ formatCurrency(item.dieu_kien_toi_thieu) }}</td>
+                                        <td class="text-center">
                                             <button v-on:click="changeStatus(item)" v-if="item.trang_thai == 1"
                                                 class="btn btn-success btn-sm w-100 shadow-sm">Đang áp dụng</button>
                                             <button v-on:click="changeStatus(item)" v-else
@@ -69,9 +69,6 @@
                                         </td>
                                     </tr>
                                 </template>
-                                <tr v-else class="text-center">
-                                    <td colspan="9">Không có dữ liệu khuyến mãi</td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -375,7 +372,13 @@ export default {
                         this.$toast?.error('Đã xảy ra lỗi khi thay đổi trạng thái Khuyến Mãi.');
                     }
                 });
-        }
+        },
+        formatCurrency(value) {
+            return new Intl.NumberFormat("vi-VN", {
+                style: "currency",
+                currency: "VND",
+            }).format(value);
+        },
     },
 };
 </script>
