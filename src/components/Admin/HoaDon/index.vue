@@ -1,195 +1,129 @@
 <template>
     <div class="row">
-        <div class="col-lg-5">
-            <div class="card border-top border-0 border-4 border-primary shadow-sm mt-2">
-                <div class="card-header">
-                    <h5 class="card-title mb-0">Tạo Hóa Đơn Mới</h5>
-                </div>
-                <div class="card-body">
-                    <form>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Mã hóa đơn</label>
-                                <input type="text" class="form-control" value="HD-MAU-001" placeholder="VD: HD0001">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Ngày bán</label>
-                                <input type="date" class="form-control" value="2026-04-08">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-4 mb-3">
-                                <label class="form-label fw-bold">Ca làm việc</label>
-                                <input type="text" class="form-control" value="Ca sang" placeholder="Ca sáng">
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label class="form-label fw-bold">Nhân viên</label>
-                                <input type="text" class="form-control" value="Tran Van B" placeholder="Nguyen Van A">
-                            </div>
-                            <div class="col-md-4 mb-3">
-                                <label class="form-label fw-bold">Khách hàng</label>
-                                <input type="text" class="form-control" value="Nguyen Thi C" placeholder="Le Thi B">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Giảm giá hóa đơn</label>
-                                <input type="number" min="0" class="form-control" value="20000" placeholder="0">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Thuế VAT hóa đơn</label>
-                                <input type="number" min="0" class="form-control" value="30000" placeholder="0">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Loại thanh toán</label>
-                                <select class="form-select">
-                                    <option value="tien_mat" selected>Tiền mặt</option>
-                                    <option value="chuyen_khoan">Chuyển khoản</option>
-                                    <option value="the">Thẻ</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label fw-bold">Đã thanh toán</label>
-                                <select class="form-select">
-                                    <option value="1" selected>Đã thanh toán</option>
-                                    <option value="0">Chưa thanh toán</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Trạng thái đơn</label>
-                            <select class="form-select">
-                                <option value="0">Mới tạo</option>
-                                <option value="1" selected>Hoàn thành</option>
-                                <option value="2">Đã hủy</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label fw-bold">Ghi chú</label>
-                            <textarea class="form-control" rows="3" placeholder="Nhập ghi chú...">Don mau de demo giao dien tao hoa don</textarea>
-                        </div>
-
-                        <div class="border rounded p-3 bg-light">
-                            <div class="row">
-                                <div class="col-6 small text-muted">Tổng tiền hàng</div>
-                                <div class="col-6 text-end fw-bold">880,000</div>
-                                <div class="col-6 small text-muted">Giảm giá</div>
-                                <div class="col-6 text-end">- 40,000</div>
-                                <div class="col-6 small text-muted">Thuế VAT</div>
-                                <div class="col-6 text-end">+ 42,000</div>
-                                <div class="col-6 pt-2 mt-2 border-top fw-bold">Tổng thanh toán</div>
-                                <div class="col-6 pt-2 mt-2 border-top text-end text-primary fw-bold">882,000</div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="card-footer d-grid">
-                    <button class="btn btn-primary fw-bold" type="button">
-                        <i class="fa fa-save me-2"></i>Tạo hóa đơn và thanh toán
-                    </button>
-                </div>
-            </div>
-        </div>
-
+        <!-- Panel Trái: Thêm Sản Phẩm Vào Hóa Đơn -->
         <div class="col-lg-7">
             <div class="card border-top border-0 border-4 border-primary shadow-sm mt-2">
                 <div class="card-header">
                     <h5 class="card-title mb-0">Thêm Sản Phẩm Vào Hóa Đơn</h5>
                 </div>
                 <div class="card-body">
-                    <div class="row g-2 align-items-end mb-3">
-                        <div class="col-md-5">
-                            <label class="form-label fw-bold">Sản phẩm</label>
-                            <input type="text" class="form-control" placeholder="Thit bo My nhap khau">
-                        </div>
-                        <div class="col-md-2">
-                            <label class="form-label fw-bold">SL</label>
-                            <input type="number" min="1" class="form-control" placeholder="1">
-                        </div>
-                        <div class="col-md-2">
-                            <label class="form-label fw-bold">Đơn giá</label>
-                            <input type="number" min="0" class="form-control" placeholder="0">
-                        </div>
-                        <div class="col-md-3 d-grid">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fa fa-plus me-1"></i>Thêm sản phẩm
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped align-middle">
-                            <thead class="table-light text-center text-nowrap">
+                    <div class="table-responsive border rounded mb-3">
+                        <table class="table table-bordered table-hover table-striped align-middle mb-0">
+                            <thead class="table-light text-center text-nowrap align-middle">
                                 <tr>
-                                    <th>STT</th>
+                                    <th class="px-2">STT</th>
                                     <th>Tên sản phẩm</th>
-                                    <th>SL</th>
-                                    <th>Đơn giá</th>
-                                    <th>Giảm giá</th>
-                                    <th>VAT</th>
-                                    <th>Thành tiền</th>
-                                    <th></th>
+                                    <th class="px-2">SL</th>
+                                    <th class="px-2">Đơn giá</th>
+                                    <th class="px-2">Giảm giá</th>
+                                    <th class="px-2">VAT</th>
+                                    <th class="px-2">Thành tiền</th>
+                                    <th class="px-2">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="text-center">
-                                    <td>1</td>
-                                    <td class="text-start">Thit bo My nhap khau</td>
-                                    <td>
-                                        <input type="number" min="1" value="2"
-                                            class="form-control form-control-sm text-center">
+                                <template v-if="list_chi_tiet.length === 0">
+                                    <tr>
+                                        <td colspan="8" class="text-center fst-italic text-secondary py-3">
+                                            Chưa có sản phẩm nào trong hóa đơn
+                                        </td>
+                                    </tr>
+                                </template>
+                                <tr v-for="(value, index) in list_chi_tiet" :key="index" class="text-center">
+                                    <td class="text-center align-middle">{{ index + 1 }}</td>
+                                    <td class="text-start align-middle fw-medium">{{ value.ten_san_pham }}</td>
+                                    <td class="text-center align-middle">
+                                        <input type="number" min="1" v-model.number="value.so_luong"
+                                            class="form-control form-control-sm text-center mx-auto" />
                                     </td>
-                                    <td>
-                                        <input type="number" min="0" value="350000"
-                                            class="form-control form-control-sm text-end">
+                                    <td class="text-center align-middle">
+                                        <input type="number" min="0" v-model.number="value.don_gia"
+                                            class="form-control form-control-sm text-end" disabled />
                                     </td>
-                                    <td>
-                                        <input type="number" min="0" value="15000"
-                                            class="form-control form-control-sm text-end">
+                                    <td class="text-center align-middle">
+                                        <input type="number" min="0" v-model.number="value.giam_gia"
+                                            class="form-control form-control-sm text-end" />
                                     </td>
-                                    <td>
-                                        <input type="number" min="0" value="30000"
-                                            class="form-control form-control-sm text-end">
+                                    <td class="text-center align-middle">
+                                        <div class="input-group input-group-sm">
+                                            <input type="number" min="0" v-model.number="value.thue_vat" class="form-control text-center px-1" disabled>
+                                            <span class="input-group-text px-1">%</span>
+                                        </div>
                                     </td>
-                                    <td class="text-end fw-bold">715,000</td>
-                                    <td>
-                                        <button class="btn btn-outline-danger btn-sm" type="button">
+                                    <td class="text-end fw-bold align-middle text-nowrap">
+                                        {{ (
+                                            ((value.so_luong || 1) * value.don_gia - (value.giam_gia || 0))
+                                            * (1 + (value.thue_vat || 0) / 100)
+                                        ).toLocaleString('vi-VN') }} ₫
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        <button class="btn btn-outline-danger btn-sm" type="button" @click="remove(index)">
                                             <i class="fa fa-times"></i>
                                         </button>
                                     </td>
                                 </tr>
-                                <tr class="text-center">
-                                    <td>2</td>
-                                    <td class="text-start">Ca hoi Na Uy dong goi</td>
-                                    <td>
-                                        <input type="number" min="1" value="1"
-                                            class="form-control form-control-sm text-center">
-                                    </td>
-                                    <td>
-                                        <input type="number" min="0" value="180000"
-                                            class="form-control form-control-sm text-end">
-                                    </td>
-                                    <td>
-                                        <input type="number" min="0" value="5000"
-                                            class="form-control form-control-sm text-end">
-                                    </td>
-                                    <td>
-                                        <input type="number" min="0" value="12000"
-                                            class="form-control form-control-sm text-end">
-                                    </td>
-                                    <td class="text-end fw-bold">187,000</td>
-                                    <td>
-                                        <button class="btn btn-outline-danger btn-sm" type="button">
-                                            <i class="fa fa-times"></i>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row align-items-center">
+                        <div class="col-md-7 d-flex align-items-center">
+                            <div class="input-group flex-nowrap w-50 me-2 mt-1 mb-1">
+                                <input type="text" class="form-control" v-model="noi_dung_tim_kiem" placeholder="Nhập mã KH..." />
+                                <button class="btn btn-primary" type="button" @click="timKiem()">Tìm</button>
+                            </div>
+                            <div v-if="khach_hang" class="text-success fw-bold fs-6 ms-2 text-nowrap text-truncate">
+                                Khách hàng: {{ khach_hang.ho_ten }}
+                            </div>
+                        </div>
+                        <div class="col-md-5 d-flex justify-content-end align-items-center">
+                            <span class="fw-bold me-3 text-nowrap">Tổng cộng: <span class="text-danger ms-1">
+                                {{ list_chi_tiet.reduce((total, item) => total + ((item.so_luong * item.don_gia
+                                            - (item.giam_gia || 0)) * (1 + (item.thue_vat || 0) / 100)), 0).toLocaleString('vi-VN') }} ₫
+                            </span></span>
+                            <button class="btn btn-primary text-nowrap">Thanh toán</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel Phải: DANH SÁCH SẢN PHẨM -->
+        <div class="col-lg-5">
+            <div class="card border-top border-0 border-4 border-primary shadow-sm mt-2">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Danh sách sản phẩm</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <input class="form-control" type="search" v-model="tu_khoa"
+                            placeholder="Nhập thông tin cần tìm và mã sản phẩm..." />
+                    </div>
+                    <div class="table-responsive border rounded">
+                        <table class="table table-striped table-bordered table-hover align-middle mb-0">
+                            <thead class="table-light text-center text-nowrap">
+                                <tr>
+                                    <th class="px-2">STT</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th class="px-2">ĐVT</th>
+                                    <th class="text-end px-2">Đơn giá</th>
+                                    <th class="px-2">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(sanPham, index) in locSanPham()" :key="index">
+                                    <td class="text-center align-middle">{{ index + 1 }}</td>
+                                    <td class="text-start align-middle fw-medium">{{ sanPham.ten_san_pham }}</td>
+                                    <td class="text-center align-middle text-muted">{{ sanPham.don_vi_tinh }}</td>
+                                    <td class="text-end align-middle">{{ sanPham.gia_ban_mac_dinh ? sanPham.gia_ban_mac_dinh.toLocaleString('vi-VN') : 0 }} ₫</td>
+                                    <td class="text-center align-middle">
+                                        <button class="btn btn-outline-primary btn-sm" type="button" @click="add(sanPham)">
+                                            <i class="fa fa-plus"></i>
                                         </button>
                                     </td>
+                                </tr>
+                                <tr v-if="locSanPham().length === 0">
+                                    <td colspan="5" class="text-center fst-italic text-secondary py-3">Không tìm thấy sản phẩm</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -199,11 +133,81 @@
         </div>
     </div>
 </template>
-
 <script>
-export default {
-    name: 'HoaDonManager',
-};
-</script>
+import axios from 'axios';
 
-<style scoped></style>
+export default {
+    data() {
+        return {
+            list_san_pham: [],
+            list_hoa_don: [],
+            hoaDon: {
+                id: null,
+                ten_san_pham: '',
+                don_vi_tinh: '',
+                gia_ban: '',
+            },
+            tu_khoa: '',
+            list_chi_tiet: [],
+            noi_dung_tim_kiem: '',
+            khach_hang: '',
+        }
+    },
+    created() {
+        this.getSanPham();
+    },
+    methods: {
+        getSanPham() {
+            axios.get('http://127.0.0.1:8000/api/admin/san-pham')
+                .then(Response => {
+                    this.list_san_pham = Response.data.data;
+                })
+                .catch(err => {
+                    console.log("Lỗi khi tải lên danh sách", err);
+                })
+        },
+        locSanPham() {
+            if (this.tu_khoa.trim() === "") {
+                return this.list_san_pham;
+            }
+            let tu_khoa_lower = this.tu_khoa.toLowerCase();
+            return this.list_san_pham.filter((item) => item.ten_san_pham.toLowerCase().includes(tu_khoa_lower));
+        },
+        add(value) {
+            let itemIndex = this.list_chi_tiet.findIndex(item => item.id === value.id);
+            if (itemIndex !== -1) {
+                this.list_chi_tiet[itemIndex].so_luong += 1;
+            } else {
+                let newItem = { ...value };
+                newItem.so_luong = 1;
+                newItem.don_gia = value.gia_ban_mac_dinh;
+                newItem.giam_gia = 0;
+                newItem.thue_vat = 10;
+                this.list_chi_tiet.push(newItem);
+            }
+        },
+        remove(index) {
+            this.list_chi_tiet.splice(index, 1);
+        },
+        timKiem() {
+            var data = {
+                noi_dung_tim_kiem: this.noi_dung_tim_kiem
+            }
+            axios.post('http://127.0.0.1:8000/api/admin/khach-hang/tim-kiem', data)
+                .then(Response => {
+                    if (Response.data.status && Response.data.data.length > 0) {
+                        this.khach_hang = Response.data.data[0];
+                        this.$toast.success(Response.data.message);
+                    } else {
+                        this.$toast.error("Không tìm thấy khách hàng");
+                        this.khach_hang = '';
+                    }
+                })
+                .catch(err => {
+                    console.log("Lỗi khi tải lên danh sách", err);
+                })
+        }
+    }
+}
+</script>
+<style></style>
